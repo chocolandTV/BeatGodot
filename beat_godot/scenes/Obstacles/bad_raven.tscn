@@ -1,0 +1,60 @@
+[gd_scene load_steps=7 format=3 uid="uid://b1ixc657wuis1"]
+
+[ext_resource type="Script" path="res://scenes/Obstacles/bad_raven.gd" id="1_4ia75"]
+[ext_resource type="SpriteFrames" uid="uid://d2ci3iqku7tm1" path="res://assets/spriteSheets/player.tres" id="1_wdmqd"]
+[ext_resource type="Texture2D" uid="uid://dl5ot6x2up1a6" path="res://assets/textures/enemie_eye.png" id="2_ulxtf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ckdk2"]
+radius = 113.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7i35q"]
+radius = 131.004
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_keck0"]
+size = Vector2(89, 2157)
+
+[node name="Bad_Raven" type="Area2D"]
+collision_layer = 2
+script = ExtResource("1_4ia75")
+bad_raven_speed = 500.0
+
+[node name="Raven_obstacle_01" type="AnimatedSprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(0, -436)
+sprite_frames = ExtResource("1_wdmqd")
+autoplay = "default"
+offset = Vector2(0, -103.72)
+flip_h = true
+
+[node name="raven_01" type="CollisionShape2D" parent="."]
+position = Vector2(-11, -501)
+shape = SubResource("CircleShape2D_ckdk2")
+
+[node name="Raven_obstacle_02" type="AnimatedSprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(0, 792)
+sprite_frames = ExtResource("1_wdmqd")
+autoplay = "default"
+offset = Vector2(0, -103.72)
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-8, 744)
+shape = SubResource("CircleShape2D_7i35q")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+modulate = Color(0.6, 0.27451, 0.211765, 1)
+position = Vector2(-8.99999, -454)
+scale = Vector2(0.43, 0.43)
+shadow_enabled = true
+texture = ExtResource("2_ulxtf")
+
+[node name="Score_area" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Score_area"]
+position = Vector2(160.5, 138.5)
+shape = SubResource("RectangleShape2D_keck0")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="Score_area" to="." method="_on_score_entered"]

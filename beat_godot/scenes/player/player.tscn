@@ -1,81 +1,10 @@
-[gd_scene load_steps=17 format=3 uid="uid://b06fobwa0bapc"]
+[gd_scene load_steps=7 format=3 uid="uid://b06fobwa0bapc"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_q0dk7"]
-[ext_resource type="Texture2D" uid="uid://n1rhqayedoqj" path="res://assets/spriteSheets/beatrii-Sheet.png" id="1_w5iag"]
+[ext_resource type="SpriteFrames" uid="uid://d2ci3iqku7tm1" path="res://assets/spriteSheets/player.tres" id="2_ddlpj"]
 [ext_resource type="PackedScene" uid="uid://btc2p8us0tk88" path="res://scenes/components/health_component.tscn" id="2_mwotk"]
 [ext_resource type="PackedScene" uid="uid://nh0e3oek75sg" path="res://scenes/components/hurtbox_component.tscn" id="3_jhwco"]
 [ext_resource type="PackedScene" uid="uid://bf2ls3twfo300" path="res://scenes/components/hit_box_component.tscn" id="4_hh5fy"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_chmbd"]
-atlas = ExtResource("1_w5iag")
-region = Rect2(0, 0, 512, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_v1ixa"]
-atlas = ExtResource("1_w5iag")
-region = Rect2(512, 0, 512, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hpj43"]
-atlas = ExtResource("1_w5iag")
-region = Rect2(1024, 0, 512, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1co3j"]
-atlas = ExtResource("1_w5iag")
-region = Rect2(1536, 0, 512, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_al0du"]
-atlas = ExtResource("1_w5iag")
-region = Rect2(2048, 0, 512, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kpu10"]
-atlas = ExtResource("1_w5iag")
-region = Rect2(2560, 0, 512, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_b3ky4"]
-atlas = ExtResource("1_w5iag")
-region = Rect2(3072, 0, 512, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yh5lw"]
-atlas = ExtResource("1_w5iag")
-region = Rect2(3584, 0, 512, 512)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jo831"]
-atlas = ExtResource("1_w5iag")
-region = Rect2(4096, 0, 512, 512)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_yfqal"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_chmbd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_v1ixa")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hpj43")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1co3j")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_al0du")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kpu10")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_b3ky4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yh5lw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jo831")
-}],
-"loop": true,
-"name": &"default",
-"speed": 10.0
-}]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iyllr"]
 radius = 114.337
@@ -84,7 +13,7 @@ radius = 114.337
 script = ExtResource("1_q0dk7")
 
 [node name="Beatrii" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_yfqal")
+sprite_frames = ExtResource("2_ddlpj")
 offset = Vector2(0, -78.575)
 
 [node name="Health_Component" parent="." instance=ExtResource("2_mwotk")]

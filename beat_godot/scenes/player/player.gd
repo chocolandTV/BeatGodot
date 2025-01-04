@@ -2,9 +2,9 @@ extends CharacterBody2D
 
 ### VARIABLES 
 const  GRAVITY : int = 1000
-const MAX_VEL : int = 600
+const MAX_VEL : int = 1200
 const START_POS : Vector2= Vector2 (100,400)
-const FLAP_SPEED : int = -500
+const FLAP_SPEED : int = -700
 var is_flying : bool = false
 var is_falling: bool = false
 
@@ -35,4 +35,5 @@ func _physics_process(delta: float) -> void:
         animation_sprite.stop()
 
 func flap():
+
     velocity.y = FLAP_SPEED

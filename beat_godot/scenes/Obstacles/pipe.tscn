@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://bk2jn7iecws0i"]
+
+[ext_resource type="SpriteFrames" uid="uid://d2ci3iqku7tm1" path="res://assets/spriteSheets/player.tres" id="1_vn4jj"]
+[ext_resource type="Texture2D" uid="uid://dl5ot6x2up1a6" path="res://assets/textures/enemie_eye.png" id="2_iriis"]
+
+[node name="Pipe" type="Area2D"]
+
+[node name="Raven_obstacle_01" type="AnimatedSprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(0, -436)
+sprite_frames = ExtResource("1_vn4jj")
+offset = Vector2(0, -103.72)
+flip_h = true
+
+[node name="Raven_obstacle_02" type="AnimatedSprite2D" parent="."]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(0, 792)
+sprite_frames = ExtResource("1_vn4jj")
+offset = Vector2(0, -103.72)
+flip_h = true
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+modulate = Color(0.6, 0.27451, 0.211765, 1)
+position = Vector2(-125, -482)
+shadow_enabled = true
+texture = ExtResource("2_iriis")

@@ -1,17 +1,44 @@
-[gd_scene load_steps=4 format=3 uid="uid://nv6kev6dqsnh"]
+[gd_scene load_steps=8 format=3 uid="uid://nv6kev6dqsnh"]
 
 [ext_resource type="PackedScene" uid="uid://b06fobwa0bapc" path="res://scenes/player/player.tscn" id="1_bhwtw"]
+[ext_resource type="Script" path="res://scenes/_game/game_scene_01.gd" id="1_ijrab"]
 [ext_resource type="Texture2D" uid="uid://bnhu40f2f2a1m" path="res://assets/textures/background.png" id="1_th85w"]
 [ext_resource type="PackedScene" uid="uid://dut1yf7bi2vl5" path="res://scenes/components/camera_2d.tscn" id="2_4si25"]
+[ext_resource type="PackedScene" uid="uid://dg1poo4ux7p4m" path="res://scenes/components/ground.tscn" id="5_lvswf"]
+[ext_resource type="PackedScene" uid="uid://b1ixc657wuis1" path="res://scenes/Obstacles/bad_raven.tscn" id="5_vau3r"]
+[ext_resource type="PackedScene" uid="uid://cqgdplic31cfi" path="res://scenes/godot_engine/godot_engine.tscn" id="6_1ucc8"]
 
-[node name="game_scene_01" type="Node2D"]
+[node name="game_scene_01" type="Node2D" node_paths=PackedStringArray("player_beatrii", "ground_object")]
+script = ExtResource("1_ijrab")
+player_beatrii = NodePath("Player")
+ground_object = NodePath("Ground")
 
 [node name="Background" type="Sprite2D" parent="."]
+scale = Vector2(1.77, 1.77)
 texture = ExtResource("1_th85w")
 
 [node name="Player" parent="." instance=ExtResource("1_bhwtw")]
-scale = Vector2(0.3, 0.3)
 motion_mode = 1
 
 [node name="Camera2D" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_4si25")]
+zoom = Vector2(0.2, 0.2)
 target = NodePath("../Player")
+
+[node name="Bad_Raven" parent="." instance=ExtResource("5_vau3r")]
+position = Vector2(1283, 0)
+
+[node name="Godot_Engine" parent="." instance=ExtResource("6_1ucc8")]
+position = Vector2(2544, 14)
+scale = Vector2(3, 3)
+
+[node name="Ground" type="Node2D" parent="."]
+scale = Vector2(1.2, 1.2)
+
+[node name="Ground3" parent="Ground" instance=ExtResource("5_lvswf")]
+position = Vector2(6550, 0)
+
+[node name="Ground2" parent="Ground" instance=ExtResource("5_lvswf")]
+position = Vector2(2493.35, 0)
+
+[node name="Ground" parent="Ground" instance=ExtResource("5_lvswf")]
+position = Vector2(-1565.83, 0)
