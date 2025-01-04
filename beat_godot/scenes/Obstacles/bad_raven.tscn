@@ -14,9 +14,9 @@ radius = 131.004
 size = Vector2(89, 2157)
 
 [node name="Bad_Raven" type="Area2D"]
+scale = Vector2(0.5, 0.5)
 collision_layer = 2
 script = ExtResource("1_4ia75")
-bad_raven_speed = 500.0
 
 [node name="Raven_obstacle_01" type="AnimatedSprite2D" parent="."]
 modulate = Color(0, 0, 0, 1)

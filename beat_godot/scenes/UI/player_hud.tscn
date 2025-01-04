@@ -1,0 +1,256 @@
+[gd_scene load_steps=8 format=3 uid="uid://c5871jutojwl3"]
+
+[ext_resource type="Texture2D" uid="uid://be8bhtdbvvs8d" path="res://assets/textures/feather.png" id="1_dmp4r"]
+[ext_resource type="Texture2D" uid="uid://bhp0g30mj0dib" path="res://icon.svg" id="2_htep6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m65oa"]
+
+[sub_resource type="Animation" id="Animation_i5cbw"]
+resource_name = "score10"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextEdit:placeholder_text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.433333, 0.5, 0.566667, 0.766667, 0.8, 0.833333, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [".", "..", "...", "xD", ".", "..", "...", ".", "..", "...", "event_player_survived -> increase spawnrate	", "event_player_survived -> increase spawnrate	"]
+}
+
+[sub_resource type="Animation" id="Animation_mrbut"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextEdit:placeholder_text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": ["player_start_game"]
+}
+
+[sub_resource type="Animation" id="Animation_8lw8m"]
+resource_name = "item10"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextEdit:placeholder_text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.433333, 0.5, 0.566667, 0.766667, 0.8, 0.833333, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [".", "..", "...", "~.~", ".", "..", "...", ".", "..", "...", "event_player_collected_chips -> increase obstacles, do not ask for help", "event_player_collected_chips -> increase obstacles, do not ask for help"]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7n7sv"]
+_data = {
+"RESET": SubResource("Animation_mrbut"),
+"item10": SubResource("Animation_8lw8m"),
+"score10": SubResource("Animation_i5cbw")
+}
+
+[node name="Player_HUD" type="CanvasLayer"]
+
+[node name="Player_health_Panel" type="HBoxContainer" parent="."]
+offset_left = 70.0
+offset_top = 70.0
+offset_right = 1082.0
+offset_bottom = 578.0
+
+[node name="Life_Panel_02" type="Panel" parent="Player_health_Panel"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_m65oa")
+
+[node name="Bg" type="TextureRect" parent="Player_health_Panel/Life_Panel_02"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_right = 512.0
+offset_bottom = 512.0
+scale = Vector2(0.16, 0.16)
+texture = ExtResource("1_dmp4r")
+
+[node name="TextureRect" type="TextureRect" parent="Player_health_Panel/Life_Panel_02"]
+modulate = Color(0.6, 0.27451, 0.211765, 1)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.145, 0.145)
+texture = ExtResource("1_dmp4r")
+
+[node name="Life_Panel_04" type="Panel" parent="Player_health_Panel"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_m65oa")
+
+[node name="Bg" type="TextureRect" parent="Player_health_Panel/Life_Panel_04"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_right = 512.0
+offset_bottom = 512.0
+scale = Vector2(0.16, 0.16)
+texture = ExtResource("1_dmp4r")
+
+[node name="TextureRect" type="TextureRect" parent="Player_health_Panel/Life_Panel_04"]
+modulate = Color(0.6, 0.27451, 0.211765, 1)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.145, 0.145)
+texture = ExtResource("1_dmp4r")
+
+[node name="Life_Panel_03" type="Panel" parent="Player_health_Panel"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_m65oa")
+
+[node name="Bg" type="TextureRect" parent="Player_health_Panel/Life_Panel_03"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_right = 512.0
+offset_bottom = 512.0
+scale = Vector2(0.16, 0.16)
+texture = ExtResource("1_dmp4r")
+
+[node name="TextureRect" type="TextureRect" parent="Player_health_Panel/Life_Panel_03"]
+modulate = Color(0.6, 0.27451, 0.211765, 1)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.145, 0.145)
+texture = ExtResource("1_dmp4r")
+
+[node name="Life_Label" type="Label" parent="."]
+offset_left = 124.0
+offset_top = 32.0
+offset_right = 195.0
+offset_bottom = 81.0
+theme_override_font_sizes/font_size = 35
+text = "Life:"
+
+[node name="Player_Item_Panel" type="HBoxContainer" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -203.0
+offset_top = 91.0
+offset_right = -3.0
+offset_bottom = 291.0
+grow_horizontal = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="Life_Panel_02" type="Panel" parent="Player_Item_Panel"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_m65oa")
+
+[node name="Bg" type="TextureRect" parent="Player_Item_Panel/Life_Panel_02"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_htep6")
+
+[node name="TextureRect" type="TextureRect" parent="Player_Item_Panel/Life_Panel_02"]
+visible = false
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_htep6")
+
+[node name="Life_Panel_04" type="Panel" parent="Player_Item_Panel"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_m65oa")
+
+[node name="Bg" type="TextureRect" parent="Player_Item_Panel/Life_Panel_04"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_htep6")
+
+[node name="TextureRect" type="TextureRect" parent="Player_Item_Panel/Life_Panel_04"]
+visible = false
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_htep6")
+
+[node name="Life_Panel_03" type="Panel" parent="Player_Item_Panel"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_m65oa")
+
+[node name="Bg" type="TextureRect" parent="Player_Item_Panel/Life_Panel_03"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_htep6")
+
+[node name="TextureRect" type="TextureRect" parent="Player_Item_Panel/Life_Panel_03"]
+visible = false
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_htep6")
+
+[node name="Item_Label" type="Label" parent="."]
+offset_left = 964.0
+offset_top = 29.0
+offset_right = 1067.0
+offset_bottom = 78.0
+theme_override_font_sizes/font_size = 35
+text = "Chips:"
+
+[node name="Godot_Engine_talk" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(800, 40)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -467.0
+offset_top = -66.0
+offset_right = 502.0
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="Godot_Engine_talk"]
+layout_mode = 2
+texture = ExtResource("2_htep6")
+expand_mode = 2
+
+[node name="Label" type="Label" parent="Godot_Engine_talk"]
+layout_mode = 2
+text = "Godot_Engine:"
+
+[node name="TextEdit" type="TextEdit" parent="Godot_Engine_talk"]
+custom_minimum_size = Vector2(800, 40)
+layout_mode = 2
+size_flags_vertical = 4
+placeholder_text = "player_start_game"
+caret_multiple = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Godot_Engine_talk"]
+libraries = {
+"": SubResource("AnimationLibrary_7n7sv")
+}
