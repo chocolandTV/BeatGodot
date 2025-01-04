@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkea0y7q8p41p"]
+
+[ext_resource type="Script" path="res://floating_text.gd" id="1_prnwa"]
+
+[node name="Floating_Text" type="Node2D"]
+script = ExtResource("1_prnwa")
+
+[node name="Label" type="Label" parent="."]
+light_mask = 2
+offset_left = -47.0
+offset_top = -37.0
+offset_right = 47.0
+offset_bottom = 39.0
+pivot_offset = Vector2(46.875, 37.165)
+theme_override_colors/font_color = Color(0.917647, 0.956863, 0.827451, 1)
+theme_override_colors/font_outline_color = Color(0.792157, 0.564706, 0.494118, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 55
+text = "700"
+horizontal_alignment = 1
+vertical_alignment = 1

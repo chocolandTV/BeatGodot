@@ -1,3 +1,17 @@
-[gd_scene format=3 uid="uid://nv6kev6dqsnh"]
+[gd_scene load_steps=4 format=3 uid="uid://nv6kev6dqsnh"]
+
+[ext_resource type="PackedScene" uid="uid://b06fobwa0bapc" path="res://scenes/player/player.tscn" id="1_bhwtw"]
+[ext_resource type="Texture2D" uid="uid://bnhu40f2f2a1m" path="res://assets/textures/background.png" id="1_th85w"]
+[ext_resource type="PackedScene" uid="uid://dut1yf7bi2vl5" path="res://scenes/components/camera_2d.tscn" id="2_4si25"]
 
 [node name="game_scene_01" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+texture = ExtResource("1_th85w")
+
+[node name="Player" parent="." instance=ExtResource("1_bhwtw")]
+scale = Vector2(0.3, 0.3)
+motion_mode = 1
+
+[node name="Camera2D" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_4si25")]
+target = NodePath("../Player")
