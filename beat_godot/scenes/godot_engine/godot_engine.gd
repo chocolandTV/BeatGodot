@@ -4,34 +4,32 @@ var badbirds_scene = preload ("res://scenes/Obstacles/bad_raven.tscn")
 ### VARIABLES
 
 @onready var timer : Timer  =$Timer
-@export var ground_collider_0 : Area2D
-@export var ground_collider_1: Area2D
-@export var ground_collider_2: Area2D
 ## score update
 @export var player_hud : Player_HUD
 
 var bad_ravens_array : Array
 var difficult : float  = 1
+var _wait_time : float = 4
 ### CONST
 const MAX_BAD_BIRDS : int  =20
 const START_POS : Vector2 = Vector2(1096,0)
 const HEIGH_MIN_MAX : Vector2 = Vector2(-1600.0, 1250.0)
 const SPAWN_HEIGHT : float  = 100
-const DIFICULT_STEP : int  =1
+const DIFFICULT_STEP : int  =1
 func _ready() -> void:
     timer.timeout.connect(on_timer_timeout)
-    ground_collider_0.hit.connect(player_bird_hit)
-    ground_collider_1.hit.connect(player_bird_hit)
-    ground_collider_2.hit.connect(player_bird_hit)
+
     get_node("/root/GlobalData").game_manager.game_is_running.connect(switch_game_state)
 
 func on_timer_timeout():
     generate_obstacles()
     ############ DIFICULT CHECK
     difficult += 1
-    if difficult == DIFICULT_STEP and timer.wait_time != 0.0:
-        timer.wait_time -=0.5
+    if difficult >= DIFFICULT_STEP and _wait_time != 0.0:
+        _wait_time =  max(0.0,_wait_time - 0.5)
+        timer.wait_time = _wait_time
         difficult  = 0
+        ##### ERROR MUST GREATER THAN ZERO WAITTIME  - Death will cause menu --- no Restart menu
         print("dificult increased")
         get_node("/root/GlobalData").player_hud.godot_anim_play_dificult()
 
@@ -54,13 +52,15 @@ func generate_obstacles():
     add_child(new_bad_ravens)
     
 func player_bird_hit():
-    get_node("/root/Audio").play_hit()
-    _game_over()
+    if get_node("/root/GlobalData").game_manager.current_player_invincible:
+        get_node("/root/Audio").play_hit()
+        health_changed()
 func player_scored():
-    get_node("/root/Audio").play_random()
+    if randi_range(0,100):
+        get_node("/root/Audio").play_random()
     get_node("/root/GlobalData").game_manager.player_scored()
 
-func _game_over():
+func health_changed():
     timer.stop()
     get_node("/root/GlobalData").game_manager.game_over()
 

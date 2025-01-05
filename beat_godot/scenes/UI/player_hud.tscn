@@ -1,271 +1,12 @@
-[gd_scene load_steps=45 format=3 uid="uid://c5871jutojwl3"]
+[gd_scene load_steps=11 format=3 uid="uid://c5871jutojwl3"]
 
 [ext_resource type="Texture2D" uid="uid://be8bhtdbvvs8d" path="res://assets/textures/feather.png" id="1_dmp4r"]
 [ext_resource type="Script" path="res://scenes/UI/player_hud.gd" id="1_f1dol"]
 [ext_resource type="Texture2D" uid="uid://bhp0g30mj0dib" path="res://icon.svg" id="2_htep6"]
 [ext_resource type="Texture2D" uid="uid://cw4b0bvhjawus" path="res://assets/textures/godot_engine_bg.png" id="4_awjsr"]
-[ext_resource type="Texture2D" uid="uid://bhbwsrry2xowp" path="res://assets/spriteSheets/godot_engine-Sheet.png" id="5_4wvyq"]
+[ext_resource type="SpriteFrames" uid="uid://yc0p6p6u4w3i" path="res://assets/spriteSheets/godot_engine.tres" id="5_lhn3c"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m65oa"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_kbea7"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_k2tva"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(128, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_34op7"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(256, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ilmhl"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(384, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gkger"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(0, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_8exr6"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(384, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_v0tfm"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(256, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_fbiht"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(128, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_nmvy0"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_258yn"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_v4rec"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1hvex"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(256, 256, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_35aj0"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(384, 256, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ayrqq"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_0is4t"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(256, 256, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6fpw4"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(384, 256, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_jdf3a"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_s2gtl"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_h35ii"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(256, 256, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_522uw"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(384, 256, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_u2ri5"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(0, 384, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wjpuw"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_058qd"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_evsdc"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(128, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6slhp"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(256, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_idx0n"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(384, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_w1lu6"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(0, 256, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_61wyu"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(384, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_regrt"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(256, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_smu1e"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(128, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6ysfg"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(0, 128, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ooixu"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(256, 0, 128, 128)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_c7b3e"]
-atlas = ExtResource("5_4wvyq")
-region = Rect2(0, 0, 128, 128)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_44c4x"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kbea7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_k2tva")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_34op7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ilmhl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gkger")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_8exr6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_v0tfm")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fbiht")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_nmvy0")
-}],
-"loop": true,
-"name": &"angry",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_258yn")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_v4rec")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1hvex")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_35aj0")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ayrqq")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_0is4t")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6fpw4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_jdf3a")
-}],
-"loop": true,
-"name": &"redeyes",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_s2gtl")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_h35ii")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_522uw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_u2ri5")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wjpuw")
-}],
-"loop": true,
-"name": &"redgodot",
-"speed": 10.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_058qd")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_evsdc")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6slhp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_idx0n")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_w1lu6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_61wyu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_regrt")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_smu1e")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6ysfg")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ooixu")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_c7b3e")
-}],
-"loop": true,
-"name": &"terrified",
-"speed": 12.0
-}]
 
 [sub_resource type="Animation" id="Animation_mrbut"]
 length = 0.001
@@ -515,8 +256,9 @@ expand_mode = 2
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Godot_Engine_talk/TextureRect"]
 position = Vector2(20, 20)
 scale = Vector2(0.35, 0.35)
-sprite_frames = SubResource("SpriteFrames_44c4x")
+sprite_frames = ExtResource("5_lhn3c")
 animation = &"angry"
+frame_progress = 0.627032
 
 [node name="Label" type="Label" parent="Godot_Engine_talk"]
 layout_mode = 2
@@ -533,6 +275,9 @@ caret_multiple = false
 libraries = {
 "": SubResource("AnimationLibrary_7n7sv")
 }
+
+[node name="LineEdit" type="LineEdit" parent="Godot_Engine_talk"]
+layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 5
@@ -569,3 +314,5 @@ custom_minimum_size = Vector2(250, 50)
 layout_mode = 2
 text = "10020. Points"
 horizontal_alignment = 1
+
+[connection signal="text_submitted" from="Godot_Engine_talk/LineEdit" to="." method="on_text_changed"]

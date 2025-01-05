@@ -1,11 +1,39 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqgdplic31cfi"]
+[gd_scene load_steps=6 format=3 uid="uid://cqgdplic31cfi"]
 
-[ext_resource type="Texture2D" uid="uid://bhp0g30mj0dib" path="res://icon.svg" id="1_p2sx2"]
+[ext_resource type="Texture2D" uid="uid://cw4b0bvhjawus" path="res://assets/textures/godot_engine_bg.png" id="1_18goo"]
+[ext_resource type="Script" path="res://scenes/godot_engine/godot_engine.gd" id="1_h0s3w"]
+[ext_resource type="SpriteFrames" uid="uid://yc0p6p6u4w3i" path="res://assets/spriteSheets/godot_engine.tres" id="2_h1a28"]
+[ext_resource type="Script" path="res://scenes/godot_engine/godot_animation.gd" id="3_7g3is"]
+[ext_resource type="Texture2D" uid="uid://bcvbl6r5jraoi" path="res://assets/textures/particles/point.png" id="4_o8x6w"]
 
 [node name="Godot_Engine" type="Node2D"]
+script = ExtResource("1_h0s3w")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_p2sx2")
+[node name="Godot_BG" type="Sprite2D" parent="."]
+texture = ExtResource("1_18goo")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Godot_BG"]
+sprite_frames = ExtResource("2_h1a28")
+autoplay = "default"
+frame_progress = 0.0763771
+script = ExtResource("3_7g3is")
+
+[node name="Timer" type="Timer" parent="Godot_BG/AnimatedSprite2D"]
+wait_time = 4.0
+autostart = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 4.0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+modulate = Color(1, 1, 1, 0.517647)
+lifetime = 3.0
+explosiveness = 1.0
+lifetime_randomness = 1.0
+texture = ExtResource("4_o8x6w")
+emission_shape = 3
+emission_rect_extents = Vector2(1, 50)
+direction = Vector2(-1, 0)
+gravity = Vector2(-55, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 25.0

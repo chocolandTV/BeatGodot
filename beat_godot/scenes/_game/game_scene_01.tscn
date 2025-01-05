@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://nv6kev6dqsnh"]
+[gd_scene load_steps=18 format=3 uid="uid://nv6kev6dqsnh"]
 
 [ext_resource type="PackedScene" uid="uid://b06fobwa0bapc" path="res://scenes/player/player.tscn" id="1_bhwtw"]
 [ext_resource type="Script" path="res://scenes/_game/game_scene_01.gd" id="1_ijrab"]
@@ -6,9 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dut1yf7bi2vl5" path="res://scenes/components/camera_2d.tscn" id="2_4si25"]
 [ext_resource type="Texture2D" uid="uid://cbfiro11hqmud" path="res://assets/textures/sun.png" id="3_6muya"]
 [ext_resource type="Texture2D" uid="uid://up4h56pf72e4" path="res://assets/textures/particles/dust.png" id="4_nj5ex"]
-[ext_resource type="PackedScene" uid="uid://dg1poo4ux7p4m" path="res://scenes/components/ground.tscn" id="5_lvswf"]
 [ext_resource type="PackedScene" uid="uid://cqgdplic31cfi" path="res://scenes/godot_engine/godot_engine.tscn" id="6_1ucc8"]
-[ext_resource type="Script" path="res://scenes/godot_engine/godot_engine.gd" id="7_aek8l"]
 [ext_resource type="PackedScene" uid="uid://by2tt8nxs4d0k" path="res://scenes/UI/menu.tscn" id="8_a4dou"]
 [ext_resource type="PackedScene" uid="uid://c5871jutojwl3" path="res://scenes/UI/player_hud.tscn" id="8_xvm8s"]
 [ext_resource type="AudioStream" uid="uid://c8ordyl0ho8af" path="res://resources/sounds/kuchibue no kimochi.mp3" id="10_f6jh7"]
@@ -28,24 +26,21 @@ stream_3/stream = ExtResource("15_hbmes")
 
 [node name="game_scene_01" type="Node2D"]
 
-[node name="Game_Manager" type="Node" parent="." node_paths=PackedStringArray("player_beatrii", "ground_object", "player_hud", "player_menu")]
+[node name="Game_Manager" type="Node" parent="." node_paths=PackedStringArray("player_beatrii", "player_hud", "player_menu")]
 script = ExtResource("1_ijrab")
 player_beatrii = NodePath("../Player")
-ground_object = NodePath("../Ground")
 player_hud = NodePath("../Player_HUD")
 player_menu = NodePath("../Menu")
 
+[node name="Timer" type="Timer" parent="Game_Manager"]
+wait_time = 3.0
+one_shot = true
+
 [node name="Background" type="Sprite2D" parent="."]
+z_index = -9
+y_sort_enabled = true
 scale = Vector2(1.77, 1.77)
 texture = ExtResource("1_th85w")
-
-[node name="Sun" type="TextureRect" parent="Background"]
-offset_left = -1070.62
-offset_top = -1531.64
-offset_right = -558.621
-offset_bottom = -1019.64
-scale = Vector2(4.205, 4.205)
-texture = ExtResource("3_6muya")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Background"]
 position = Vector2(1855.93, 0)
@@ -61,36 +56,34 @@ spread = 16.12
 gravity = Vector2(-550, 0)
 initial_velocity_min = 59.7
 initial_velocity_max = 358.21
-scale_amount_max = 5.0
+scale_amount_min = 3.0
+scale_amount_max = 10.0
 color = Color(0.537255, 0.356863, 0.117647, 1)
+
+[node name="Sun" type="TextureRect" parent="."]
+z_index = -4
+y_sort_enabled = true
+offset_left = -1019.0
+offset_top = -1050.0
+offset_right = -507.0
+offset_bottom = -538.0
+scale = Vector2(4.205, 4.205)
+texture = ExtResource("3_6muya")
 
 [node name="Player" parent="." instance=ExtResource("1_bhwtw")]
 motion_mode = 1
 
 [node name="Camera2D" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_4si25")]
 zoom = Vector2(0.2, 0.2)
+limit_top = -2200
+limit_bottom = 1200
+limit_smoothed = true
 target = NodePath("../Player")
 
-[node name="Godot_Engine" parent="." node_paths=PackedStringArray("ground_collider_0", "ground_collider_1", "ground_collider_2", "player_hud") instance=ExtResource("6_1ucc8")]
+[node name="Godot_Engine" parent="." node_paths=PackedStringArray("player_hud") instance=ExtResource("6_1ucc8")]
 position = Vector2(2544, 14)
 scale = Vector2(3, 3)
-script = ExtResource("7_aek8l")
-ground_collider_0 = NodePath("../Ground/Ground")
-ground_collider_1 = NodePath("../Ground/Ground2")
-ground_collider_2 = NodePath("../Ground/Ground3")
 player_hud = NodePath("../Player_HUD")
-
-[node name="Ground" type="Node2D" parent="."]
-scale = Vector2(1.2, 1.2)
-
-[node name="Ground3" parent="Ground" instance=ExtResource("5_lvswf")]
-position = Vector2(6550, 0)
-
-[node name="Ground2" parent="Ground" instance=ExtResource("5_lvswf")]
-position = Vector2(2493.35, 0)
-
-[node name="Ground" parent="Ground" instance=ExtResource("5_lvswf")]
-position = Vector2(-1565.83, 0)
 
 [node name="Menu" parent="." node_paths=PackedStringArray("gamemanager") instance=ExtResource("8_a4dou")]
 gamemanager = NodePath("../Game_Manager")
@@ -101,6 +94,7 @@ visible = false
 [node name="Audio_Manager" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_f6jh7")
 volume_db = -20.0
+autoplay = true
 parameters/looping = true
 script = ExtResource("11_amum6")
 

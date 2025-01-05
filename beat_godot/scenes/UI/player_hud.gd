@@ -14,21 +14,31 @@ class_name Player_HUD
 @export var godot_engine_Part_02: TextureRect
 @export var godot_engine_Part_03: TextureRect
 
-@export var godot_engine_chat : TextEdit
+@export var godot_engine_chat : LineEdit
 #### GODOT ENGINE ANIMATION 
 @onready var godot_animation_player : AnimationPlayer = $Godot_Engine_talk/AnimationPlayer
 @onready var godot_animation_sprite : AnimatedSprite2D = $Godot_Engine_talk/TextureRect/AnimatedSprite2D
 ###### PLAYER CLICKED ON LIFE ICONS
-var player_progress_life_01 : int = 0
-var player_progress_life_02: int = 0
-var player_progress_life_03 : int = 0
+var player_metagame_life : int = 9
+var is_life_container_highlighted : bool  = false
 
 func _ready() -> void:
     get_node("/root/GlobalData").SET_PLAYERHUD(self)
     update_player_life(3)
+    update_player_score(0)
+
+    life_icon_01.mouse_entered.connect(on_life_container_entered)
+    life_icon_02.mouse_entered.connect(on_life_container_entered)
+    life_icon_03.mouse_entered.connect(on_life_container_entered)
+
+    life_icon_01.mouse_exited.connect(on_life_container_exited)
+    life_icon_02.mouse_exited.connect(on_life_container_exited)
+    life_icon_03.mouse_exited.connect(on_life_container_exited)
+
 ### update all thingi
 
 func godot_anim_play_dificult():
+    print("do animation")
     godot_animation_player.play("score10")
     godot_animation_sprite.play("angry")
 
@@ -58,3 +68,28 @@ func update_player_life(value : int):
         life_label.text = "8"
         life_label.rotation_degrees = 90.0
         life_label.add_theme_font_size_override("font_size",40)
+
+func on_life_container_entered():
+    is_life_container_highlighted = true
+func on_life_container_exited():
+    is_life_container_highlighted = false
+
+func on_text_changed(_newstring: String):
+
+    ##set random animation and text 
+    print("random text")
+
+func _input(event: InputEvent) -> void:
+        if event.is_action_pressed("left_click") and  is_life_container_highlighted:
+            player_metagame_life -=1
+            print(player_metagame_life)
+            if player_metagame_life == 6:
+                update_player_life(2)
+            if player_metagame_life ==3:
+                update_player_life(1)
+            if player_metagame_life <= 0:
+                update_player_life(-1)
+                get_node("/root/GlobalData").game_manager.player_metagame_progress()
+
+
+            
