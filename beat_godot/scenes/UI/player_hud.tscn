@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c5871jutojwl3"]
+[gd_scene load_steps=13 format=3 uid="uid://c5871jutojwl3"]
 
 [ext_resource type="Texture2D" uid="uid://be8bhtdbvvs8d" path="res://assets/textures/feather.png" id="1_dmp4r"]
 [ext_resource type="Script" path="res://scenes/UI/player_hud.gd" id="1_f1dol"]
@@ -22,6 +22,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": ["player_start_game"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect/AnimatedSprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_8lw8m"]
@@ -56,10 +68,39 @@ tracks/0/keys = {
 "values": [".", "..", "...", "xD", ".", "..", "...", ".", "..", "...", "event_player_survived -> increase spawnrate	", "event_player_survived -> increase spawnrate	"]
 }
 
+[sub_resource type="Animation" id="Animation_ywm6x"]
+resource_name = "metagame"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextEdit:placeholder_text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.433333, 0.5, 0.566667, 0.766667, 0.8, 0.833333, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [".", "..", "...", "MHWHAT", ".", "..", "...", ".", "..", "...", "Engine_error: loosing parts", "Engine_error: loosing parts"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect/AnimatedSprite2D:offset")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333, 0.633333, 0.9, 1.23333, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-7.515, 18.8), Vector2(-2.32389, -3.69278), Vector2(4.165, -10.19), Vector2(0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7n7sv"]
 _data = {
 "RESET": SubResource("Animation_mrbut"),
 "item10": SubResource("Animation_8lw8m"),
+"metagame": SubResource("Animation_ywm6x"),
 "score10": SubResource("Animation_i5cbw")
 }
 
@@ -258,8 +299,7 @@ expand_mode = 2
 position = Vector2(20, 20)
 scale = Vector2(0.35, 0.35)
 sprite_frames = ExtResource("5_lhn3c")
-animation = &"angry"
-frame_progress = 0.912969
+animation = &"terrified"
 
 [node name="Label" type="Label" parent="Godot_Engine_talk"]
 layout_mode = 2
@@ -276,9 +316,6 @@ caret_multiple = false
 libraries = {
 "": SubResource("AnimationLibrary_7n7sv")
 }
-
-[node name="LineEdit" type="LineEdit" parent="Godot_Engine_talk"]
-layout_mode = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 5
@@ -319,5 +356,3 @@ horizontal_alignment = 1
 [node name="Win_Panel" parent="." instance=ExtResource("6_2ynty")]
 process_mode = 3
 visible = false
-
-[connection signal="text_submitted" from="Godot_Engine_talk/LineEdit" to="." method="on_text_changed"]

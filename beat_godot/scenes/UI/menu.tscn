@@ -61,7 +61,7 @@ position = Vector2(596, 357)
 scale = Vector2(0.305, 0.305)
 sprite_frames = ExtResource("3_boxt4")
 autoplay = "default"
-frame_progress = 0.299613
+frame_progress = 0.127997
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

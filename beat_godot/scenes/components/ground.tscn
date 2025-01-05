@@ -12,38 +12,39 @@ monitorable = false
 script = ExtResource("1_6peva")
 
 [node name="CollisionShape2D_Top" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1702)
+position = Vector2(-1534, -1702)
 shape = SubResource("RectangleShape2D_scgjr")
 
 [node name="CollisionShape2D2_Bot" type="CollisionShape2D" parent="."]
-position = Vector2(0, 1645.37)
+position = Vector2(-1534, 1645.37)
 shape = SubResource("RectangleShape2D_scgjr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1534, 0)
 texture = ExtResource("1_1dvd8")
 
 [node name="CollisionShape2D_Top2" type="CollisionShape2D" parent="."]
-position = Vector2(4096, -1702)
+position = Vector2(2562, -1702)
 shape = SubResource("RectangleShape2D_scgjr")
 
 [node name="CollisionShape2D2_Bot2" type="CollisionShape2D" parent="."]
-position = Vector2(4096, 1645.37)
+position = Vector2(2562, 1645.37)
 shape = SubResource("RectangleShape2D_scgjr")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(4096, 0)
+position = Vector2(2562, 0)
 texture = ExtResource("1_1dvd8")
 
 [node name="CollisionShape2D_Top3" type="CollisionShape2D" parent="."]
-position = Vector2(8192, -1702)
+position = Vector2(6658, -1702)
 shape = SubResource("RectangleShape2D_scgjr")
 
 [node name="CollisionShape2D2_Bot3" type="CollisionShape2D" parent="."]
-position = Vector2(8192, 1645.37)
+position = Vector2(6658, 1645.37)
 shape = SubResource("RectangleShape2D_scgjr")
 
 [node name="Sprite2D3" type="Sprite2D" parent="."]
-position = Vector2(8192, 0)
+position = Vector2(6658, 0)
 texture = ExtResource("1_1dvd8")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

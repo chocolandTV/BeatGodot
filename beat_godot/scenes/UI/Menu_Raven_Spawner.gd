@@ -20,5 +20,5 @@ func switch_spawner(value : bool):
 func start_spawn():
     var new_bad_ravens = badbirds_scene.instantiate()
     new_bad_ravens.global_position.x = START_SPAWN_POS.x
-    new_bad_ravens.global_position.y = randf_range(-100, 300)
+    new_bad_ravens.global_position.y = randf_range(-55, 200)
     add_child(new_bad_ravens)

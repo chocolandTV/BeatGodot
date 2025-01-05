@@ -43,6 +43,10 @@ func godot_anim_play_dificult():
     godot_animation_player.play("score10")
     godot_animation_sprite.play("angry")
 
+func godot_anim_play_endgame():
+    godot_animation_player.play("metagame")
+    godot_animation_sprite.play("terrified")
+
 func update_player_score(game_score : int):
     player_score_label.text = str(game_score)
 
