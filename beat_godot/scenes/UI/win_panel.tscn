@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=3 uid="uid://8wmshp8tgioi"]
+
+[ext_resource type="Texture2D" uid="uid://be8bhtdbvvs8d" path="res://assets/textures/feather.png" id="1_8qn6l"]
+[ext_resource type="Script" path="res://scenes/UI/win_panel.gd" id="1_dyvmj"]
+[ext_resource type="Texture2D" uid="uid://cw4b0bvhjawus" path="res://assets/textures/godot_engine_bg.png" id="1_tk7ww"]
+[ext_resource type="Texture2D" uid="uid://bhbwsrry2xowp" path="res://assets/spriteSheets/godot_engine-Sheet.png" id="2_t1k2t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qx84x"]
+atlas = ExtResource("2_t1k2t")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ngsow"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qx84x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Win_Panel" type="CanvasLayer"]
+script = ExtResource("1_dyvmj")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 100
+explosiveness = 1.0
+randomness = 1.0
+texture = ExtResource("1_8qn6l")
+direction = Vector2(0, -1)
+spread = 180.0
+gravity = Vector2(0, -5)
+initial_velocity_min = 50.0
+initial_velocity_max = 250.0
+scale_amount_min = 0.01
+scale_amount_max = 0.02
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -62.0
+offset_top = -58.0
+offset_right = 66.0
+offset_bottom = 70.0
+texture = ExtResource("1_tk7ww")
+
+[node name="Label" type="Label" parent="TextureRect"]
+offset_left = 17.0
+offset_top = 28.0
+offset_right = 110.0
+offset_bottom = 97.0
+theme_override_font_sizes/font_size = 50
+text = "Win"
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+offset_left = -62.0
+offset_top = -238.0
+offset_right = 66.0
+offset_bottom = -110.0
+texture = ExtResource("1_tk7ww")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TextureRect2"]
+position = Vector2(62, 62)
+sprite_frames = SubResource("SpriteFrames_ngsow")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -231.0
+offset_top = 76.0
+offset_right = 258.0
+offset_bottom = 152.0
+theme_override_font_sizes/font_size = 55
+text = "Thanks for playing"

@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://c5871jutojwl3"]
+[gd_scene load_steps=12 format=3 uid="uid://c5871jutojwl3"]
 
 [ext_resource type="Texture2D" uid="uid://be8bhtdbvvs8d" path="res://assets/textures/feather.png" id="1_dmp4r"]
 [ext_resource type="Script" path="res://scenes/UI/player_hud.gd" id="1_f1dol"]
 [ext_resource type="Texture2D" uid="uid://bhp0g30mj0dib" path="res://icon.svg" id="2_htep6"]
 [ext_resource type="Texture2D" uid="uid://cw4b0bvhjawus" path="res://assets/textures/godot_engine_bg.png" id="4_awjsr"]
 [ext_resource type="SpriteFrames" uid="uid://yc0p6p6u4w3i" path="res://assets/spriteSheets/godot_engine.tres" id="5_lhn3c"]
+[ext_resource type="PackedScene" uid="uid://8wmshp8tgioi" path="res://scenes/UI/win_panel.tscn" id="6_2ynty"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m65oa"]
 
@@ -36,7 +37,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.433333, 0.5, 0.566667, 0.766667, 0.8, 0.833333, 1, 2),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [".", "..", "...", "~.~", ".", "..", "...", ".", "..", "...", "event_player_collected_chips -> increase obstacles, do not ask for help", "event_player_collected_chips -> increase obstacles, do not ask for help"]
+"values": [".", "..", "...", "~.~", ".", "..", "...", ".", "..", "...", "event_player_destroy_himself ->huh? what the hell is player doing?", "event_player_destroy_himself ->huh? what the hell is player doing?"]
 }
 
 [sub_resource type="Animation" id="Animation_i5cbw"]
@@ -258,7 +259,7 @@ position = Vector2(20, 20)
 scale = Vector2(0.35, 0.35)
 sprite_frames = ExtResource("5_lhn3c")
 animation = &"angry"
-frame_progress = 0.627032
+frame_progress = 0.912969
 
 [node name="Label" type="Label" parent="Godot_Engine_talk"]
 layout_mode = 2
@@ -314,5 +315,9 @@ custom_minimum_size = Vector2(250, 50)
 layout_mode = 2
 text = "10020. Points"
 horizontal_alignment = 1
+
+[node name="Win_Panel" parent="." instance=ExtResource("6_2ynty")]
+process_mode = 3
+visible = false
 
 [connection signal="text_submitted" from="Godot_Engine_talk/LineEdit" to="." method="on_text_changed"]

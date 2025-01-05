@@ -18,9 +18,11 @@ class_name Player_HUD
 #### GODOT ENGINE ANIMATION 
 @onready var godot_animation_player : AnimationPlayer = $Godot_Engine_talk/AnimationPlayer
 @onready var godot_animation_sprite : AnimatedSprite2D = $Godot_Engine_talk/TextureRect/AnimatedSprite2D
+@onready var godot_win : CanvasLayer =$Win_Panel
 ###### PLAYER CLICKED ON LIFE ICONS
 var player_metagame_life : int = 9
 var is_life_container_highlighted : bool  = false
+
 
 func _ready() -> void:
     get_node("/root/GlobalData").SET_PLAYERHUD(self)
@@ -38,13 +40,30 @@ func _ready() -> void:
 ### update all thingi
 
 func godot_anim_play_dificult():
-    print("do animation")
     godot_animation_player.play("score10")
     godot_animation_sprite.play("angry")
 
 func update_player_score(game_score : int):
     player_score_label.text = str(game_score)
 
+############## ENDGAME
+func update_metagame(value : int):
+    if value >=1:
+        godot_engine_Part_01.visible = true
+        godot_engine_Part_02.visible = false
+        godot_engine_Part_03.visible = false
+    if value >=2:
+        godot_engine_Part_01.visible = true
+        godot_engine_Part_02.visible = true
+        godot_engine_Part_03.visible = false
+    if value >=3 :
+        godot_engine_Part_01.visible = true
+        godot_engine_Part_02.visible = true
+        godot_engine_Part_03.visible = true
+        get_tree().paused = true
+        godot_win.visible  = true
+
+########## END 
 func update_player_life(value : int):
     if value ==3:
         life_icon_01.visible = true
@@ -75,7 +94,6 @@ func on_life_container_exited():
     is_life_container_highlighted = false
 
 func on_text_changed(_newstring: String):
-
     ##set random animation and text 
     print("random text")
 
@@ -85,10 +103,13 @@ func _input(event: InputEvent) -> void:
             print(player_metagame_life)
             if player_metagame_life == 6:
                 update_player_life(2)
+                godot_animation_player.play("item10")
             if player_metagame_life ==3:
                 update_player_life(1)
+                godot_animation_player.play("item10")
             if player_metagame_life <= 0:
                 update_player_life(-1)
+                godot_animation_player.play("item10")
                 get_node("/root/GlobalData").game_manager.player_metagame_progress()
 
 

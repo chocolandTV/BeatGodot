@@ -4,6 +4,8 @@ var badbirds_scene = preload ("res://scenes/Obstacles/bad_raven.tscn")
 ### VARIABLES
 
 @onready var timer : Timer  =$Timer
+@export var ground_collider_0 : Area2D
+
 ## score update
 @export var player_hud : Player_HUD
 
@@ -16,9 +18,12 @@ const START_POS : Vector2 = Vector2(1096,0)
 const HEIGH_MIN_MAX : Vector2 = Vector2(-1600.0, 1250.0)
 const SPAWN_HEIGHT : float  = 100
 const DIFFICULT_STEP : int  =1
+########### ENDGAME 
+var is_godot_highlighted :bool = false
+var item_clicked : int = 0
 func _ready() -> void:
     timer.timeout.connect(on_timer_timeout)
-
+    ground_collider_0.hit.connect(player_bird_hit)
     get_node("/root/GlobalData").game_manager.game_is_running.connect(switch_game_state)
 
 func on_timer_timeout():
@@ -52,7 +57,7 @@ func generate_obstacles():
     add_child(new_bad_ravens)
     
 func player_bird_hit():
-    if get_node("/root/GlobalData").game_manager.current_player_invincible:
+    if !get_node("/root/GlobalData").game_manager.current_player_invincible:
         get_node("/root/Audio").play_hit()
         health_changed()
 func player_scored():
@@ -69,3 +74,21 @@ func switch_game_state(value :bool):
         timer.start()
     else:
         timer.stop()
+
+func _input(event: InputEvent) -> void:
+        if event.is_action_pressed("left_click") and  is_godot_highlighted:
+            item_clicked += 1
+            print("click 1")
+            get_node("/root/Audio").play_random()
+            if item_clicked >= 10:
+                get_node("/root/GlobalData").player_hud.update_metagame(1)
+                #update ui item 1
+            if item_clicked >= 20:
+                get_node("/root/GlobalData").player_hud.update_metagame(2)
+            if item_clicked >= 30:
+                get_node("/root/GlobalData").player_hud.update_metagame(3)
+                #( FINAL WIN)
+func on_mouse_entered():
+    is_godot_highlighted = true
+func on_mouse_exited():
+    is_godot_highlighted = false 

@@ -71,20 +71,20 @@ func start_game():
 func quit_game():
     get_tree().quit()
 
-# func _process(_delta: float) -> void:
-#     if _is_game_running:
-#         _scroll += SCROLL_SPEED
-#         #reset
-#         if _scroll >= 4096:
-#             _scroll =0
-#         #object move
-#         ground_object.position.x = -_scroll
-########### PLAYER KILLED HEALTH COMPONENT
+func _process(_delta: float) -> void:
+    if _is_game_running:
+        _scroll += SCROLL_SPEED
+        #reset
+        if _scroll >= 4096:
+            _scroll =0
+        #object move
+        ground_object.position.x = -_scroll
+########## PLAYER KILLED HEALTH COMPONENT
 func player_progress_lifehack():
     current_player_invincible = true
 
 func player_scored():
-    _game_score +=1
+    _game_score +=1000
     get_node("/root/GlobalData").SET_PLAYER_SCORE(_game_score)
     # UI UPDATE
     get_node("/root/GlobalData").player_hud.update_player_score(_game_score)
@@ -99,7 +99,7 @@ func game_over():
         get_node("/root/GlobalData").player_hud.update_player_life(_current_player_life)
 
     if _current_player_life <= 0 and !current_player_invincible:
-        current_player_invincible = true
+        player_progress_lifehack()
         player_beatrii.is_falling = true
         player_beatrii.is_flying = false
         timer.start()
@@ -114,7 +114,7 @@ func on_timer_timeout_game_over():
     #show game_over menu
 
 func player_metagame_progress():
-    current_player_invincible = true
+    player_progress_lifehack()
     real_game_score = 1
      ### 1 Step  no life
 
