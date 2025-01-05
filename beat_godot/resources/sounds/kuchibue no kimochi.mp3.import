@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c8ordyl0ho8af"
+path="res://.godot/imported/kuchibue no kimochi.mp3-4869dd969a4240c99f54d2fd88d072ae.mp3str"
+
+[deps]
+
+source_file="res://resources/sounds/kuchibue no kimochi.mp3"
+dest_files=["res://.godot/imported/kuchibue no kimochi.mp3-4869dd969a4240c99f54d2fd88d072ae.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

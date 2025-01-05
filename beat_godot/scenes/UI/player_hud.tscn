@@ -1,25 +1,271 @@
-[gd_scene load_steps=8 format=3 uid="uid://c5871jutojwl3"]
+[gd_scene load_steps=45 format=3 uid="uid://c5871jutojwl3"]
 
 [ext_resource type="Texture2D" uid="uid://be8bhtdbvvs8d" path="res://assets/textures/feather.png" id="1_dmp4r"]
+[ext_resource type="Script" path="res://scenes/UI/player_hud.gd" id="1_f1dol"]
 [ext_resource type="Texture2D" uid="uid://bhp0g30mj0dib" path="res://icon.svg" id="2_htep6"]
+[ext_resource type="Texture2D" uid="uid://cw4b0bvhjawus" path="res://assets/textures/godot_engine_bg.png" id="4_awjsr"]
+[ext_resource type="Texture2D" uid="uid://bhbwsrry2xowp" path="res://assets/spriteSheets/godot_engine-Sheet.png" id="5_4wvyq"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m65oa"]
 
-[sub_resource type="Animation" id="Animation_i5cbw"]
-resource_name = "score10"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextEdit:placeholder_text")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.433333, 0.5, 0.566667, 0.766667, 0.8, 0.833333, 1, 2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [".", "..", "...", "xD", ".", "..", "...", ".", "..", "...", "event_player_survived -> increase spawnrate	", "event_player_survived -> increase spawnrate	"]
-}
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbea7"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k2tva"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_34op7"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ilmhl"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gkger"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8exr6"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v0tfm"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fbiht"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nmvy0"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_258yn"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v4rec"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1hvex"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(256, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_35aj0"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(384, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ayrqq"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0is4t"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(256, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6fpw4"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(384, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdf3a"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s2gtl"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h35ii"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(256, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_522uw"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(384, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u2ri5"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(0, 384, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wjpuw"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_058qd"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_evsdc"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6slhp"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_idx0n"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(384, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w1lu6"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(0, 256, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61wyu"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(384, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_regrt"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(256, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_smu1e"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(128, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ysfg"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(0, 128, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ooixu"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c7b3e"]
+atlas = ExtResource("5_4wvyq")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_44c4x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kbea7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k2tva")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_34op7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ilmhl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gkger")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8exr6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v0tfm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fbiht")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nmvy0")
+}],
+"loop": true,
+"name": &"angry",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_258yn")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v4rec")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1hvex")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_35aj0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ayrqq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0is4t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6fpw4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jdf3a")
+}],
+"loop": true,
+"name": &"redeyes",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s2gtl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h35ii")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_522uw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u2ri5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wjpuw")
+}],
+"loop": true,
+"name": &"redgodot",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_058qd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_evsdc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6slhp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_idx0n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w1lu6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61wyu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_regrt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_smu1e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6ysfg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ooixu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c7b3e")
+}],
+"loop": true,
+"name": &"terrified",
+"speed": 12.0
+}]
 
 [sub_resource type="Animation" id="Animation_mrbut"]
 length = 0.001
@@ -52,6 +298,22 @@ tracks/0/keys = {
 "values": [".", "..", "...", "~.~", ".", "..", "...", ".", "..", "...", "event_player_collected_chips -> increase obstacles, do not ask for help", "event_player_collected_chips -> increase obstacles, do not ask for help"]
 }
 
+[sub_resource type="Animation" id="Animation_i5cbw"]
+resource_name = "score10"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextEdit:placeholder_text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.433333, 0.5, 0.566667, 0.766667, 0.8, 0.833333, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [".", "..", "...", "xD", ".", "..", "...", ".", "..", "...", "event_player_survived -> increase spawnrate	", "event_player_survived -> increase spawnrate	"]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7n7sv"]
 _data = {
 "RESET": SubResource("Animation_mrbut"),
@@ -59,7 +321,18 @@ _data = {
 "score10": SubResource("Animation_i5cbw")
 }
 
-[node name="Player_HUD" type="CanvasLayer"]
+[node name="Player_HUD" type="CanvasLayer" node_paths=PackedStringArray("life_holder", "life_label", "life_icon_01", "life_icon_02", "life_icon_03", "player_score_label", "godot_engine_Part_01", "godot_engine_Part_02", "godot_engine_Part_03", "godot_engine_chat")]
+script = ExtResource("1_f1dol")
+life_holder = NodePath("Player_health_Panel")
+life_label = NodePath("Life_Label")
+life_icon_01 = NodePath("Player_health_Panel/Life_Panel_02/Life_01")
+life_icon_02 = NodePath("Player_health_Panel/Life_Panel_04/Life_02")
+life_icon_03 = NodePath("Player_health_Panel/Life_Panel_03/Life_03")
+player_score_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/player_score")
+godot_engine_Part_01 = NodePath("Player_Item_Panel/Life_Panel_02/Godot_Part_01")
+godot_engine_Part_02 = NodePath("Player_Item_Panel/Life_Panel_04/Godot_Part_02")
+godot_engine_Part_03 = NodePath("Player_Item_Panel/Life_Panel_03/Godot_Part_03")
+godot_engine_chat = NodePath("Godot_Engine_talk/TextEdit")
 
 [node name="Player_health_Panel" type="HBoxContainer" parent="."]
 offset_left = 70.0
@@ -80,7 +353,7 @@ offset_bottom = 512.0
 scale = Vector2(0.16, 0.16)
 texture = ExtResource("1_dmp4r")
 
-[node name="TextureRect" type="TextureRect" parent="Player_health_Panel/Life_Panel_02"]
+[node name="Life_01" type="TextureRect" parent="Player_health_Panel/Life_Panel_02"]
 modulate = Color(0.6, 0.27451, 0.211765, 1)
 layout_mode = 0
 offset_right = 40.0
@@ -101,7 +374,7 @@ offset_bottom = 512.0
 scale = Vector2(0.16, 0.16)
 texture = ExtResource("1_dmp4r")
 
-[node name="TextureRect" type="TextureRect" parent="Player_health_Panel/Life_Panel_04"]
+[node name="Life_02" type="TextureRect" parent="Player_health_Panel/Life_Panel_04"]
 modulate = Color(0.6, 0.27451, 0.211765, 1)
 layout_mode = 0
 offset_right = 40.0
@@ -122,7 +395,7 @@ offset_bottom = 512.0
 scale = Vector2(0.16, 0.16)
 texture = ExtResource("1_dmp4r")
 
-[node name="TextureRect" type="TextureRect" parent="Player_health_Panel/Life_Panel_03"]
+[node name="Life_03" type="TextureRect" parent="Player_health_Panel/Life_Panel_03"]
 modulate = Color(0.6, 0.27451, 0.211765, 1)
 layout_mode = 0
 offset_right = 40.0
@@ -162,7 +435,7 @@ offset_bottom = 128.0
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_htep6")
 
-[node name="TextureRect" type="TextureRect" parent="Player_Item_Panel/Life_Panel_02"]
+[node name="Godot_Part_01" type="TextureRect" parent="Player_Item_Panel/Life_Panel_02"]
 visible = false
 layout_mode = 0
 offset_right = 128.0
@@ -183,7 +456,7 @@ offset_bottom = 128.0
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_htep6")
 
-[node name="TextureRect" type="TextureRect" parent="Player_Item_Panel/Life_Panel_04"]
+[node name="Godot_Part_02" type="TextureRect" parent="Player_Item_Panel/Life_Panel_04"]
 visible = false
 layout_mode = 0
 offset_right = 128.0
@@ -204,7 +477,7 @@ offset_bottom = 128.0
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_htep6")
 
-[node name="TextureRect" type="TextureRect" parent="Player_Item_Panel/Life_Panel_03"]
+[node name="Godot_Part_03" type="TextureRect" parent="Player_Item_Panel/Life_Panel_03"]
 visible = false
 layout_mode = 0
 offset_right = 128.0
@@ -236,8 +509,14 @@ grow_vertical = 0
 
 [node name="TextureRect" type="TextureRect" parent="Godot_Engine_talk"]
 layout_mode = 2
-texture = ExtResource("2_htep6")
+texture = ExtResource("4_awjsr")
 expand_mode = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Godot_Engine_talk/TextureRect"]
+position = Vector2(20, 20)
+scale = Vector2(0.35, 0.35)
+sprite_frames = SubResource("SpriteFrames_44c4x")
+animation = &"angry"
 
 [node name="Label" type="Label" parent="Godot_Engine_talk"]
 layout_mode = 2
@@ -254,3 +533,39 @@ caret_multiple = false
 libraries = {
 "": SubResource("AnimationLibrary_7n7sv")
 }
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -125.0
+offset_right = 125.0
+offset_bottom = 250.0
+grow_horizontal = 2
+theme_override_constants/margin_top = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 35
+text = "Score:"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+modulate = Color(0.858824, 0.847059, 0.682353, 1)
+position = Vector2(32, 0)
+scale = Vector2(0.09, 0.09)
+texture = ExtResource("1_dmp4r")
+offset = Vector2(100, 100)
+
+[node name="player_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(250, 50)
+layout_mode = 2
+text = "10020. Points"
+horizontal_alignment = 1

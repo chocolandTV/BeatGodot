@@ -1,5 +1,5 @@
 extends CharacterBody2D
-
+class_name Player
 ### VARIABLES 
 const  GRAVITY : int = 1000
 const MAX_VEL : int = 1200
@@ -11,6 +11,7 @@ var is_falling: bool = false
 @onready var animation_sprite : AnimatedSprite2D = $Beatrii
 
 func _ready() -> void:
+    get_node("/root/GlobalData").SET_PLAYER(self)
     reset()
 
 func reset():

@@ -1,22 +1,68 @@
-[gd_scene load_steps=9 format=3 uid="uid://nv6kev6dqsnh"]
+[gd_scene load_steps=20 format=3 uid="uid://nv6kev6dqsnh"]
 
 [ext_resource type="PackedScene" uid="uid://b06fobwa0bapc" path="res://scenes/player/player.tscn" id="1_bhwtw"]
 [ext_resource type="Script" path="res://scenes/_game/game_scene_01.gd" id="1_ijrab"]
 [ext_resource type="Texture2D" uid="uid://bnhu40f2f2a1m" path="res://assets/textures/background.png" id="1_th85w"]
 [ext_resource type="PackedScene" uid="uid://dut1yf7bi2vl5" path="res://scenes/components/camera_2d.tscn" id="2_4si25"]
+[ext_resource type="Texture2D" uid="uid://cbfiro11hqmud" path="res://assets/textures/sun.png" id="3_6muya"]
+[ext_resource type="Texture2D" uid="uid://up4h56pf72e4" path="res://assets/textures/particles/dust.png" id="4_nj5ex"]
 [ext_resource type="PackedScene" uid="uid://dg1poo4ux7p4m" path="res://scenes/components/ground.tscn" id="5_lvswf"]
 [ext_resource type="PackedScene" uid="uid://cqgdplic31cfi" path="res://scenes/godot_engine/godot_engine.tscn" id="6_1ucc8"]
 [ext_resource type="Script" path="res://scenes/godot_engine/godot_engine.gd" id="7_aek8l"]
+[ext_resource type="PackedScene" uid="uid://by2tt8nxs4d0k" path="res://scenes/UI/menu.tscn" id="8_a4dou"]
 [ext_resource type="PackedScene" uid="uid://c5871jutojwl3" path="res://scenes/UI/player_hud.tscn" id="8_xvm8s"]
+[ext_resource type="AudioStream" uid="uid://c8ordyl0ho8af" path="res://resources/sounds/kuchibue no kimochi.mp3" id="10_f6jh7"]
+[ext_resource type="Script" path="res://scenes/_game/audio_executer.gd" id="11_amum6"]
+[ext_resource type="AudioStream" uid="uid://km1xfdtpnlxu" path="res://resources/sounds/raven_01.mp3" id="12_2l4m5"]
+[ext_resource type="AudioStream" uid="uid://cpa66jq6vets6" path="res://resources/sounds/raven_02.mp3" id="13_t87qh"]
+[ext_resource type="AudioStream" uid="uid://bspox2avo3h5g" path="res://resources/sounds/raven_03.mp3" id="14_444km"]
+[ext_resource type="AudioStream" uid="uid://bug8kbgx6r280" path="res://resources/sounds/raven_thinking.mp3" id="15_hbmes"]
+[ext_resource type="AudioStream" uid="uid://cii62g4hxqxik" path="res://resources/sounds/raven_hit.mp3" id="16_sqmtg"]
 
-[node name="game_scene_01" type="Node2D" node_paths=PackedStringArray("player_beatrii", "ground_object")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wv8yx"]
+streams_count = 4
+stream_0/stream = ExtResource("12_2l4m5")
+stream_1/stream = ExtResource("13_t87qh")
+stream_2/stream = ExtResource("14_444km")
+stream_3/stream = ExtResource("15_hbmes")
+
+[node name="game_scene_01" type="Node2D"]
+
+[node name="Game_Manager" type="Node" parent="." node_paths=PackedStringArray("player_beatrii", "ground_object", "player_hud", "player_menu")]
 script = ExtResource("1_ijrab")
-player_beatrii = NodePath("Player")
-ground_object = NodePath("Ground")
+player_beatrii = NodePath("../Player")
+ground_object = NodePath("../Ground")
+player_hud = NodePath("../Player_HUD")
+player_menu = NodePath("../Menu")
 
 [node name="Background" type="Sprite2D" parent="."]
 scale = Vector2(1.77, 1.77)
 texture = ExtResource("1_th85w")
+
+[node name="Sun" type="TextureRect" parent="Background"]
+offset_left = -1070.62
+offset_top = -1531.64
+offset_right = -558.621
+offset_bottom = -1019.64
+scale = Vector2(4.205, 4.205)
+texture = ExtResource("3_6muya")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Background"]
+position = Vector2(1855.93, 0)
+amount = 50
+lifetime = 10.0
+randomness = 1.0
+lifetime_randomness = 1.0
+texture = ExtResource("4_nj5ex")
+emission_shape = 3
+emission_rect_extents = Vector2(50, 1000)
+direction = Vector2(-1, 0)
+spread = 16.12
+gravity = Vector2(-550, 0)
+initial_velocity_min = 59.7
+initial_velocity_max = 358.21
+scale_amount_max = 5.0
+color = Color(0.537255, 0.356863, 0.117647, 1)
 
 [node name="Player" parent="." instance=ExtResource("1_bhwtw")]
 motion_mode = 1
@@ -25,13 +71,14 @@ motion_mode = 1
 zoom = Vector2(0.2, 0.2)
 target = NodePath("../Player")
 
-[node name="Godot_Engine" parent="." node_paths=PackedStringArray("ground_collider_0", "ground_collider_1", "ground_collider_2") instance=ExtResource("6_1ucc8")]
+[node name="Godot_Engine" parent="." node_paths=PackedStringArray("ground_collider_0", "ground_collider_1", "ground_collider_2", "player_hud") instance=ExtResource("6_1ucc8")]
 position = Vector2(2544, 14)
 scale = Vector2(3, 3)
 script = ExtResource("7_aek8l")
 ground_collider_0 = NodePath("../Ground/Ground")
 ground_collider_1 = NodePath("../Ground/Ground2")
 ground_collider_2 = NodePath("../Ground/Ground3")
+player_hud = NodePath("../Player_HUD")
 
 [node name="Ground" type="Node2D" parent="."]
 scale = Vector2(1.2, 1.2)
@@ -45,4 +92,22 @@ position = Vector2(2493.35, 0)
 [node name="Ground" parent="Ground" instance=ExtResource("5_lvswf")]
 position = Vector2(-1565.83, 0)
 
+[node name="Menu" parent="." node_paths=PackedStringArray("gamemanager") instance=ExtResource("8_a4dou")]
+gamemanager = NodePath("../Game_Manager")
+
 [node name="Player_HUD" parent="." instance=ExtResource("8_xvm8s")]
+visible = false
+
+[node name="Audio_Manager" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_f6jh7")
+volume_db = -20.0
+parameters/looping = true
+script = ExtResource("11_amum6")
+
+[node name="Raven_Random_Sound" type="AudioStreamPlayer" parent="Audio_Manager"]
+stream = SubResource("AudioStreamRandomizer_wv8yx")
+volume_db = -15.0
+
+[node name="Raven_Hit_Sound" type="AudioStreamPlayer" parent="Audio_Manager"]
+stream = ExtResource("16_sqmtg")
+volume_db = -21.543

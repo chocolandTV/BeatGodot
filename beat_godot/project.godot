@@ -15,6 +15,11 @@ run/main_scene="res://scenes/_game/game_scene_01.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Audio="*res://scenes/manager/audio.tscn"
+GlobalData="*res://scenes/manager/global_data.tscn"
+
 [display]
 
 mouse_cursor/custom_image="res://assets/textures/mouse_cursor.png"
