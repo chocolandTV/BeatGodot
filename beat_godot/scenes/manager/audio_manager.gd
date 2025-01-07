@@ -3,6 +3,7 @@ class_name Audio_Manager
 
 signal play_hit_sound()
 signal play_random_sound()
+signal play_godot_damaged()
 
 func play_hit():
     play_hit_sound.emit()
@@ -10,6 +11,8 @@ func play_hit():
 func play_random():
     play_random_sound.emit()
 
+func play_godot_damage():
+    play_godot_damaged.emit()
 
 func _ready() -> void:
      get_node("/root/GlobalData").SET_AUDIO_MANAGER(self)

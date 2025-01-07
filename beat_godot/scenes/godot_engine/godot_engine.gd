@@ -1,75 +1,62 @@
 extends Node2D
 class_name enemy_godot
 var badbirds_scene = preload ("res://scenes/Obstacles/bad_raven.tscn")
-### VARIABLES
-
-@onready var timer : Timer  =$Timer
-@export var ground_collider_0 : Area2D
-@onready var animation_sprite : AnimatedSprite2D =$Godot_BG/AnimatedSprite2D
-@onready var animation_particle: CPUParticles2D = $Godot_BG/AnimatedSprite2D/Particle_damaged
-## score update
-@export var player_hud : Player_HUD
-
-var bad_ravens_array : Array
-var difficult : float  = 1
-var _wait_time : float = 4
+### DEFINES
+@onready var timer : Timer  =$Spawn_rate_timer
+@onready var animation_sprite : AnimatedSprite2D =$Godot_Movement/AnimatedSprite2D
+@onready var animation_particle: CPUParticles2D = $Godot_Movement/AnimatedSprite2D/Particle_damaged
+@onready var godot_movement :enemy_godot_movement  =$Godot_Movement
+@export var spawn_rate_seconds : float = 4.0
 ### CONST
-const MAX_BAD_BIRDS : int  =100
 const START_POS : Vector2 = Vector2(1096,0)
+const SPAWN_HEIGHT : float  = 400
 
-const SPAWN_HEIGHT : float  = 200
-const DIFFICULT_STEP : int  =1
-########### ENDGAME 
+########### VARIABLES
 var is_godot_highlighted :bool = false
-var item_clicked : int = 0
-func _ready() -> void:
-    timer.timeout.connect(on_timer_timeout)
-    ground_collider_0.hit.connect(player_bird_hit)
-    get_node("/root/GlobalData").game_manager.game_is_running.connect(switch_game_state)
+var _godot_life : int = 30
+var _player_hud : Player_HUD
+var _game_manager : Game_Manager
+var _audio_manager:  Audio_Manager
 
+func _ready() -> void:
+    _player_hud = get_node("/root/GlobalData").player_hud
+    print(_player_hud)
+    _game_manager = get_node("/root/GlobalData").game_manager
+    _audio_manager  = get_node("/root/Audio")
+
+    timer.timeout.connect(on_timer_timeout)
+    timer.wait_time = spawn_rate_seconds
+    _game_manager.game_is_running.connect(switch_game_state)
+#### TIMER EVENT  ALL 4 SECONDS
 func on_timer_timeout():
     generate_obstacles()
-    ############ DIFICULT CHECK
-    difficult += 1
-    if difficult >= DIFFICULT_STEP and _wait_time != 0.0:
-        _wait_time =  max(0.5,_wait_time - 0.5)
-        timer.wait_time = _wait_time
-        difficult  = 0
-        if item_clicked >= 1:
-            get_node("/root/GlobalData").player_hud.godot_anim_play_endgame()
-        else:
-            get_node("/root/GlobalData").player_hud.godot_anim_play_dificult()
+    _player_hud.godot_anim_play_dificult()
+    godot_movement.increase_difficult_speed()
 
 func generate_obstacles():
-    if bad_ravens_array.size()> MAX_BAD_BIRDS:
-        bad_ravens_array[0].queue_free()
-        bad_ravens_array.remove_at(0)
-
-    # delete after stack is full ?
     var new_bad_ravens = badbirds_scene.instantiate()
     new_bad_ravens.global_position.x = START_POS.x
-
-    # need calibrate
     new_bad_ravens.global_position.y = randf_range(-SPAWN_HEIGHT, SPAWN_HEIGHT)
     new_bad_ravens.hit.connect(player_bird_hit)
     new_bad_ravens.scored.connect(player_scored)
-
-    # add to array
-    bad_ravens_array.append(new_bad_ravens)
     add_child(new_bad_ravens)
-    
+
+func godot_loose_parts():
+    _player_hud.godot_anim_play_endgame()
+
 func player_bird_hit():
-    if !get_node("/root/GlobalData").game_manager.current_player_invincible:
-        get_node("/root/Audio").play_hit()
-        health_changed()
+    pass
+    # if !_game_manager.current_player_invincible:
+    #     _audio_manager.play_hit()
+    #     health_changed()
 func player_scored():
-    if randi_range(0,100):
-        get_node("/root/Audio").play_random()
-    get_node("/root/GlobalData").game_manager.player_scored()
+    if randi_range(0,100) < 10:  #sound fix
+        _audio_manager.play_random()
+    _game_manager.player_scored()
 
 func health_changed():
-    timer.stop()
-    get_node("/root/GlobalData").game_manager.game_over()
+    # timer.stop()
+    _game_manager.game_over()
 
 func switch_game_state(value :bool):
     if value:
@@ -79,23 +66,24 @@ func switch_game_state(value :bool):
 
 func _input(event: InputEvent) -> void:
         if event.is_action_pressed("left_click") and  is_godot_highlighted:
-            item_clicked += 1
-            print("click 1")
-            get_node("/root/Audio").play_random()
-            if item_clicked >= 10:
-                get_node("/root/GlobalData").player_hud.update_metagame(1)
+            _godot_life -= 1
+            ### UPDATE GODOT UI LIFE
+            if _godot_life == 20:
+                _audio_manager.play_godot_damage()
+                _player_hud.update_metagame(1)
                 animation_sprite.play_terrifiered()
                 animation_particle.emitting = true
-                #update ui item 1
-            if item_clicked >= 20:
-                get_node("/root/GlobalData").player_hud.update_metagame(2)
+            if _godot_life == 10:
+                _audio_manager.play_godot_damage()
+                _player_hud.update_metagame(2)
                 animation_sprite.play_terrifiered()
                 animation_particle.emitting = true
-            if item_clicked >= 30:
-                get_node("/root/GlobalData").player_hud.update_metagame(3)
+            if _godot_life == 0:
+                _audio_manager.play_godot_damage()
+                _player_hud.update_metagame(3)
                 animation_sprite.play_terrifiered()
                 animation_particle.emitting = true
-                #( FINAL WIN)
+
 func on_mouse_entered():
     is_godot_highlighted = true
 func on_mouse_exited():

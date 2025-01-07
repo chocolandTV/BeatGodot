@@ -47,6 +47,10 @@ func godot_anim_play_endgame():
     godot_animation_player.play("metagame")
     godot_animation_sprite.play("terrified")
 
+func godot_anim_play_damaged():
+    godot_animation_player.play("metagame")
+    godot_animation_sprite.play("redgodot")
+
 func update_player_score(game_score : int):
     player_score_label.text = str(game_score)
 

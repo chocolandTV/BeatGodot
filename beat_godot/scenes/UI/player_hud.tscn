@@ -52,22 +52,6 @@ tracks/0/keys = {
 "values": [".", "..", "...", "~.~", ".", "..", "...", ".", "..", "...", "event_player_destroy_himself ->huh? what the hell is player doing?", "event_player_destroy_himself ->huh? what the hell is player doing?"]
 }
 
-[sub_resource type="Animation" id="Animation_i5cbw"]
-resource_name = "score10"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextEdit:placeholder_text")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.433333, 0.5, 0.566667, 0.766667, 0.8, 0.833333, 1, 2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [".", "..", "...", "xD", ".", "..", "...", ".", "..", "...", "event_player_survived -> increase spawnrate	", "event_player_survived -> increase spawnrate	"]
-}
-
 [sub_resource type="Animation" id="Animation_ywm6x"]
 resource_name = "metagame"
 length = 2.0
@@ -94,6 +78,22 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(0, 0), Vector2(-7.515, 18.8), Vector2(-2.32389, -3.69278), Vector2(4.165, -10.19), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_i5cbw"]
+resource_name = "score10"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextEdit:placeholder_text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.433333, 0.5, 0.566667, 0.766667, 0.8, 0.833333, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [".", "..", "...", "xD", ".", "..", "...", ".", "..", "...", "event_player_survived -> increase spawnrate	", "event_player_survived -> increase spawnrate	"]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7n7sv"]

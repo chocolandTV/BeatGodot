@@ -1,8 +1,8 @@
 extends AnimatedSprite2D
 class_name Godot_Animation
-
+@export var scale_animation_redgot : float  = 2
 @onready var timer :Timer =$Timer
-var random_string :Array[String] = ["angry", "terrified","redeyes","redgodot"]
+var _random_string :Array[String] = ["angry","default","default","angry", "terrified","redeyes"]
 func _ready() -> void:
     ### timer add timeout
     timer.timeout.connect(random_animation_player)
@@ -11,7 +11,7 @@ func _ready() -> void:
 
 func random_animation_player():
     if randf_range(0,100) <35:
-        play(random_string.pick_random())
+        play(_random_string.pick_random())
     else:
         play("default")
 
@@ -26,3 +26,8 @@ func play_redeye():
 
 func play_red_godot():
     play("redgodot")
+    var _tempscale  = scale
+    scale *=scale_animation_redgot 
+    for x in scale_animation_redgot *5:
+        scale = (scale_animation_redgot - x*0.1) * Vector2.ONE
+    scale = _tempscale

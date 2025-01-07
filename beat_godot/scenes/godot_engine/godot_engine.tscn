@@ -15,22 +15,21 @@ point_count = 2
 [node name="Godot_Engine" type="Node2D"]
 script = ExtResource("1_h0s3w")
 
-[node name="Godot_BG" type="Sprite2D" parent="."]
+[node name="Godot_Movement" type="Sprite2D" parent="."]
 texture = ExtResource("1_18goo")
 script = ExtResource("1_mkxk0")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Godot_BG"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Godot_Movement"]
 sprite_frames = ExtResource("2_h1a28")
-animation = &"redeyes"
+animation = &"redgodot"
 autoplay = "redeyes"
-frame_progress = 0.761928
 script = ExtResource("3_7g3is")
 
-[node name="Timer" type="Timer" parent="Godot_BG/AnimatedSprite2D"]
+[node name="Timer" type="Timer" parent="Godot_Movement/AnimatedSprite2D"]
 wait_time = 4.0
 autostart = true
 
-[node name="Button" type="Button" parent="Godot_BG/AnimatedSprite2D"]
+[node name="Button" type="Button" parent="Godot_Movement/AnimatedSprite2D"]
 custom_minimum_size = Vector2(150, 150)
 offset_left = -73.0
 offset_top = -78.0
@@ -39,23 +38,25 @@ offset_bottom = 72.0
 keep_pressed_outside = true
 flat = true
 
-[node name="Particle_damaged" type="CPUParticles2D" parent="Godot_BG/AnimatedSprite2D"]
+[node name="Particle_damaged" type="CPUParticles2D" parent="Godot_Movement/AnimatedSprite2D"]
 emitting = false
-amount = 16
+amount = 55
+lifetime = 2.0
 one_shot = true
 explosiveness = 1.0
 randomness = 1.0
+lifetime_randomness = 1.0
 texture = ExtResource("1_p2sx2")
 spread = 180.0
 gravity = Vector2(0, -220)
-initial_velocity_min = 50.0
+initial_velocity_min = 75.0
 initial_velocity_max = 250.0
-scale_amount_min = 0.1
-scale_amount_max = 0.15
+scale_amount_min = 0.5
+scale_amount_max = 0.5
 scale_amount_curve = SubResource("Curve_anux2")
 color = Color(0.6, 0.27451, 0.211765, 1)
 
-[node name="CPUParticles2D" type="CPUParticles2D" parent="Godot_BG"]
+[node name="CPUParticles2D" type="CPUParticles2D" parent="Godot_Movement"]
 modulate = Color(1, 1, 1, 0.517647)
 lifetime = 3.0
 explosiveness = 1.0
@@ -68,8 +69,8 @@ gravity = Vector2(-55, 0)
 initial_velocity_min = 5.0
 initial_velocity_max = 25.0
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Spawn_rate_timer" type="Timer" parent="."]
 wait_time = 4.0
 
-[connection signal="mouse_entered" from="Godot_BG/AnimatedSprite2D/Button" to="." method="on_mouse_entered"]
-[connection signal="mouse_exited" from="Godot_BG/AnimatedSprite2D/Button" to="." method="on_mouse_exited"]
+[connection signal="mouse_entered" from="Godot_Movement/AnimatedSprite2D/Button" to="." method="on_mouse_entered"]
+[connection signal="mouse_exited" from="Godot_Movement/AnimatedSprite2D/Button" to="." method="on_mouse_exited"]

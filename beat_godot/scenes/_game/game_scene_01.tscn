@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://nv6kev6dqsnh"]
+[gd_scene load_steps=20 format=3 uid="uid://nv6kev6dqsnh"]
 
 [ext_resource type="PackedScene" uid="uid://b06fobwa0bapc" path="res://scenes/player/player.tscn" id="1_bhwtw"]
 [ext_resource type="Script" path="res://scenes/_game/game_scene_01.gd" id="1_ijrab"]
@@ -17,6 +17,7 @@
 [ext_resource type="AudioStream" uid="uid://bspox2avo3h5g" path="res://resources/sounds/raven_03.mp3" id="14_444km"]
 [ext_resource type="AudioStream" uid="uid://bug8kbgx6r280" path="res://resources/sounds/raven_thinking.mp3" id="15_hbmes"]
 [ext_resource type="AudioStream" uid="uid://cii62g4hxqxik" path="res://resources/sounds/raven_hit.mp3" id="16_sqmtg"]
+[ext_resource type="AudioStream" uid="uid://b5v3jpsf5ax70" path="res://resources/sounds/godot_damaged.mp3" id="17_uvr0p"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wv8yx"]
 streams_count = 4
@@ -84,11 +85,9 @@ limit_bottom = 1500
 limit_smoothed = true
 target = NodePath("../Player")
 
-[node name="Godot_Engine" parent="." node_paths=PackedStringArray("ground_collider_0", "player_hud") instance=ExtResource("6_1ucc8")]
+[node name="Godot_Engine" parent="." instance=ExtResource("6_1ucc8")]
 position = Vector2(2544, 14)
 scale = Vector2(3, 3)
-ground_collider_0 = NodePath("../Ground")
-player_hud = NodePath("../Player_HUD")
 
 [node name="Menu" parent="." node_paths=PackedStringArray("gamemanager") instance=ExtResource("8_a4dou")]
 gamemanager = NodePath("../Game_Manager")
@@ -110,6 +109,9 @@ volume_db = -15.0
 [node name="Raven_Hit_Sound" type="AudioStreamPlayer" parent="Audio_Manager"]
 stream = ExtResource("16_sqmtg")
 volume_db = -21.543
+
+[node name="Godot_damage" type="AudioStreamPlayer" parent="Audio_Manager"]
+stream = ExtResource("17_uvr0p")
 
 [node name="Ground" parent="." instance=ExtResource("5_lvswf")]
 position = Vector2(-3246, 0)
