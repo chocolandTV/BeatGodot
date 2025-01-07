@@ -16,6 +16,7 @@
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f47g7"]
 texture = ExtResource("8_58sp1")
+modulate_color = Color(0.917647, 0.956863, 0.827451, 1)
 
 [node name="Menu" type="CanvasLayer" node_paths=PackedStringArray("credit_panel", "button_start")]
 script = ExtResource("1_fh81q")
@@ -90,6 +91,9 @@ custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 focus_mode = 0
+theme_override_colors/font_color = Color(0.917647, 0.956863, 0.827451, 1)
+theme_override_colors/font_outline_color = Color(0.792157, 0.564706, 0.494118, 1)
+theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 50
 theme_override_icons/icon = ExtResource("6_qa8uo")
 theme_override_styles/hover = ExtResource("8_q7xxm")
