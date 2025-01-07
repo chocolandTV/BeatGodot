@@ -12,15 +12,18 @@ func set_life(value : int):
     max_health = value
     current_health = value
 
+func cure_wounds():
+    current_health +=1
+    if max_health < current_health:
+        current_health = max_health
+
 func damage(damage_amount : int):
     if is_invincible:
         return
     current_health -= damage_amount
     health_changed.emit()
-    if current_health >0:
-        check_death()
+    check_death()
 
-    
 func check_death():
     if current_health <= 0:
         died.emit()

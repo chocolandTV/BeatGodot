@@ -50,6 +50,7 @@ escape={
 2d_physics/layer_4="Godot"
 2d_physics/layer_5="Enemies"
 2d_physics/layer_6="Player_Attack"
+2d_physics/layer_7="Respawner"
 
 [rendering]
 

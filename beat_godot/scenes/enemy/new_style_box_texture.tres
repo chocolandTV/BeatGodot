@@ -1,0 +1,13 @@
+[gd_resource type="StyleBoxTexture" load_steps=2 format=3 uid="uid://mc2bsob2dsmw"]
+
+[ext_resource type="Texture2D" uid="uid://d554bmbvhgcr" path="res://assets/textures/ui/perfect_button_pressed.png" id="1_60qog"]
+
+[resource]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+texture = ExtResource("1_60qog")
+expand_margin_top = 5.0
+expand_margin_bottom = 5.0
+region_rect = Rect2(7, 9, 337, 126)

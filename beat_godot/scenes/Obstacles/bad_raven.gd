@@ -1,16 +1,18 @@
-extends Area2D
+extends Node2D
 class_name Bad_Raven
 var bad_raven_speed : float = 900
-signal hit 
-signal scored
-@onready var particle_01 : CPUParticles2D =$Raven_obstacle_01/CPUParticles2D
-@onready var particle_02: CPUParticles2D = $Raven_obstacle_02/CPUParticles2D2
+var _start_pos : Vector2
 
-func _on_body_entered(_body):
-    hit.emit()
+signal cured()
 
-func _on_score_entered(_body):
-    scored.emit()
-
+func _ready() -> void:
+    bad_raven_speed = randf_range(500, 1500)
+    _start_pos = global_position
 func _process(delta: float) -> void:
     global_position.x -= bad_raven_speed * delta
+
+func on_area_entered_respawn(_area : Area2D):
+    print ("Respawn_ Enemy")
+    global_position = _start_pos
+    bad_raven_speed +=100
+    cured.emit()

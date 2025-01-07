@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b06fobwa0bapc"]
+[gd_scene load_steps=8 format=3 uid="uid://b06fobwa0bapc"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_q0dk7"]
 [ext_resource type="SpriteFrames" uid="uid://d2ci3iqku7tm1" path="res://assets/spriteSheets/player.tres" id="2_ddlpj"]
@@ -6,10 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://nh0e3oek75sg" path="res://scenes/components/hurtbox_component.tscn" id="3_jhwco"]
 [ext_resource type="PackedScene" uid="uid://bf2ls3twfo300" path="res://scenes/components/hit_box_component.tscn" id="4_hh5fy"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_suksw"]
+size = Vector2(266, 44)
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_iyllr"]
-radius = 114.337
+radius = 203.416
 
 [node name="Player" type="CharacterBody2D"]
+collision_mask = 4
 script = ExtResource("1_q0dk7")
 
 [node name="Beatrii" type="AnimatedSprite2D" parent="."]
@@ -20,11 +24,12 @@ offset = Vector2(0, -78.575)
 
 [node name="Hurtbox_Component" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_jhwco")]
 collision_layer = 0
-collision_mask = 14
+collision_mask = 26
 health_component = NodePath("../Health_Component")
 
-[node name="CollisionShape2D" parent="Hurtbox_Component" index="0"]
-debug_color = Color(0.951482, 2.31028e-06, 0.563434, 0.42)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox_Component"]
+position = Vector2(13, 3)
+shape = SubResource("RectangleShape2D_suksw")
 
 [node name="HitBox_Component" parent="." instance=ExtResource("4_hh5fy")]
 collision_mask = 0

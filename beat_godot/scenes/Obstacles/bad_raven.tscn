@@ -11,10 +11,22 @@ scale = Vector2(0.5, 0.5)
 script = ExtResource("1_4ia75")
 
 [node name="Raven_obstacle_01" parent="." instance=ExtResource("2_vsno5")]
+z_index = 1
+y_sort_enabled = true
 position = Vector2(-152, -486)
 
 [node name="Raven_obstacle_02" parent="." instance=ExtResource("2_vsno5")]
+z_index = 1
+y_sort_enabled = true
 position = Vector2(-158, 954)
+
+[node name="Respawn_checker" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 64
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Respawn_checker"]
+position = Vector2(160.5, 138.5)
+shape = SubResource("RectangleShape2D_keck0")
 
 [node name="Score_area" type="Area2D" parent="."]
 collision_layer = 4
@@ -23,3 +35,5 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Score_area"]
 position = Vector2(160.5, 138.5)
 shape = SubResource("RectangleShape2D_keck0")
+
+[connection signal="area_entered" from="Respawn_checker" to="." method="on_area_entered_respawn"]

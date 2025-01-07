@@ -127,7 +127,7 @@ func _input(event: InputEvent) -> void:
             if player_metagame_life <= 0:
                 update_player_life(-1)
                 godot_animation_player.play("item10")
-                get_node("/root/GlobalData").game_manager.player_metagame_progress()
+                ## get metaprogression
 
 
             

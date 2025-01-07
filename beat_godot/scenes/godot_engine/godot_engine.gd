@@ -13,7 +13,7 @@ const SPAWN_HEIGHT : float  = 400
 
 ########### VARIABLES
 var is_godot_highlighted :bool = false
-var _godot_life : int = 30
+# var _godot_life : int = 30
 var _player_hud : Player_HUD
 var _game_manager : Game_Manager
 var _audio_manager:  Audio_Manager
@@ -37,26 +37,16 @@ func generate_obstacles():
     var new_bad_ravens = badbirds_scene.instantiate()
     new_bad_ravens.global_position.x = START_POS.x
     new_bad_ravens.global_position.y = randf_range(-SPAWN_HEIGHT, SPAWN_HEIGHT)
-    new_bad_ravens.hit.connect(player_bird_hit)
-    new_bad_ravens.scored.connect(player_scored)
     add_child(new_bad_ravens)
 
 func godot_loose_parts():
     _player_hud.godot_anim_play_endgame()
 
-func player_bird_hit():
-    pass
-    # if !_game_manager.current_player_invincible:
-    #     _audio_manager.play_hit()
-    #     health_changed()
+
 func player_scored():
     if randi_range(0,100) < 10:  #sound fix
         _audio_manager.play_random()
     _game_manager.player_scored()
-
-func health_changed():
-    # timer.stop()
-    _game_manager.game_over()
 
 func switch_game_state(value :bool):
     if value:
@@ -64,27 +54,22 @@ func switch_game_state(value :bool):
     else:
         timer.stop()
 
-func _input(event: InputEvent) -> void:
-        if event.is_action_pressed("left_click") and  is_godot_highlighted:
-            _godot_life -= 1
-            ### UPDATE GODOT UI LIFE
-            if _godot_life == 20:
-                _audio_manager.play_godot_damage()
-                _player_hud.update_metagame(1)
-                animation_sprite.play_terrifiered()
-                animation_particle.emitting = true
-            if _godot_life == 10:
-                _audio_manager.play_godot_damage()
-                _player_hud.update_metagame(2)
-                animation_sprite.play_terrifiered()
-                animation_particle.emitting = true
-            if _godot_life == 0:
-                _audio_manager.play_godot_damage()
-                _player_hud.update_metagame(3)
-                animation_sprite.play_terrifiered()
-                animation_particle.emitting = true
-
-func on_mouse_entered():
-    is_godot_highlighted = true
-func on_mouse_exited():
-    is_godot_highlighted = false 
+# func _input(event: InputEvent) -> void:
+#         if event.is_action_pressed("left_click") and  is_godot_highlighted:
+#             _godot_life -= 1
+#             ### UPDATE GODOT UI LIFE
+#             if _godot_life == 20:
+#                 _audio_manager.play_godot_damage()
+#                 _player_hud.update_metagame(1)
+#                 animation_sprite.play_terrifiered()
+#                 animation_particle.emitting = true
+#             if _godot_life == 10:
+#                 _audio_manager.play_godot_damage()
+#                 _player_hud.update_metagame(2)
+#                 animation_sprite.play_terrifiered()
+#                 animation_particle.emitting = true
+#             if _godot_life == 0:
+#                 _audio_manager.play_godot_damage()
+#                 _player_hud.update_metagame(3)
+#                 animation_sprite.play_terrifiered()
+#                 animation_particle.emitting = true

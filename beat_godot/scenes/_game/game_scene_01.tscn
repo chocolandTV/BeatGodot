@@ -104,6 +104,9 @@ collision_mask = 0
 motion_mode = 1
 
 [node name="Player_Attack_Claw" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("16_vg6up")]
+position = Vector2(-1736, 0)
+scale = Vector2(5, 5)
+monitorable = true
 camera = NodePath("../Camera2D")
 
 [node name="Enemy_Respawner" parent="." instance=ExtResource("16_s226m")]
@@ -122,3 +125,4 @@ scale = Vector2(3, 3)
 
 [node name="Ground" parent="." instance=ExtResource("5_lvswf")]
 position = Vector2(-3246, 0)
+monitorable = true

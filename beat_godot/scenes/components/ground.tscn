@@ -7,7 +7,8 @@
 size = Vector2(4096, 692)
 
 [node name="Ground" type="Area2D"]
-collision_layer = 0
+collision_layer = 16
+collision_mask = 0
 monitorable = false
 script = ExtResource("1_6peva")
 
@@ -46,5 +47,3 @@ shape = SubResource("RectangleShape2D_scgjr")
 [node name="Sprite2D3" type="Sprite2D" parent="."]
 position = Vector2(6658, 0)
 texture = ExtResource("1_1dvd8")
-
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]

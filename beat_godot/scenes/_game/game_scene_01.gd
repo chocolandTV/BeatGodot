@@ -79,30 +79,13 @@ func _process(_delta: float) -> void:
             _scroll =0
         #object move
         ground_object.position.x = -_scroll
-########## PLAYER KILLED HEALTH COMPONENT
-func player_progress_lifehack():
-    current_player_invincible = true
+
 
 func player_scored():
     _game_score +=1000
     get_node("/root/GlobalData").SET_PLAYER_SCORE(_game_score)
     # UI UPDATE
     get_node("/root/GlobalData").player_hud.update_player_score(_game_score)
-
-############### GAME OVER
-
-func game_over():
-    #### Check Life
-    if !current_player_invincible:
-        _current_player_life -= 1
-        get_node("/root/GlobalData").player_life =_current_player_life
-        get_node("/root/GlobalData").player_hud.update_player_life(_current_player_life)
-
-    if _current_player_life <= 0 and !current_player_invincible:
-        player_progress_lifehack()
-        player_beatrii.is_falling = true
-        player_beatrii.is_flying = false
-        timer.start()
 
 func on_timer_timeout_game_over():
     get_node("/root/GlobalData").menu.update_game_over()
@@ -112,12 +95,5 @@ func on_timer_timeout_game_over():
     _is_game_running = false
     _is_game_over = true
     #show game_over menu
-
-func player_metagame_progress():
-    player_progress_lifehack()
-    real_game_score = 1
-     ### 1 Step  no life
-
-     ###  2nd Step no hitbox
-
-     ### 3 rd step win after score
+func game_over():
+     timer.start()

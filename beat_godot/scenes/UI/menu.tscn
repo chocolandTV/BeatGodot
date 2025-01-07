@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://by2tt8nxs4d0k"]
+[gd_scene load_steps=16 format=3 uid="uid://by2tt8nxs4d0k"]
 
 [ext_resource type="Script" path="res://scenes/UI/menu.gd" id="1_fh81q"]
 [ext_resource type="Texture2D" uid="uid://bnhu40f2f2a1m" path="res://assets/textures/background.png" id="1_lnp5v"]
@@ -9,10 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://djiablurjeksl" path="res://assets/textures/godot_face/redeye.png" id="6_qa8uo"]
 [ext_resource type="Texture2D" uid="uid://bpb2ar4g14i1x" path="res://assets/textures/godot_face/frightnen.png" id="7_ak6vb"]
 [ext_resource type="Texture2D" uid="uid://up4h56pf72e4" path="res://assets/textures/particles/dust.png" id="7_ero6r"]
+[ext_resource type="Theme" uid="uid://dm0wp1bciqkm1" path="res://resources/main_theme.tres" id="7_etlvu"]
 [ext_resource type="Script" path="res://scenes/UI/button_start.gd" id="7_m0e1q"]
 [ext_resource type="Texture2D" uid="uid://d554bmbvhgcr" path="res://assets/textures/ui/perfect_button_pressed.png" id="8_58sp1"]
 [ext_resource type="Texture2D" uid="uid://bx8uui0bkqmn0" path="res://assets/textures/godot_face/redgodot.png" id="8_ogj45"]
-[ext_resource type="StyleBox" uid="uid://cmbid7h8kgt25" path="res://resources/button_pressed.tres" id="8_q7xxm"]
+[ext_resource type="StyleBox" uid="uid://dj578j6yjpski" path="res://resources/button_normal.tres" id="9_8up5h"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f47g7"]
 texture = ExtResource("8_58sp1")
@@ -91,14 +92,15 @@ custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 focus_mode = 0
+theme = ExtResource("7_etlvu")
 theme_override_colors/font_color = Color(0.917647, 0.956863, 0.827451, 1)
 theme_override_colors/font_outline_color = Color(0.792157, 0.564706, 0.494118, 1)
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 50
 theme_override_icons/icon = ExtResource("6_qa8uo")
-theme_override_styles/hover = ExtResource("8_q7xxm")
+theme_override_styles/hover = ExtResource("9_8up5h")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_f47g7")
-theme_override_styles/normal = ExtResource("8_q7xxm")
+theme_override_styles/normal = ExtResource("9_8up5h")
 text = "Start"
 script = ExtResource("7_m0e1q")
 
@@ -107,6 +109,7 @@ custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 focus_mode = 0
+theme = ExtResource("7_etlvu")
 theme_override_font_sizes/font_size = 50
 theme_override_icons/icon = ExtResource("7_ak6vb")
 text = "Credits"
@@ -117,6 +120,7 @@ custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 size_flags_horizontal = 4
 focus_mode = 0
+theme = ExtResource("7_etlvu")
 theme_override_font_sizes/font_size = 50
 theme_override_icons/icon = ExtResource("8_ogj45")
 text = "Exit

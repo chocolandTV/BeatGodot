@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c75lipgihvfjc"]
+[gd_scene load_steps=11 format=3 uid="uid://c75lipgihvfjc"]
 
 [ext_resource type="SpriteFrames" uid="uid://d2ci3iqku7tm1" path="res://assets/spriteSheets/player.tres" id="1_wy6xg"]
 [ext_resource type="Texture2D" uid="uid://c5fnes7sywokx" path="res://assets/textures/particles/feather.png" id="2_mwnux"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://nh0e3oek75sg" path="res://scenes/components/hurtbox_component.tscn" id="5_objsv"]
 [ext_resource type="Script" path="res://scenes/components/hit_box_component.gd" id="5_xvgdw"]
 [ext_resource type="Shape2D" uid="uid://co8v4ckcivdk1" path="res://scenes/enemy/enemy_box.tres" id="6_3ftma"]
+[ext_resource type="Texture2D" uid="uid://dl5ot6x2up1a6" path="res://assets/textures/enemie_eye.png" id="8_m4ubs"]
 
 [sub_resource type="Curve" id="Curve_5w0kv"]
 min_value = -360.0
@@ -48,7 +49,7 @@ color = Color(0, 0, 0, 1)
 [node name="Health_Component" parent="." instance=ExtResource("4_bflc6")]
 
 [node name="HitBox_Component" type="Area2D" parent="."]
-position = Vector2(-43, 77)
+position = Vector2(13, 77)
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("5_xvgdw")
@@ -64,3 +65,11 @@ health_component = NodePath("../Health_Component")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Hurtbox_Component"]
 shape = ExtResource("6_3ftma")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(1, 0, 0, 1)
+show_behind_parent = true
+top_level = true
+position = Vector2(391, 376)
+scale = Vector2(0.205, 0.205)
+texture = ExtResource("8_m4ubs")

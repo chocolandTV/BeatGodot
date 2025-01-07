@@ -9,8 +9,19 @@ var is_flying : bool = false
 var is_falling: bool = false
 
 @onready var animation_sprite : AnimatedSprite2D = $Beatrii
+@onready var health_component : Health_Component = $Health_Component
+var _game_manager : Game_Manager
+var _audio_manager:  Audio_Manager
+var _player_hud : Player_HUD
 
 func _ready() -> void:
+    _player_hud = get_node("/root/GlobalData").player_hud
+    _game_manager = get_node("/root/GlobalData").game_manager
+    _audio_manager  = get_node("/root/Audio")
+
+    health_component.died.connect(on_player_death)
+    health_component.health_changed.connect(on_player_damage)
+
     get_node("/root/GlobalData").SET_PLAYER(self)
     reset()
 
@@ -35,6 +46,18 @@ func _physics_process(delta: float) -> void:
     else:
         animation_sprite.stop()
 
-func flap():
+func on_player_death():
+    is_falling = true
+    is_flying = false
+    animation_sprite.stop()
+    _game_manager.game_over()
 
+func on_player_damage():
+        _player_hud.update_player_life(health_component.current_health)
+        _audio_manager.play_hit()
+func flap():
     velocity.y = FLAP_SPEED
+
+func on_player_scored():
+    _game_manager.player_scored()
+    _audio_manager.play_random()

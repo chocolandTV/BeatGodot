@@ -1,18 +1,19 @@
-[gd_resource type="Theme" load_steps=3 format=3 uid="uid://dm0wp1bciqkm1"]
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://dm0wp1bciqkm1"]
 
-[ext_resource type="Texture2D" uid="uid://d554bmbvhgcr" path="res://assets/textures/ui/perfect_button_pressed.png" id="1_vf3ix"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_g3u2w"]
-content_margin_left = 5.0
-content_margin_top = 5.0
-content_margin_right = 5.0
-content_margin_bottom = 5.0
-texture = ExtResource("1_vf3ix")
-expand_margin_top = 5.0
-expand_margin_right = 5.0
-expand_margin_bottom = 5.0
-region_rect = Rect2(7, 9, 337, 126)
+[ext_resource type="StyleBox" uid="uid://btm1dmnnbjg26" path="res://resources/button_hover.tres" id="2_2gf3g"]
+[ext_resource type="StyleBox" uid="uid://dj578j6yjpski" path="res://resources/button_normal.tres" id="3_68xc0"]
+[ext_resource type="StyleBox" uid="uid://cmbid7h8kgt25" path="res://resources/button_pressed.tres" id="4_d57dm"]
 
 [resource]
+Button/colors/font_color = Color(0.917647, 0.956863, 0.827451, 1)
+Button/colors/font_hover_color = Color(0.6, 0.27451, 0.211765, 1)
+Button/colors/font_hover_pressed_color = Color(0.6, 0.27451, 0.211765, 1)
+Button/colors/font_outline_color = Color(0.792157, 0.564706, 0.494118, 1)
+Button/constants/align_to_largest_stylebox = 5
+Button/constants/h_separation = 5
+Button/constants/icon_max_width = 100
+Button/constants/outline_size = 10
 Button/font_sizes/font_size = 35
-Button/styles/pressed = SubResource("StyleBoxTexture_g3u2w")
+Button/styles/hover = ExtResource("2_2gf3g")
+Button/styles/normal = ExtResource("3_68xc0")
+Button/styles/pressed = ExtResource("4_d57dm")
