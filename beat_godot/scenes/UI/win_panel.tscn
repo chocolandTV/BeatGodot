@@ -1,24 +1,25 @@
-[gd_scene load_steps=7 format=3 uid="uid://8wmshp8tgioi"]
+[gd_scene load_steps=9 format=3 uid="uid://8wmshp8tgioi"]
 
 [ext_resource type="Texture2D" uid="uid://be8bhtdbvvs8d" path="res://assets/textures/feather.png" id="1_8qn6l"]
 [ext_resource type="Script" path="res://scenes/UI/win_panel.gd" id="1_dyvmj"]
 [ext_resource type="Texture2D" uid="uid://cw4b0bvhjawus" path="res://assets/textures/godot_engine_bg.png" id="1_tk7ww"]
-[ext_resource type="Texture2D" uid="uid://bhbwsrry2xowp" path="res://assets/spriteSheets/godot_engine-Sheet.png" id="2_t1k2t"]
+[ext_resource type="Texture2D" uid="uid://did530whq38bh" path="res://assets/textures/godot_face/smile.png" id="4_0w3h8"]
+[ext_resource type="Texture2D" uid="uid://djiablurjeksl" path="res://assets/textures/godot_face/redeye.png" id="5_7i5e2"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_qx84x"]
-atlas = ExtResource("2_t1k2t")
-region = Rect2(0, 256, 128, 128)
+[sub_resource type="Curve" id="Curve_8nk7e"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 10.0, 0.0, 0, 0]
+point_count = 2
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_ngsow"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qx84x")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+[sub_resource type="Curve" id="Curve_oyphc"]
+_data = [Vector2(0, 1), 0.0, 2.85931, 0, 0, Vector2(0.987952, 0.024452), -3.34965, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_jfsfs"]
+min_value = -1.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="Win_Panel" type="CanvasLayer"]
 script = ExtResource("1_dyvmj")
@@ -26,6 +27,7 @@ script = ExtResource("1_dyvmj")
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 position = Vector2(513, -4)
 amount = 100
+lifetime = 2.0
 explosiveness = 1.0
 randomness = 1.0
 texture = ExtResource("1_8qn6l")
@@ -34,17 +36,22 @@ spread = 180.0
 gravity = Vector2(0, -5)
 initial_velocity_min = 50.0
 initial_velocity_max = 250.0
-scale_amount_min = 0.01
-scale_amount_max = 0.02
+angle_max = 720.0
+angle_curve = SubResource("Curve_8nk7e")
+scale_amount_min = 0.03
+scale_amount_max = 0.05
+scale_amount_curve = SubResource("Curve_oyphc")
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("Curve_jfsfs")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Pulsing_win" type="TextureRect" parent="."]
 offset_left = 451.0
 offset_top = -62.0
 offset_right = 579.0
 offset_bottom = 66.0
 texture = ExtResource("1_tk7ww")
 
-[node name="Label" type="Label" parent="TextureRect"]
+[node name="Label" type="Label" parent="Pulsing_win"]
 layout_mode = 0
 offset_left = 17.0
 offset_top = 28.0
@@ -60,9 +67,9 @@ offset_right = 579.0
 offset_bottom = -114.0
 texture = ExtResource("1_tk7ww")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="TextureRect2"]
+[node name="AnimatedSprite2D" type="Sprite2D" parent="TextureRect2"]
 position = Vector2(62, 62)
-sprite_frames = SubResource("SpriteFrames_ngsow")
+texture = ExtResource("4_0w3h8")
 
 [node name="Label" type="Label" parent="."]
 offset_left = 282.0
@@ -71,3 +78,23 @@ offset_right = 771.0
 offset_bottom = 148.0
 theme_override_font_sizes/font_size = 55
 text = "Thanks for playing"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 402.0
+offset_top = 191.0
+offset_right = 652.0
+offset_bottom = 281.0
+texture = ExtResource("1_tk7ww")
+expand_mode = 1
+
+[node name="Button" type="Button" parent="TextureRect"]
+offset_left = 8.0
+offset_top = 1.0
+offset_right = 370.0
+offset_bottom = 137.0
+scale = Vector2(0.645, 0.645)
+theme_override_font_sizes/font_size = 35
+theme_override_icons/icon = ExtResource("5_7i5e2")
+text = "<-Main Menu"
+
+[connection signal="pressed" from="TextureRect/Button" to="." method="on_button_pressed_restart"]

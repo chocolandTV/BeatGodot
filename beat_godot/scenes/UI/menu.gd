@@ -28,3 +28,4 @@ func on_button_pressed_credits():
 func update_game_over():
     button_start.text  = "Restart"
     is_game_over = true
+

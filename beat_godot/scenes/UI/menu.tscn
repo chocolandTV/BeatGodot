@@ -1,12 +1,21 @@
-[gd_scene load_steps=8 format=3 uid="uid://by2tt8nxs4d0k"]
+[gd_scene load_steps=15 format=3 uid="uid://by2tt8nxs4d0k"]
 
 [ext_resource type="Script" path="res://scenes/UI/menu.gd" id="1_fh81q"]
 [ext_resource type="Texture2D" uid="uid://bnhu40f2f2a1m" path="res://assets/textures/background.png" id="1_lnp5v"]
 [ext_resource type="Script" path="res://scenes/UI/Menu_Raven_Spawner.gd" id="2_jbbbc"]
-[ext_resource type="Texture2D" uid="uid://bhp0g30mj0dib" path="res://icon.svg" id="3_b0i1c"]
 [ext_resource type="SpriteFrames" uid="uid://d2ci3iqku7tm1" path="res://assets/spriteSheets/player.tres" id="3_boxt4"]
 [ext_resource type="Texture2D" uid="uid://cbfiro11hqmud" path="res://assets/textures/sun.png" id="4_cnp47"]
+[ext_resource type="Script" path="res://scenes/UI/menu_tween_animation.gd" id="6_kax8e"]
+[ext_resource type="Texture2D" uid="uid://djiablurjeksl" path="res://assets/textures/godot_face/redeye.png" id="6_qa8uo"]
+[ext_resource type="Texture2D" uid="uid://bpb2ar4g14i1x" path="res://assets/textures/godot_face/frightnen.png" id="7_ak6vb"]
 [ext_resource type="Texture2D" uid="uid://up4h56pf72e4" path="res://assets/textures/particles/dust.png" id="7_ero6r"]
+[ext_resource type="Script" path="res://scenes/UI/button_start.gd" id="7_m0e1q"]
+[ext_resource type="Texture2D" uid="uid://d554bmbvhgcr" path="res://assets/textures/ui/perfect_button_pressed.png" id="8_58sp1"]
+[ext_resource type="Texture2D" uid="uid://bx8uui0bkqmn0" path="res://assets/textures/godot_face/redgodot.png" id="8_ogj45"]
+[ext_resource type="StyleBox" uid="uid://cmbid7h8kgt25" path="res://resources/button_pressed.tres" id="8_q7xxm"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f47g7"]
+texture = ExtResource("8_58sp1")
 
 [node name="Menu" type="CanvasLayer" node_paths=PackedStringArray("credit_panel", "button_start")]
 script = ExtResource("1_fh81q")
@@ -62,6 +71,7 @@ scale = Vector2(0.305, 0.305)
 sprite_frames = ExtResource("3_boxt4")
 autoplay = "default"
 frame_progress = 0.237315
+script = ExtResource("6_kax8e")
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -79,26 +89,35 @@ text = "a game about to beat a engine"
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 size_flags_horizontal = 4
+focus_mode = 0
 theme_override_font_sizes/font_size = 50
-theme_override_icons/icon = ExtResource("3_b0i1c")
+theme_override_icons/icon = ExtResource("6_qa8uo")
+theme_override_styles/hover = ExtResource("8_q7xxm")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_f47g7")
+theme_override_styles/normal = ExtResource("8_q7xxm")
 text = "Start"
+script = ExtResource("7_m0e1q")
 
 [node name="Button_Credits" type="Button" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 size_flags_horizontal = 4
+focus_mode = 0
 theme_override_font_sizes/font_size = 50
-theme_override_icons/icon = ExtResource("3_b0i1c")
+theme_override_icons/icon = ExtResource("7_ak6vb")
 text = "Credits"
+script = ExtResource("7_m0e1q")
 
 [node name="Button_Exit" type="Button" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 size_flags_horizontal = 4
+focus_mode = 0
 theme_override_font_sizes/font_size = 50
-theme_override_icons/icon = ExtResource("3_b0i1c")
+theme_override_icons/icon = ExtResource("8_ogj45")
 text = "Exit
 "
+script = ExtResource("7_m0e1q")
 
 [node name="Credits" type="MarginContainer" parent="."]
 visible = false

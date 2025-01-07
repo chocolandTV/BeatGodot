@@ -40,6 +40,13 @@ func _ready() -> void:
 ### update all thingi
 
 func godot_anim_play_dificult():
+    ### TEXT TWEEN EPIC NEW FUNCTION
+#     func _ready():
+    # 	var tween = create_tween()
+    # 	tween.tween_method(set_label_text, 0, 10, 1).set_delay(1)
+
+    # func set_label_text(value: int):
+    # 	$Label.text = "Counting " + str(value)
     godot_animation_player.play("score10")
     godot_animation_sprite.play("angry")
 
@@ -70,6 +77,8 @@ func update_metagame(value : int):
         godot_engine_Part_03.visible = true
         get_tree().paused = true
         godot_win.visible  = true
+        godot_win.start_scaling()
+
 
 ########## END 
 func update_player_life(value : int):

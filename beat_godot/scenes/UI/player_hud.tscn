@@ -356,3 +356,5 @@ horizontal_alignment = 1
 [node name="Win_Panel" parent="." instance=ExtResource("6_2ynty")]
 process_mode = 3
 visible = false
+offset = Vector2(50, 400)
+transform = Transform2D(1, 0, 0, 1, 50, 400)

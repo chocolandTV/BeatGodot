@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://c75lipgihvfjc"]
+
+[ext_resource type="SpriteFrames" uid="uid://d2ci3iqku7tm1" path="res://assets/spriteSheets/player.tres" id="1_wy6xg"]
+[ext_resource type="Texture2D" uid="uid://c5fnes7sywokx" path="res://assets/textures/particles/feather.png" id="2_mwnux"]
+
+[sub_resource type="Curve" id="Curve_5w0kv"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 25.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_882b1"]
+_data = [Vector2(0.00401606, 1), 0.0, 0.0, 0, 0, Vector2(0.991968, 0.0463744), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Raven_obstacle_01" type="AnimatedSprite2D"]
+modulate = Color(0, 0, 0, 1)
+position = Vector2(0, -436)
+sprite_frames = ExtResource("1_wy6xg")
+autoplay = "default"
+offset = Vector2(0, -103.72)
+flip_h = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(-12, -60)
+emitting = false
+amount = 5
+lifetime = 5.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 1.0
+texture = ExtResource("2_mwnux")
+direction = Vector2(3, 1)
+spread = 180.0
+gravity = Vector2(200, 980)
+initial_velocity_max = 313.43
+angle_max = 720.0
+angle_curve = SubResource("Curve_5w0kv")
+scale_amount_curve = SubResource("Curve_882b1")
+color = Color(0, 0, 0, 1)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://nv6kev6dqsnh"]
+[gd_scene load_steps=21 format=3 uid="uid://nv6kev6dqsnh"]
 
 [ext_resource type="PackedScene" uid="uid://b06fobwa0bapc" path="res://scenes/player/player.tscn" id="1_bhwtw"]
 [ext_resource type="Script" path="res://scenes/_game/game_scene_01.gd" id="1_ijrab"]
@@ -16,6 +16,7 @@
 [ext_resource type="AudioStream" uid="uid://cpa66jq6vets6" path="res://resources/sounds/raven_02.mp3" id="13_t87qh"]
 [ext_resource type="AudioStream" uid="uid://bspox2avo3h5g" path="res://resources/sounds/raven_03.mp3" id="14_444km"]
 [ext_resource type="AudioStream" uid="uid://bug8kbgx6r280" path="res://resources/sounds/raven_thinking.mp3" id="15_hbmes"]
+[ext_resource type="PackedScene" uid="uid://cx3p88w8gtnmi" path="res://scenes/components/respawner.tscn" id="16_s226m"]
 [ext_resource type="AudioStream" uid="uid://cii62g4hxqxik" path="res://resources/sounds/raven_hit.mp3" id="16_sqmtg"]
 [ext_resource type="AudioStream" uid="uid://b5v3jpsf5ax70" path="res://resources/sounds/godot_damaged.mp3" id="17_uvr0p"]
 
@@ -28,6 +29,24 @@ stream_3/stream = ExtResource("15_hbmes")
 
 [node name="game_scene_01" type="Node2D"]
 
+[node name="Audio_Manager" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_f6jh7")
+volume_db = -20.0
+autoplay = true
+parameters/looping = true
+script = ExtResource("11_amum6")
+
+[node name="Raven_Random_Sound" type="AudioStreamPlayer" parent="Audio_Manager"]
+stream = SubResource("AudioStreamRandomizer_wv8yx")
+volume_db = -15.0
+
+[node name="Raven_Hit_Sound" type="AudioStreamPlayer" parent="Audio_Manager"]
+stream = ExtResource("16_sqmtg")
+volume_db = -21.543
+
+[node name="Godot_damage" type="AudioStreamPlayer" parent="Audio_Manager"]
+stream = ExtResource("17_uvr0p")
+
 [node name="Game_Manager" type="Node" parent="." node_paths=PackedStringArray("player_beatrii", "ground_object", "player_hud", "player_menu")]
 script = ExtResource("1_ijrab")
 player_beatrii = NodePath("../Player")
@@ -38,6 +57,12 @@ player_menu = NodePath("../Menu")
 [node name="Timer" type="Timer" parent="Game_Manager"]
 wait_time = 3.0
 one_shot = true
+
+[node name="Player_HUD" parent="." instance=ExtResource("8_xvm8s")]
+visible = false
+
+[node name="Menu" parent="." node_paths=PackedStringArray("gamemanager") instance=ExtResource("8_a4dou")]
+gamemanager = NodePath("../Game_Manager")
 
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -9
@@ -77,41 +102,19 @@ texture = ExtResource("3_6muya")
 collision_mask = 0
 motion_mode = 1
 
-[node name="Camera2D" parent="." node_paths=PackedStringArray("target") instance=ExtResource("2_4si25")]
-position = Vector2(-1772, 1829)
+[node name="Respawner" parent="Player" instance=ExtResource("16_s226m")]
+position = Vector2(-3682, -18)
+
+[node name="Camera2D" parent="." instance=ExtResource("2_4si25")]
+position = Vector2(529, 1829)
 zoom = Vector2(0.2, 0.2)
 limit_top = -1600
 limit_bottom = 1500
-limit_smoothed = true
-target = NodePath("../Player")
+script = null
 
 [node name="Godot_Engine" parent="." instance=ExtResource("6_1ucc8")]
 position = Vector2(2544, 14)
 scale = Vector2(3, 3)
-
-[node name="Menu" parent="." node_paths=PackedStringArray("gamemanager") instance=ExtResource("8_a4dou")]
-gamemanager = NodePath("../Game_Manager")
-
-[node name="Player_HUD" parent="." instance=ExtResource("8_xvm8s")]
-visible = false
-
-[node name="Audio_Manager" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("10_f6jh7")
-volume_db = -20.0
-autoplay = true
-parameters/looping = true
-script = ExtResource("11_amum6")
-
-[node name="Raven_Random_Sound" type="AudioStreamPlayer" parent="Audio_Manager"]
-stream = SubResource("AudioStreamRandomizer_wv8yx")
-volume_db = -15.0
-
-[node name="Raven_Hit_Sound" type="AudioStreamPlayer" parent="Audio_Manager"]
-stream = ExtResource("16_sqmtg")
-volume_db = -21.543
-
-[node name="Godot_damage" type="AudioStreamPlayer" parent="Audio_Manager"]
-stream = ExtResource("17_uvr0p")
 
 [node name="Ground" parent="." instance=ExtResource("5_lvswf")]
 position = Vector2(-3246, 0)
