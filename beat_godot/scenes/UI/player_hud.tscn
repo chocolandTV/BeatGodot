@@ -1,13 +1,24 @@
-[gd_scene load_steps=13 format=3 uid="uid://c5871jutojwl3"]
+[gd_scene load_steps=17 format=3 uid="uid://c5871jutojwl3"]
 
 [ext_resource type="Texture2D" uid="uid://be8bhtdbvvs8d" path="res://assets/textures/feather.png" id="1_dmp4r"]
 [ext_resource type="Script" path="res://scenes/UI/player_hud.gd" id="1_f1dol"]
-[ext_resource type="Texture2D" uid="uid://bhp0g30mj0dib" path="res://icon.svg" id="2_htep6"]
+[ext_resource type="Texture2D" uid="uid://dxbo8nl4xa3kd" path="res://assets/textures/godot_engine_bg_hud.png" id="3_4ojlw"]
+[ext_resource type="Texture2D" uid="uid://d280pbd1nvhvf" path="res://assets/textures/particles/star.png" id="3_fqyv4"]
 [ext_resource type="Texture2D" uid="uid://cw4b0bvhjawus" path="res://assets/textures/godot_engine_bg.png" id="4_awjsr"]
+[ext_resource type="Texture2D" uid="uid://db7kukov7p7x0" path="res://assets/textures/godot_engine.png" id="4_na82p"]
 [ext_resource type="SpriteFrames" uid="uid://yc0p6p6u4w3i" path="res://assets/spriteSheets/godot_engine.tres" id="5_lhn3c"]
 [ext_resource type="PackedScene" uid="uid://8wmshp8tgioi" path="res://scenes/UI/win_panel.tscn" id="6_2ynty"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m65oa"]
+
+[sub_resource type="Curve" id="Curve_gj7g0"]
+_data = [Vector2(0, 0.032967), 0.0, 0.0, 0, 0, Vector2(0.518072, 0.989039), 0.0, 0.0, 0, 0, Vector2(0.991968, 0.032967), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_6i41h"]
+min_value = -1.0
+_data = [Vector2(1e-05, -0.89011), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="Animation" id="Animation_mrbut"]
 length = 0.001
@@ -144,6 +155,30 @@ offset_bottom = 40.0
 scale = Vector2(0.145, 0.145)
 texture = ExtResource("1_dmp4r")
 
+[node name="particle_01" type="CPUParticles2D" parent="Player_health_Panel/Life_Panel_02/Life_01"]
+position = Vector2(351.724, 275.862)
+emitting = false
+amount = 3
+lifetime = 10.0
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 1.0
+texture = ExtResource("3_fqyv4")
+emission_shape = 1
+emission_sphere_radius = 128.0
+direction = Vector2(5, -1)
+spread = 180.0
+gravity = Vector2(3, -30)
+initial_velocity_max = 55.0
+orbit_velocity_max = 1.0
+radial_accel_min = 5.0
+radial_accel_max = 55.0
+scale_amount_min = 0.1
+scale_amount_max = 0.4
+scale_amount_curve = SubResource("Curve_gj7g0")
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("Curve_6i41h")
+
 [node name="Life_Panel_04" type="Panel" parent="Player_health_Panel"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
@@ -165,6 +200,31 @@ offset_bottom = 40.0
 scale = Vector2(0.145, 0.145)
 texture = ExtResource("1_dmp4r")
 
+[node name="particle_02" type="CPUParticles2D" parent="Player_health_Panel/Life_Panel_04/Life_02"]
+position = Vector2(358.621, 275.862)
+scale = Vector2(1, 1)
+emitting = false
+amount = 3
+lifetime = 10.0
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 1.0
+texture = ExtResource("3_fqyv4")
+emission_shape = 1
+emission_sphere_radius = 128.0
+direction = Vector2(5, -1)
+spread = 180.0
+gravity = Vector2(3, -30)
+initial_velocity_max = 55.0
+orbit_velocity_max = 1.0
+radial_accel_min = 5.0
+radial_accel_max = 55.0
+scale_amount_min = 0.1
+scale_amount_max = 0.4
+scale_amount_curve = SubResource("Curve_gj7g0")
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("Curve_6i41h")
+
 [node name="Life_Panel_03" type="Panel" parent="Player_health_Panel"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
@@ -185,6 +245,31 @@ offset_right = 40.0
 offset_bottom = 40.0
 scale = Vector2(0.145, 0.145)
 texture = ExtResource("1_dmp4r")
+
+[node name="particle_03" type="CPUParticles2D" parent="Player_health_Panel/Life_Panel_03/Life_03"]
+position = Vector2(379.31, 296.552)
+scale = Vector2(1, 1)
+emitting = false
+amount = 3
+lifetime = 10.0
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 1.0
+texture = ExtResource("3_fqyv4")
+emission_shape = 1
+emission_sphere_radius = 128.0
+direction = Vector2(5, -1)
+spread = 180.0
+gravity = Vector2(3, -30)
+initial_velocity_max = 55.0
+orbit_velocity_max = 1.0
+radial_accel_min = 5.0
+radial_accel_max = 55.0
+scale_amount_min = 0.1
+scale_amount_max = 0.4
+scale_amount_curve = SubResource("Curve_gj7g0")
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("Curve_6i41h")
 
 [node name="Life_Label" type="Label" parent="."]
 offset_left = 124.0
@@ -211,12 +296,11 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_m65oa")
 
 [node name="Bg" type="TextureRect" parent="Player_Item_Panel/Life_Panel_02"]
-modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_right = 128.0
 offset_bottom = 128.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_htep6")
+texture = ExtResource("3_4ojlw")
 
 [node name="Godot_Part_01" type="TextureRect" parent="Player_Item_Panel/Life_Panel_02"]
 visible = false
@@ -224,7 +308,7 @@ layout_mode = 0
 offset_right = 128.0
 offset_bottom = 128.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_htep6")
+texture = ExtResource("4_na82p")
 
 [node name="Life_Panel_04" type="Panel" parent="Player_Item_Panel"]
 custom_minimum_size = Vector2(80, 80)
@@ -232,12 +316,11 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_m65oa")
 
 [node name="Bg" type="TextureRect" parent="Player_Item_Panel/Life_Panel_04"]
-modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_right = 128.0
 offset_bottom = 128.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_htep6")
+texture = ExtResource("3_4ojlw")
 
 [node name="Godot_Part_02" type="TextureRect" parent="Player_Item_Panel/Life_Panel_04"]
 visible = false
@@ -245,7 +328,7 @@ layout_mode = 0
 offset_right = 128.0
 offset_bottom = 128.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_htep6")
+texture = ExtResource("4_na82p")
 
 [node name="Life_Panel_03" type="Panel" parent="Player_Item_Panel"]
 custom_minimum_size = Vector2(80, 80)
@@ -253,12 +336,11 @@ layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_m65oa")
 
 [node name="Bg" type="TextureRect" parent="Player_Item_Panel/Life_Panel_03"]
-modulate = Color(0, 0, 0, 1)
 layout_mode = 0
 offset_right = 128.0
 offset_bottom = 128.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_htep6")
+texture = ExtResource("3_4ojlw")
 
 [node name="Godot_Part_03" type="TextureRect" parent="Player_Item_Panel/Life_Panel_03"]
 visible = false
@@ -266,7 +348,7 @@ layout_mode = 0
 offset_right = 128.0
 offset_bottom = 128.0
 scale = Vector2(0.4, 0.4)
-texture = ExtResource("2_htep6")
+texture = ExtResource("4_na82p")
 
 [node name="Item_Label" type="Label" parent="."]
 offset_left = 964.0

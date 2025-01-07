@@ -19,10 +19,14 @@ class_name Player_HUD
 @onready var godot_animation_player : AnimationPlayer = $Godot_Engine_talk/AnimationPlayer
 @onready var godot_animation_sprite : AnimatedSprite2D = $Godot_Engine_talk/TextureRect/AnimatedSprite2D
 @onready var godot_win : CanvasLayer =$Win_Panel
+## particle health_meta_game
+@onready var particle_health_01: CPUParticles2D =$Player_health_Panel/Life_Panel_02/Life_01/particle_01
+@onready var particle_health_02: CPUParticles2D =$Player_health_Panel/Life_Panel_04/Life_02/particle_02
+@onready var particle_health_03: CPUParticles2D =$Player_health_Panel/Life_Panel_03/Life_03/particle_03
 ###### PLAYER CLICKED ON LIFE ICONS
 var player_metagame_life : int = 9
 var is_life_container_highlighted : bool  = false
-
+var meta_is_done : bool = false
 
 func _ready() -> void:
     get_node("/root/GlobalData").SET_PLAYERHUD(self)
@@ -115,19 +119,33 @@ func on_text_changed(_newstring: String):
     print("random text")
 
 func _input(event: InputEvent) -> void:
-        if event.is_action_pressed("left_click") and  is_life_container_highlighted:
+        if event.is_action_pressed("left_click") and  is_life_container_highlighted and !meta_is_done:
             player_metagame_life -=1
             print(player_metagame_life)
             if player_metagame_life == 6:
-                update_player_life(2)
+                update_meta_life(2)
                 godot_animation_player.play("item10")
             if player_metagame_life ==3:
-                update_player_life(1)
+                update_meta_life(1)
                 godot_animation_player.play("item10")
             if player_metagame_life <= 0:
-                update_player_life(-1)
+                update_meta_life(-1)
                 godot_animation_player.play("item10")
                 ## get metaprogression
 
 
-            
+func update_meta_life(value : int):
+    if value ==2:
+        particle_health_03.emitting = true
+        life_icon_03.modulate = Color8(219,216,174,255)
+    if value ==1 :
+        particle_health_02.emitting = true
+        life_icon_02.modulate = Color8(219,216,174,255)
+    if value == -1:
+        particle_health_01.emitting = true
+        life_icon_01.modulate = Color8(219,216,174,255)
+        life_label.text = "8"
+        life_label.rotation_degrees = 90.0
+        life_label.add_theme_font_size_override("font_size",55)
+        life_label.modulate = Color8(219,216,174,255)
+        meta_is_done = true
