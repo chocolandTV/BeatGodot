@@ -1,17 +1,15 @@
 extends Control
 class_name Player_HUD
-## turn off if player attack his life and destroyed
-@export var life_holder : HBoxContainer
-@export var life_label : Label
+
 #####################################
-@export var life_texture:TextureRect 
-@export var player_score_label : Label
+@onready var life_texture:TextureRect = $VBoxContainer/Player_Progress_Panel/Life_container/Life_01
+@onready var player_score_label : Label =$VBoxContainer/Player_Progress_Panel/Score_Holder/HBoxContainer/player_score
 
-@export var godot_engine_Part_01: TextureRect
-@export var godot_engine_Part_02: TextureRect
-@export var godot_engine_Part_03: TextureRect
+@onready var godot_engine_Part_01: TextureRect =$VBoxContainer/Player_Progress_Panel/Player_Item_Panel/Life_Panel_02/Godot_Part_01
+@onready var godot_engine_Part_02: TextureRect =$VBoxContainer/Player_Progress_Panel/Player_Item_Panel/Life_Panel_04/Godot_Part_02
+@onready var godot_engine_Part_03: TextureRect=$VBoxContainer/Player_Progress_Panel/Player_Item_Panel/Life_Panel_03/Godot_Part_03
 
-@export var godot_engine_chat : LineEdit
+@onready var godot_engine_chat : TextEdit = $MarginContainer/Godot_Engine_talk/TextEdit
 #### GODOT ENGINE ANIMATION 
 @onready var godot_animation_player : AnimationPlayer = $MarginContainer/Godot_Engine_talk/AnimationPlayer
 @onready var godot_animation_sprite : AnimatedSprite2D = $MarginContainer/Godot_Engine_talk/TextureRect/AnimatedSprite2D

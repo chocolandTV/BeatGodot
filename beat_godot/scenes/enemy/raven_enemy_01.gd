@@ -36,6 +36,6 @@ func on_enemy_died():
 
     tween_dead.tween_property(self,"rotation",deg_to_rad(-90),1).as_relative()
     tween_dead.set_parallel()
-    tween_dead.tween_property(self,"position",Vector2.DOWN * 3500,1).as_relative()
+    tween_dead.tween_property(self,"position",Vector2.DOWN * 1500,1).as_relative()
     tween_dead.tween_callback(queue_free).set_delay(10)
     

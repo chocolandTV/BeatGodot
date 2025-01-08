@@ -8,8 +8,8 @@ var badbirds_scene = preload ("res://scenes/Obstacles/bad_raven.tscn")
 @onready var godot_movement :enemy_godot_movement  =$Godot_Movement
 @export var spawn_rate_seconds : float = 4.0
 ### CONST
-const START_POS : Vector2 = Vector2(1096,0)
-const SPAWN_HEIGHT : float  = 400
+const START_POS : Vector2 = Vector2(1442,0)
+const SPAWN_HEIGHT : float  = 250
 
 ########### VARIABLES
 var is_godot_highlighted :bool = false

@@ -18,12 +18,15 @@ var _current_player_life: int = 3
 var current_player_invincible:  bool = false
 @export var player_beatrii : CharacterBody2D
 @export var ground_object : Node2D
-@export var player_hud : Player_HUD
-@export var player_menu : Menu
+var player_hud : Player_HUD
+var player_menu : Menu
 @onready var timer :Timer =$Timer
 
 func _ready() -> void:
     get_node("/root/GlobalData").SET_GAMEMANAGER(self)
+    ## get refs
+    player_hud  = get_node("/root/GlobalData").player_hud
+    player_menu  =get_node("/root/GlobalData").menu
     new_game()
     timer.timeout.connect(on_timer_timeout_game_over)
 

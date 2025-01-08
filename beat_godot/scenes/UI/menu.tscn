@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://by2tt8nxs4d0k"]
+[gd_scene load_steps=17 format=3 uid="uid://by2tt8nxs4d0k"]
 
 [ext_resource type="Script" path="res://scenes/UI/menu.gd" id="1_fh81q"]
 [ext_resource type="Texture2D" uid="uid://bnhu40f2f2a1m" path="res://assets/textures/background.png" id="1_lnp5v"]
@@ -15,18 +15,26 @@
 [ext_resource type="Texture2D" uid="uid://bx8uui0bkqmn0" path="res://assets/textures/godot_face/redgodot.png" id="8_ogj45"]
 [ext_resource type="StyleBox" uid="uid://dj578j6yjpski" path="res://resources/button_normal.tres" id="9_8up5h"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r8xff"]
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f47g7"]
 texture = ExtResource("8_58sp1")
 modulate_color = Color(0.917647, 0.956863, 0.827451, 1)
 
-[node name="Menu" type="CanvasLayer" node_paths=PackedStringArray("credit_panel", "button_start")]
+[node name="Menu" type="Control"]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_fh81q")
-credit_panel = NodePath("Credits")
-button_start = NodePath("MarginContainer/VBoxContainer/Button_Start")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 z_index = -3
 y_sort_enabled = true
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -36,6 +44,7 @@ texture = ExtResource("1_lnp5v")
 expand_mode = 2
 
 [node name="Raven_Spawner" type="TextureRect" parent="."]
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -49,14 +58,15 @@ script = ExtResource("2_jbbbc")
 z_index = -2
 y_sort_enabled = true
 custom_minimum_size = Vector2(300, 0)
-offset_left = 462.0
-offset_top = 158.0
-offset_right = 974.0
-offset_bottom = 670.0
+offset_left = 624.0
+offset_top = 1.0
+offset_right = 2018.0
+offset_bottom = 1395.0
 scale = Vector2(0.505, 0.505)
 texture = ExtResource("4_cnp47")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
 offset_right = 648.0
@@ -68,8 +78,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MarginContainer/VBoxContainer"]
-position = Vector2(596, 357)
-scale = Vector2(0.305, 0.305)
+position = Vector2(973, 354)
 sprite_frames = ExtResource("3_boxt4")
 autoplay = "default"
 frame_progress = 0.237315
@@ -78,14 +87,26 @@ script = ExtResource("6_kax8e")
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 50
+theme = ExtResource("7_etlvu")
+theme_override_font_sizes/font_size = 100
 text = "Beatrii"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+theme_override_styles/separator = SubResource("StyleBoxEmpty_r8xff")
 
 [node name="Label2" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 12
+theme = ExtResource("7_etlvu")
+theme_override_font_sizes/font_size = 30
 text = "a game about to beat a engine"
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 25
+theme_override_styles/separator = SubResource("StyleBoxEmpty_r8xff")
 
 [node name="Button_Start" type="Button" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(350, 100)
@@ -130,6 +151,7 @@ script = ExtResource("7_m0e1q")
 [node name="Credits" type="MarginContainer" parent="."]
 visible = false
 custom_minimum_size = Vector2(250, 250)
+layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
@@ -173,8 +195,8 @@ theme_override_font_sizes/font_size = 36
 text = "Kuchibue no kimochi"
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-position = Vector2(1329, 385)
-amount = 50
+position = Vector2(1992, 535)
+amount = 150
 lifetime = 10.0
 randomness = 1.0
 lifetime_randomness = 1.0

@@ -5,6 +5,8 @@ extends Area2D
 @onready var animator : AnimationPlayer = $AnimationPlayer
 var _is_clicked : bool  =false
 var _is_cooldown : bool  = false
+func _ready() -> void:
+    cooldown_timer.timeout.connect(on_timer_timeout)
 
 func _input(event: InputEvent) -> void:
     if event.is_action_pressed("left_click"):
