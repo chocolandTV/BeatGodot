@@ -1,15 +1,16 @@
-[gd_scene load_steps=17 format=3 uid="uid://c5871jutojwl3"]
+[gd_scene load_steps=20 format=3 uid="uid://c5871jutojwl3"]
 
 [ext_resource type="Texture2D" uid="uid://be8bhtdbvvs8d" path="res://assets/textures/feather.png" id="1_dmp4r"]
 [ext_resource type="Script" path="res://scenes/UI/player_hud.gd" id="1_f1dol"]
+[ext_resource type="Theme" uid="uid://dm0wp1bciqkm1" path="res://resources/main_theme.tres" id="2_5c476"]
+[ext_resource type="Texture2D" uid="uid://wd6j4nxyqbme" path="res://assets/textures/health_panel_3_hearths.png" id="2_bqlhd"]
 [ext_resource type="Texture2D" uid="uid://dxbo8nl4xa3kd" path="res://assets/textures/godot_engine_bg_hud.png" id="3_4ojlw"]
 [ext_resource type="Texture2D" uid="uid://d280pbd1nvhvf" path="res://assets/textures/particles/star.png" id="3_fqyv4"]
+[ext_resource type="Script" path="res://scenes/UI/life_container.gd" id="3_otkrc"]
 [ext_resource type="Texture2D" uid="uid://cw4b0bvhjawus" path="res://assets/textures/godot_engine_bg.png" id="4_awjsr"]
 [ext_resource type="Texture2D" uid="uid://db7kukov7p7x0" path="res://assets/textures/godot_engine.png" id="4_na82p"]
 [ext_resource type="SpriteFrames" uid="uid://yc0p6p6u4w3i" path="res://assets/spriteSheets/godot_engine.tres" id="5_lhn3c"]
 [ext_resource type="PackedScene" uid="uid://8wmshp8tgioi" path="res://scenes/UI/win_panel.tscn" id="6_2ynty"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m65oa"]
 
 [sub_resource type="Curve" id="Curve_gj7g0"]
 _data = [Vector2(0, 0.032967), 0.0, 0.0, 0, 0, Vector2(0.518072, 0.989039), 0.0, 0.0, 0, 0, Vector2(0.991968, 0.032967), 0.0, 0.0, 0, 0]
@@ -19,6 +20,8 @@ point_count = 3
 min_value = -1.0
 _data = [Vector2(1e-05, -0.89011), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m65oa"]
 
 [sub_resource type="Animation" id="Animation_mrbut"]
 length = 0.001
@@ -115,328 +118,302 @@ _data = {
 "score10": SubResource("Animation_i5cbw")
 }
 
-[node name="Player_HUD" type="CanvasLayer" node_paths=PackedStringArray("life_holder", "life_label", "life_icon_01", "life_icon_02", "life_icon_03", "player_score_label", "godot_engine_Part_01", "godot_engine_Part_02", "godot_engine_Part_03", "godot_engine_chat")]
+[node name="Player_HUD" type="Control" node_paths=PackedStringArray("life_holder", "life_label", "life_texture", "player_score_label", "godot_engine_Part_01", "godot_engine_Part_02", "godot_engine_Part_03", "godot_engine_chat")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_f1dol")
-life_holder = NodePath("Player_health_Panel")
-life_label = NodePath("Life_Label")
-life_icon_01 = NodePath("Player_health_Panel/Life_Panel_02/Life_01")
-life_icon_02 = NodePath("Player_health_Panel/Life_Panel_04/Life_02")
-life_icon_03 = NodePath("Player_health_Panel/Life_Panel_03/Life_03")
-player_score_label = NodePath("MarginContainer/VBoxContainer/HBoxContainer/player_score")
-godot_engine_Part_01 = NodePath("Player_Item_Panel/Life_Panel_02/Godot_Part_01")
-godot_engine_Part_02 = NodePath("Player_Item_Panel/Life_Panel_04/Godot_Part_02")
-godot_engine_Part_03 = NodePath("Player_Item_Panel/Life_Panel_03/Godot_Part_03")
-godot_engine_chat = NodePath("Godot_Engine_talk/TextEdit")
+life_holder = NodePath("VBoxContainer/Player_Progress_Panel")
+life_label = NodePath("VBoxContainer/Header_Topics/Life_Margin_C/Life_Label")
+life_texture = NodePath("VBoxContainer/Player_Progress_Panel/Life_container/Life_01")
+player_score_label = NodePath("VBoxContainer/Player_Progress_Panel/Score_Holder/HBoxContainer/player_score")
+godot_engine_Part_01 = NodePath("VBoxContainer/Player_Progress_Panel/Player_Item_Panel/Life_Panel_02/Godot_Part_01")
+godot_engine_Part_02 = NodePath("VBoxContainer/Player_Progress_Panel/Player_Item_Panel/Life_Panel_04/Godot_Part_02")
+godot_engine_Part_03 = NodePath("VBoxContainer/Player_Progress_Panel/Player_Item_Panel/Life_Panel_03/Godot_Part_03")
+godot_engine_chat = NodePath("MarginContainer/Godot_Engine_talk/TextEdit")
 
-[node name="Player_health_Panel" type="HBoxContainer" parent="."]
-offset_left = 70.0
-offset_top = 70.0
-offset_right = 1082.0
-offset_bottom = 578.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.169
+offset_bottom = -0.52002
 
-[node name="Life_Panel_02" type="Panel" parent="Player_health_Panel"]
-custom_minimum_size = Vector2(50, 50)
+[node name="Header_Topics" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_m65oa")
 
-[node name="Bg" type="TextureRect" parent="Player_health_Panel/Life_Panel_02"]
-modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_right = 512.0
-offset_bottom = 512.0
-scale = Vector2(0.16, 0.16)
-texture = ExtResource("1_dmp4r")
-
-[node name="Life_01" type="TextureRect" parent="Player_health_Panel/Life_Panel_02"]
-modulate = Color(0.6, 0.27451, 0.211765, 1)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(0.145, 0.145)
-texture = ExtResource("1_dmp4r")
-
-[node name="particle_01" type="CPUParticles2D" parent="Player_health_Panel/Life_Panel_02/Life_01"]
-position = Vector2(351.724, 275.862)
-emitting = false
-amount = 3
-lifetime = 10.0
-explosiveness = 1.0
-randomness = 1.0
-lifetime_randomness = 1.0
-texture = ExtResource("3_fqyv4")
-emission_shape = 1
-emission_sphere_radius = 128.0
-direction = Vector2(5, -1)
-spread = 180.0
-gravity = Vector2(3, -30)
-initial_velocity_max = 55.0
-orbit_velocity_max = 1.0
-radial_accel_min = 5.0
-radial_accel_max = 55.0
-scale_amount_min = 0.1
-scale_amount_max = 0.4
-scale_amount_curve = SubResource("Curve_gj7g0")
-hue_variation_max = 1.0
-hue_variation_curve = SubResource("Curve_6i41h")
-
-[node name="Life_Panel_04" type="Panel" parent="Player_health_Panel"]
-custom_minimum_size = Vector2(50, 50)
+[node name="Life_Margin_C" type="MarginContainer" parent="VBoxContainer/Header_Topics"]
+custom_minimum_size = Vector2(630, 50)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_m65oa")
 
-[node name="Bg" type="TextureRect" parent="Player_health_Panel/Life_Panel_04"]
-modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_right = 512.0
-offset_bottom = 512.0
-scale = Vector2(0.16, 0.16)
-texture = ExtResource("1_dmp4r")
-
-[node name="Life_02" type="TextureRect" parent="Player_health_Panel/Life_Panel_04"]
-modulate = Color(0.6, 0.27451, 0.211765, 1)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(0.145, 0.145)
-texture = ExtResource("1_dmp4r")
-
-[node name="particle_02" type="CPUParticles2D" parent="Player_health_Panel/Life_Panel_04/Life_02"]
-position = Vector2(358.621, 275.862)
-scale = Vector2(1, 1)
-emitting = false
-amount = 3
-lifetime = 10.0
-explosiveness = 1.0
-randomness = 1.0
-lifetime_randomness = 1.0
-texture = ExtResource("3_fqyv4")
-emission_shape = 1
-emission_sphere_radius = 128.0
-direction = Vector2(5, -1)
-spread = 180.0
-gravity = Vector2(3, -30)
-initial_velocity_max = 55.0
-orbit_velocity_max = 1.0
-radial_accel_min = 5.0
-radial_accel_max = 55.0
-scale_amount_min = 0.1
-scale_amount_max = 0.4
-scale_amount_curve = SubResource("Curve_gj7g0")
-hue_variation_max = 1.0
-hue_variation_curve = SubResource("Curve_6i41h")
-
-[node name="Life_Panel_03" type="Panel" parent="Player_health_Panel"]
-custom_minimum_size = Vector2(50, 0)
+[node name="Life_Label" type="Label" parent="VBoxContainer/Header_Topics/Life_Margin_C"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_m65oa")
-
-[node name="Bg" type="TextureRect" parent="Player_health_Panel/Life_Panel_03"]
-modulate = Color(0, 0, 0, 1)
-layout_mode = 0
-offset_right = 512.0
-offset_bottom = 512.0
-scale = Vector2(0.16, 0.16)
-texture = ExtResource("1_dmp4r")
-
-[node name="Life_03" type="TextureRect" parent="Player_health_Panel/Life_Panel_03"]
-modulate = Color(0.6, 0.27451, 0.211765, 1)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(0.145, 0.145)
-texture = ExtResource("1_dmp4r")
-
-[node name="particle_03" type="CPUParticles2D" parent="Player_health_Panel/Life_Panel_03/Life_03"]
-position = Vector2(379.31, 296.552)
-scale = Vector2(1, 1)
-emitting = false
-amount = 3
-lifetime = 10.0
-explosiveness = 1.0
-randomness = 1.0
-lifetime_randomness = 1.0
-texture = ExtResource("3_fqyv4")
-emission_shape = 1
-emission_sphere_radius = 128.0
-direction = Vector2(5, -1)
-spread = 180.0
-gravity = Vector2(3, -30)
-initial_velocity_max = 55.0
-orbit_velocity_max = 1.0
-radial_accel_min = 5.0
-radial_accel_max = 55.0
-scale_amount_min = 0.1
-scale_amount_max = 0.4
-scale_amount_curve = SubResource("Curve_gj7g0")
-hue_variation_max = 1.0
-hue_variation_curve = SubResource("Curve_6i41h")
-
-[node name="Life_Label" type="Label" parent="."]
-offset_left = 124.0
-offset_top = 32.0
-offset_right = 195.0
-offset_bottom = 81.0
+theme = ExtResource("2_5c476")
 theme_override_font_sizes/font_size = 35
 text = "Life:"
+horizontal_alignment = 1
 
-[node name="Player_Item_Panel" type="HBoxContainer" parent="."]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -203.0
-offset_top = 91.0
-offset_right = -3.0
-offset_bottom = 291.0
-grow_horizontal = 0
-metadata/_edit_use_anchors_ = true
-
-[node name="Life_Panel_02" type="Panel" parent="Player_Item_Panel"]
-custom_minimum_size = Vector2(80, 80)
+[node name="Score_Margin_C" type="MarginContainer" parent="VBoxContainer/Header_Topics"]
+custom_minimum_size = Vector2(630, 50)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_m65oa")
 
-[node name="Bg" type="TextureRect" parent="Player_Item_Panel/Life_Panel_02"]
-layout_mode = 0
-offset_right = 128.0
-offset_bottom = 128.0
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("3_4ojlw")
-
-[node name="Godot_Part_01" type="TextureRect" parent="Player_Item_Panel/Life_Panel_02"]
-visible = false
-layout_mode = 0
-offset_right = 128.0
-offset_bottom = 128.0
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("4_na82p")
-
-[node name="Life_Panel_04" type="Panel" parent="Player_Item_Panel"]
-custom_minimum_size = Vector2(80, 80)
+[node name="Label" type="Label" parent="VBoxContainer/Header_Topics/Score_Margin_C"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_m65oa")
+theme = ExtResource("2_5c476")
+theme_override_font_sizes/font_size = 35
+text = "Score:"
+horizontal_alignment = 1
 
-[node name="Bg" type="TextureRect" parent="Player_Item_Panel/Life_Panel_04"]
-layout_mode = 0
-offset_right = 128.0
-offset_bottom = 128.0
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("3_4ojlw")
-
-[node name="Godot_Part_02" type="TextureRect" parent="Player_Item_Panel/Life_Panel_04"]
-visible = false
-layout_mode = 0
-offset_right = 128.0
-offset_bottom = 128.0
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("4_na82p")
-
-[node name="Life_Panel_03" type="Panel" parent="Player_Item_Panel"]
-custom_minimum_size = Vector2(80, 80)
+[node name="Chips_Margin_C" type="MarginContainer" parent="VBoxContainer/Header_Topics"]
+custom_minimum_size = Vector2(630, 50)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_m65oa")
 
-[node name="Bg" type="TextureRect" parent="Player_Item_Panel/Life_Panel_03"]
-layout_mode = 0
-offset_right = 128.0
-offset_bottom = 128.0
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("3_4ojlw")
-
-[node name="Godot_Part_03" type="TextureRect" parent="Player_Item_Panel/Life_Panel_03"]
-visible = false
-layout_mode = 0
-offset_right = 128.0
-offset_bottom = 128.0
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("4_na82p")
-
-[node name="Item_Label" type="Label" parent="."]
-offset_left = 964.0
-offset_top = 29.0
-offset_right = 1067.0
-offset_bottom = 78.0
+[node name="Item_Label" type="Label" parent="VBoxContainer/Header_Topics/Chips_Margin_C"]
+layout_mode = 2
+theme = ExtResource("2_5c476")
 theme_override_font_sizes/font_size = 35
 text = "Chips:"
+horizontal_alignment = 1
 
-[node name="Godot_Engine_talk" type="HBoxContainer" parent="."]
-custom_minimum_size = Vector2(800, 40)
+[node name="Player_Progress_Panel" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(1000, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="Life_container" type="MarginContainer" parent="VBoxContainer/Player_Progress_Panel"]
+custom_minimum_size = Vector2(630, 0)
+layout_mode = 2
+
+[node name="Life_01" type="TextureRect" parent="VBoxContainer/Player_Progress_Panel/Life_container"]
+layout_mode = 2
+texture = ExtResource("2_bqlhd")
+script = ExtResource("3_otkrc")
+
+[node name="particle_01" type="CPUParticles2D" parent="VBoxContainer/Player_Progress_Panel/Life_container"]
+position = Vector2(65, 64.45)
+emitting = false
+amount = 3
+lifetime = 10.0
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 1.0
+texture = ExtResource("3_fqyv4")
+emission_shape = 1
+emission_sphere_radius = 128.0
+direction = Vector2(5, -1)
+spread = 180.0
+gravity = Vector2(3, -30)
+initial_velocity_max = 55.0
+orbit_velocity_max = 1.0
+radial_accel_min = 5.0
+radial_accel_max = 55.0
+scale_amount_min = 0.1
+scale_amount_max = 0.4
+scale_amount_curve = SubResource("Curve_gj7g0")
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("Curve_6i41h")
+
+[node name="particle_02" type="CPUParticles2D" parent="VBoxContainer/Player_Progress_Panel/Life_container"]
+position = Vector2(194, 66.45)
+scale = Vector2(0.29, 0.29)
+emitting = false
+amount = 3
+lifetime = 10.0
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 1.0
+texture = ExtResource("3_fqyv4")
+emission_shape = 1
+emission_sphere_radius = 128.0
+direction = Vector2(5, -1)
+spread = 180.0
+gravity = Vector2(3, -30)
+initial_velocity_max = 55.0
+orbit_velocity_max = 1.0
+radial_accel_min = 5.0
+radial_accel_max = 55.0
+scale_amount_min = 0.1
+scale_amount_max = 0.4
+scale_amount_curve = SubResource("Curve_gj7g0")
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("Curve_6i41h")
+
+[node name="particle_03" type="CPUParticles2D" parent="VBoxContainer/Player_Progress_Panel/Life_container"]
+position = Vector2(323, 66.45)
+scale = Vector2(0.29, 0.29)
+emitting = false
+amount = 3
+lifetime = 10.0
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 1.0
+texture = ExtResource("3_fqyv4")
+emission_shape = 1
+emission_sphere_radius = 128.0
+direction = Vector2(5, -1)
+spread = 180.0
+gravity = Vector2(3, -30)
+initial_velocity_max = 55.0
+orbit_velocity_max = 1.0
+radial_accel_min = 5.0
+radial_accel_max = 55.0
+scale_amount_min = 0.1
+scale_amount_max = 0.4
+scale_amount_curve = SubResource("Curve_gj7g0")
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("Curve_6i41h")
+
+[node name="Score_Holder" type="MarginContainer" parent="VBoxContainer/Player_Progress_Panel"]
+custom_minimum_size = Vector2(630, 50)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/margin_top = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Player_Progress_Panel/Score_Holder"]
+custom_minimum_size = Vector2(630, 0)
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Player_Progress_Panel/Score_Holder/HBoxContainer"]
+modulate = Color(0.858824, 0.847059, 0.682353, 1)
+position = Vector2(178, 30)
+scale = Vector2(0.23, 0.23)
+texture = ExtResource("1_dmp4r")
+
+[node name="player_score" type="Label" parent="VBoxContainer/Player_Progress_Panel/Score_Holder/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme = ExtResource("2_5c476")
+text = "x 10020"
+horizontal_alignment = 2
+
+[node name="Player_Item_Panel" type="HBoxContainer" parent="VBoxContainer/Player_Progress_Panel"]
+custom_minimum_size = Vector2(630, 128)
+layout_mode = 2
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Life_Panel_02" type="Panel" parent="VBoxContainer/Player_Progress_Panel/Player_Item_Panel"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_m65oa")
+
+[node name="Bg" type="TextureRect" parent="VBoxContainer/Player_Progress_Panel/Player_Item_Panel/Life_Panel_02"]
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_4ojlw")
+
+[node name="Godot_Part_01" type="TextureRect" parent="VBoxContainer/Player_Progress_Panel/Player_Item_Panel/Life_Panel_02"]
+visible = false
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_na82p")
+
+[node name="Life_Panel_04" type="Panel" parent="VBoxContainer/Player_Progress_Panel/Player_Item_Panel"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_m65oa")
+
+[node name="Bg" type="TextureRect" parent="VBoxContainer/Player_Progress_Panel/Player_Item_Panel/Life_Panel_04"]
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_4ojlw")
+
+[node name="Godot_Part_02" type="TextureRect" parent="VBoxContainer/Player_Progress_Panel/Player_Item_Panel/Life_Panel_04"]
+visible = false
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_na82p")
+
+[node name="Life_Panel_03" type="Panel" parent="VBoxContainer/Player_Progress_Panel/Player_Item_Panel"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_m65oa")
+
+[node name="Bg" type="TextureRect" parent="VBoxContainer/Player_Progress_Panel/Player_Item_Panel/Life_Panel_03"]
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("3_4ojlw")
+
+[node name="Godot_Part_03" type="TextureRect" parent="VBoxContainer/Player_Progress_Panel/Player_Item_Panel/Life_Panel_03"]
+visible = false
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_na82p")
+
+[node name="Win_Panel" parent="." instance=ExtResource("6_2ynty")]
+process_mode = 3
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -244.5
+offset_top = -236.0
+offset_right = 244.5
+offset_bottom = 236.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -467.0
-offset_top = -66.0
-offset_right = 502.0
-offset_bottom = -26.0
+offset_left = -479.5
+offset_top = -120.0
+offset_right = 479.5
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_constants/margin_bottom = 80
 
-[node name="TextureRect" type="TextureRect" parent="Godot_Engine_talk"]
+[node name="Godot_Engine_talk" type="HBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(800, 40)
+layout_mode = 2
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/Godot_Engine_talk"]
 layout_mode = 2
 texture = ExtResource("4_awjsr")
 expand_mode = 2
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Godot_Engine_talk/TextureRect"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="MarginContainer/Godot_Engine_talk/TextureRect"]
 position = Vector2(20, 20)
 scale = Vector2(0.35, 0.35)
 sprite_frames = ExtResource("5_lhn3c")
 animation = &"terrified"
 
-[node name="Label" type="Label" parent="Godot_Engine_talk"]
+[node name="Label" type="Label" parent="MarginContainer/Godot_Engine_talk"]
 layout_mode = 2
 text = "Godot_Engine:"
 
-[node name="TextEdit" type="TextEdit" parent="Godot_Engine_talk"]
+[node name="TextEdit" type="TextEdit" parent="MarginContainer/Godot_Engine_talk"]
 custom_minimum_size = Vector2(800, 40)
 layout_mode = 2
 size_flags_vertical = 4
 placeholder_text = "player_start_game"
 caret_multiple = false
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Godot_Engine_talk"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/Godot_Engine_talk"]
 libraries = {
 "": SubResource("AnimationLibrary_7n7sv")
 }
-
-[node name="MarginContainer" type="MarginContainer" parent="."]
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -125.0
-offset_right = 125.0
-offset_bottom = 250.0
-grow_horizontal = 2
-theme_override_constants/margin_top = 25
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-layout_mode = 2
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 35
-text = "Score:"
-horizontal_alignment = 1
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-modulate = Color(0.858824, 0.847059, 0.682353, 1)
-position = Vector2(32, 0)
-scale = Vector2(0.09, 0.09)
-texture = ExtResource("1_dmp4r")
-offset = Vector2(100, 100)
-
-[node name="player_score" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
-clip_contents = true
-custom_minimum_size = Vector2(250, 50)
-layout_mode = 2
-text = "10020. Points"
-horizontal_alignment = 1
-
-[node name="Win_Panel" parent="." instance=ExtResource("6_2ynty")]
-process_mode = 3
-visible = false
-offset = Vector2(50, 400)
-transform = Transform2D(1, 0, 0, 1, 50, 400)

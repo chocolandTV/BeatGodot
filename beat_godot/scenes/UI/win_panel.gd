@@ -1,5 +1,5 @@
-extends CanvasLayer
-@onready var pulsing_object : TextureRect =$Pulsing_win
+extends MarginContainer
+@onready var pulsing_object : TextureRect =$VBoxContainer/Panel/Pulsing_win
 
 func start_scaling():
     var tween_updown = get_tree().create_tween().set_loops()
@@ -12,4 +12,4 @@ func start_scaling():
     tween_updown.tween_property(pulsing_object,"scale",Vector2.ONE,10).as_relative()
 
 func on_button_pressed_restart():
-    get_tree().change_scene_to_file("res://scenes/_game/game_scene_01.tscn")
+    get_node("/root/GlobalData").menu.on_button_pressed_restart()

@@ -6,12 +6,11 @@ signal game_is_running(value :bool)
 
 ### CONST
 const SCROLL_SPEED : float  = 8.0
-const PIPE_DELAY : float  = 100.0
-const PIPE_RANGE: float = 200.0
+const SCROLL_START : float =406
 ### VARS
 var _is_game_running : bool = false
 var _is_game_over : bool  = false
-var _scroll = 0
+var _scroll = 406
 var _game_score : int = 0
 var real_game_score : int  = 0
 var game_paused : bool = false
@@ -34,7 +33,7 @@ func new_game():
     _is_game_running = false
     _is_game_over = false
     _game_score = 0
-    _scroll = 0
+    _scroll = 406
     player_beatrii.reset()
 
 
@@ -76,7 +75,7 @@ func _process(_delta: float) -> void:
         _scroll += SCROLL_SPEED
         #reset
         if _scroll >= 4096:
-            _scroll =0
+            _scroll =SCROLL_START
         #object move
         ground_object.position.x = -_scroll
 
@@ -87,6 +86,9 @@ func player_scored():
     # UI UPDATE
     get_node("/root/GlobalData").player_hud.update_player_score(_game_score)
 
+func game_over():
+     timer.start()
+    ### WHEN TIMER IF DONE -> gameover waittime
 func on_timer_timeout_game_over():
     get_node("/root/GlobalData").menu.update_game_over()
     game_is_running.emit(false)
@@ -95,5 +97,3 @@ func on_timer_timeout_game_over():
     _is_game_running = false
     _is_game_over = true
     #show game_over menu
-func game_over():
-     timer.start()

@@ -68,38 +68,37 @@ gamemanager = NodePath("../Game_Manager")
 [node name="Background" type="Sprite2D" parent="."]
 z_index = -9
 y_sort_enabled = true
-scale = Vector2(1.77, 1.77)
+position = Vector2(0, -602)
 texture = ExtResource("1_th85w")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Background"]
-position = Vector2(1855.93, 0)
+position = Vector2(2042, 600)
 amount = 50
 lifetime = 10.0
 randomness = 1.0
 lifetime_randomness = 1.0
 texture = ExtResource("4_nj5ex")
 emission_shape = 3
-emission_rect_extents = Vector2(50, 1000)
+emission_rect_extents = Vector2(20, 1000)
 direction = Vector2(-1, 0)
 spread = 16.12
 gravity = Vector2(-550, 0)
 initial_velocity_min = 59.7
 initial_velocity_max = 358.21
-scale_amount_min = 3.0
-scale_amount_max = 10.0
+scale_amount_min = 0.3
 color = Color(0.537255, 0.356863, 0.117647, 1)
 
 [node name="Sun" type="TextureRect" parent="."]
 z_index = -4
 y_sort_enabled = true
-offset_left = -1019.0
-offset_top = -1050.0
-offset_right = -507.0
-offset_bottom = -538.0
-scale = Vector2(4.205, 4.205)
+offset_left = -240.0
+offset_top = -502.0
+offset_right = 272.0
+offset_bottom = 10.0
 texture = ExtResource("3_6muya")
 
 [node name="Player" parent="." instance=ExtResource("1_bhwtw")]
+scale = Vector2(0.3, 0.3)
 collision_mask = 0
 motion_mode = 1
 
@@ -113,16 +112,12 @@ camera = NodePath("../Camera2D")
 position = Vector2(-3682, -18)
 
 [node name="Camera2D" parent="." instance=ExtResource("2_4si25")]
-position = Vector2(529, 1829)
-zoom = Vector2(0.2, 0.2)
-limit_top = -1600
-limit_bottom = 1500
 script = null
 
 [node name="Godot_Engine" parent="." instance=ExtResource("6_1ucc8")]
-position = Vector2(2544, 14)
-scale = Vector2(3, 3)
+position = Vector2(862, 14)
 
 [node name="Ground" parent="." instance=ExtResource("5_lvswf")]
-position = Vector2(-3246, 0)
+position = Vector2(406, 0)
+scale = Vector2(0.41, 0.41)
 monitorable = true

@@ -11,12 +11,15 @@ func _ready() -> void:
     get_node("/root/GlobalData").SET_MENU(self)
 
 func on_button_pressed_start():
-    if is_game_over:
-        get_tree().change_scene_to_file("res://scenes/_game/game_scene_01.tscn")
-        is_game_over = false
-        on_button_pressed_start()
+    is_game_over = false
     gamemanager.start_game()
     button_start.text  = "Resume"
+
+func on_button_pressed_restart():
+    is_game_over = false
+    get_tree().change_scene_to_file("res://scenes/_game/game_scene_01.tscn")
+    on_button_pressed_start()
+
 
 func on_button_pressed_quit():
     gamemanager.quit_game()

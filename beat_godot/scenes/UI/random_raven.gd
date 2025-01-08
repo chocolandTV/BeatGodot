@@ -1,5 +1,5 @@
 extends Node2D
-var bad_raven_speed : float = 1300
+var bad_raven_speed : float = 500
 
 func _process(delta: float) -> void:
     global_position.x -= bad_raven_speed * delta

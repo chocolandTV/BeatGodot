@@ -1,9 +1,9 @@
 extends CharacterBody2D
 class_name Player
 ### VARIABLES 
-const  GRAVITY : int = 1000
+const  GRAVITY : int = 980
 const MAX_VEL : int = 1200
-const START_POS : Vector2= Vector2 (100,400)
+const START_POS : Vector2= Vector2 (0,0)
 const FLAP_SPEED : int = -700
 var is_flying : bool = false
 var is_falling: bool = false

@@ -1,13 +1,10 @@
-extends CanvasLayer
+extends Control
 class_name Player_HUD
 ## turn off if player attack his life and destroyed
 @export var life_holder : HBoxContainer
 @export var life_label : Label
 #####################################
-@export var life_icon_01:TextureRect 
-@export var life_icon_02 : TextureRect
-@export var life_icon_03 : TextureRect
-
+@export var life_texture:TextureRect 
 @export var player_score_label : Label
 
 @export var godot_engine_Part_01: TextureRect
@@ -16,14 +13,20 @@ class_name Player_HUD
 
 @export var godot_engine_chat : LineEdit
 #### GODOT ENGINE ANIMATION 
-@onready var godot_animation_player : AnimationPlayer = $Godot_Engine_talk/AnimationPlayer
-@onready var godot_animation_sprite : AnimatedSprite2D = $Godot_Engine_talk/TextureRect/AnimatedSprite2D
-@onready var godot_win : CanvasLayer =$Win_Panel
+@onready var godot_animation_player : AnimationPlayer = $MarginContainer/Godot_Engine_talk/AnimationPlayer
+@onready var godot_animation_sprite : AnimatedSprite2D = $MarginContainer/Godot_Engine_talk/TextureRect/AnimatedSprite2D
+@onready var godot_win : MarginContainer =$Win_Panel
 ## particle health_meta_game
-@onready var particle_health_01: CPUParticles2D =$Player_health_Panel/Life_Panel_02/Life_01/particle_01
-@onready var particle_health_02: CPUParticles2D =$Player_health_Panel/Life_Panel_04/Life_02/particle_02
-@onready var particle_health_03: CPUParticles2D =$Player_health_Panel/Life_Panel_03/Life_03/particle_03
+@onready var particle_health_01: CPUParticles2D =$VBoxContainer/Player_Progress_Panel/Life_container/particle_01
+@onready var particle_health_02: CPUParticles2D =$VBoxContainer/Player_Progress_Panel/Life_container/particle_02
+@onready var particle_health_03: CPUParticles2D =$VBoxContainer/Player_Progress_Panel/Life_container/particle_03
 ###### PLAYER CLICKED ON LIFE ICONS
+## textures 
+var _three_life_icon : Texture2D  = preload("res://assets/textures/health_panel_3_hearths.png")
+var _two_life_icon : Texture2D  = preload("res://assets/textures/health_panel_2_hearths.png")
+var _one_life_icon : Texture2D  = preload("res://assets/textures/health_panel_1_hearths.png")
+var _zero_life_icon : Texture2D  = preload("res://assets/textures/health_panel_0_hearths.png")
+var _inf_life_icon : Texture2D  = preload("res://assets/textures/health_panel_8_hearths.png")
 var player_metagame_life : int = 9
 var is_life_container_highlighted : bool  = false
 var meta_is_done : bool = false
@@ -32,14 +35,8 @@ func _ready() -> void:
     get_node("/root/GlobalData").SET_PLAYERHUD(self)
     update_player_life(3)
     update_player_score(0)
-
-    life_icon_01.mouse_entered.connect(on_life_container_entered)
-    life_icon_02.mouse_entered.connect(on_life_container_entered)
-    life_icon_03.mouse_entered.connect(on_life_container_entered)
-
-    life_icon_01.mouse_exited.connect(on_life_container_exited)
-    life_icon_02.mouse_exited.connect(on_life_container_exited)
-    life_icon_03.mouse_exited.connect(on_life_container_exited)
+    life_texture.mouse_entered.connect(on_life_container_entered)
+    life_texture.mouse_exited.connect(on_life_container_exited)
 
 ### update all thingi
 
@@ -87,27 +84,15 @@ func update_metagame(value : int):
 ########## END 
 func update_player_life(value : int):
     if value ==3:
-        life_icon_01.visible = true
-        life_icon_02.visible = true
-        life_icon_03.visible = true
+        life_texture. texture = _three_life_icon
     if value ==2:
-        life_icon_01.visible = true
-        life_icon_02.visible = true
-        life_icon_03.visible = false
+        life_texture. texture = _two_life_icon
     if value ==1 :
-        life_icon_01.visible = true
-        life_icon_02.visible = false
-        life_icon_03.visible = false
+        life_texture. texture = _one_life_icon
     if value == 0:
-        life_icon_01.visible = false
-        life_icon_02.visible = false
-        life_icon_03.visible = false
+        life_texture. texture = _zero_life_icon
     if value == -1:
-        #new icon
-        life_holder.visible = false
-        life_label.text = "8"
-        life_label.rotation_degrees = 90.0
-        life_label.add_theme_font_size_override("font_size",40)
+        life_texture. texture = _inf_life_icon
 
 func on_life_container_entered():
     is_life_container_highlighted = true
@@ -137,15 +122,9 @@ func _input(event: InputEvent) -> void:
 func update_meta_life(value : int):
     if value ==2:
         particle_health_03.emitting = true
-        life_icon_03.modulate = Color8(219,216,174,255)
+        
     if value ==1 :
         particle_health_02.emitting = true
-        life_icon_02.modulate = Color8(219,216,174,255)
+
     if value == -1:
         particle_health_01.emitting = true
-        life_icon_01.modulate = Color8(219,216,174,255)
-        life_label.text = "8"
-        life_label.rotation_degrees = 90.0
-        life_label.add_theme_font_size_override("font_size",55)
-        life_label.modulate = Color8(219,216,174,255)
-        meta_is_done = true
