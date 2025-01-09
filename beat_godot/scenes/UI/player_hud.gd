@@ -27,7 +27,6 @@ var _zero_life_icon : Texture2D  = preload("res://assets/textures/health_panel_0
 var _inf_life_icon : Texture2D  = preload("res://assets/textures/health_panel_8_hearths.png")
 var player_metagame_life : int = 9
 var is_life_container_highlighted : bool  = false
-var meta_is_done : bool = false
 
 func _ready() -> void:
     get_node("/root/GlobalData").SET_PLAYERHUD(self)
@@ -93,35 +92,28 @@ func update_player_life(value : int):
         life_texture. texture = _inf_life_icon
 
 func on_life_container_entered():
+    print("Mouse entered")
     is_life_container_highlighted = true
 func on_life_container_exited():
+    print("mouse exited")
     is_life_container_highlighted = false
 
 func on_text_changed(_newstring: String):
     godot_engine_chat.placeholder_text = _newstring
-
+########## META GAME#############
 func _input(event: InputEvent) -> void:
-        if event.is_action_pressed("left_click") and  is_life_container_highlighted and !meta_is_done:
+        if event.is_action_pressed("left_click") and  is_life_container_highlighted:
             player_metagame_life -=1
-            print(player_metagame_life)
             if player_metagame_life == 6:
-                update_meta_life(2)
+                update_player_life(2)
+                particle_health_03.emitting = true
                 godot_animation_player.play("item10")
             if player_metagame_life ==3:
-                update_meta_life(1)
+                update_player_life(1)
+                particle_health_02.emitting = true
                 godot_animation_player.play("item10")
             if player_metagame_life <= 0:
-                update_meta_life(-1)
+                update_player_life(-1)
+                particle_health_01.emitting = true
+                get_node("/root/GameManager").meta_game_progress()
                 godot_animation_player.play("item10")
-                ## get metaprogression
-
-
-func update_meta_life(value : int):
-    if value ==2:
-        particle_health_03.emitting = true
-        
-    if value ==1 :
-        particle_health_02.emitting = true
-
-    if value == -1:
-        particle_health_01.emitting = true

@@ -3,7 +3,7 @@ class_name Player
 ### VARIABLES 
 const  GRAVITY : int = 980
 const MAX_VEL : int = 1200
-const START_POS : Vector2= Vector2 (0,0)
+var start_pos : Vector2
 const FLAP_SPEED : int = -700
 var is_flying : bool = false
 var is_falling: bool = false
@@ -15,6 +15,7 @@ var _audio_manager:  Audio_Manager
 var _player_hud : Player_HUD
 
 func _ready() -> void:
+    start_pos = global_position
     _player_hud = get_node("/root/GlobalData").player_hud
     _game_manager = get_node("/root/GameManager")
     _game_manager.game_restarted.connect(on_game_restart)
@@ -44,7 +45,7 @@ func on_game_restart():
 func reset():
     is_falling = false
     is_flying = false
-    position = START_POS
+    position = start_pos
     set_rotation(0)
     health_component.set_life(3)
     

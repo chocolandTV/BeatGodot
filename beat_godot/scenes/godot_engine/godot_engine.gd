@@ -8,10 +8,16 @@ var badbirds_scene = preload ("res://scenes/Obstacles/bad_raven.tscn")
 @onready var godot_movement :enemy_godot_movement  =$Godot_Movement
 @onready var health_component : Health_Component =$Health_Component
 @onready var health_generation_timer : Timer  =$Health_Component/Health_reg_timer
-@onready var godot_shield : AnimatedSprite2D = $Godot_Shield
+@onready var godot_shield : AnimatedSprite2D = $Godot_Movement/Godot_Shield
 @export var spawn_rate_seconds : float = 4.0
+@export var color_75 :Color
+@export var color_50: Color
+@export var color_25: Color
+@onready var lifebar : ColorRect =$Godot_Movement/LifeBar/ColorRect
 ### CONST
-const START_POS : Vector2 = Vector2(1442,0)
+var start_pos : Vector2
+var color_array : Array[Color]
+var size_array : Array[int] = [33,22,11,1]
 const SPAWN_HEIGHT : float  = 250
 
 ########### VARIABLES
@@ -22,6 +28,11 @@ var _audio_manager:  Audio_Manager
 var metagame : int = 0
 
 func _ready() -> void:
+    color_array.append(color_75)
+    color_array.append(color_75)
+    color_array.append(color_50)
+    color_array.append(color_25)
+    start_pos = global_position
     _player_hud = get_node("/root/GlobalData").player_hud
     print(_player_hud)
     _game_manager = get_node("/root/GameManager")
@@ -36,7 +47,7 @@ func _ready() -> void:
 
 func on_restart_game():
     health_component.set_life(30)
-    global_position = START_POS
+    global_position = start_pos
     metagame = 0
 
 #### TIMER EVENT  ALL 4 SECONDS
@@ -47,7 +58,7 @@ func on_timer_timeout():
 
 func generate_obstacles():
     var new_bad_ravens = badbirds_scene.instantiate()
-    new_bad_ravens.global_position.x = START_POS.x
+    new_bad_ravens.global_position.x = start_pos.x
     new_bad_ravens.global_position.y = randf_range(-SPAWN_HEIGHT, SPAWN_HEIGHT)
     add_child(new_bad_ravens)
 
@@ -66,7 +77,6 @@ func game_paused():
     timer.stop()
 func on_default_damage_entered(_area : Area2D):
     health_component.damage(1)
-    _audio_manager.play_godot_damage()
     godot_shield.play("shield")
     animation_sprite.play_terrifiered()
     animation_particle.emitting = true
@@ -78,9 +88,10 @@ func on_health_reg_timout():
     
 func on_real_damage_entered(_area: Area2D):
     metagame +=1
-    health_component.damage(1)
+    lifebar.modulate = color_array[metagame]
+    lifebar.size.x =  size_array[metagame]
+    health_component.damage(_area.damage)
     _audio_manager.play_godot_damage()
-
     animation_sprite.play_terrifiered()
     animation_particle.emitting = true
     _player_hud.on_text_changed("hearth_attack - > do you love me =O §$%& ERROR_HANDLE_LOVE **~~")

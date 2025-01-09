@@ -1,11 +1,11 @@
 extends Node
 class_name Game_Manager
 
-signal game_is_running(value :bool)
 signal game_restarted()
 signal game_started()
 signal game_resumed()
 signal game_paused()
+signal game_meta_broked()
 ### VARS
 var _is_game_running : bool = false
 var _is_game_over : bool  = false
@@ -37,13 +37,11 @@ func paused_game(value :bool):
         game_paused.emit()
     else:
         game_resumed.emit()
-    game_is_running.emit(!value)
     _is_game_running = !value
 
 func start_game():
     player_hud  = get_node("/root/GlobalData").player_hud
     player_menu  =get_node("/root/GlobalData").menu
-    game_is_running.emit(true)
     player_hud.visible = true
     player_menu.visible  =false
     _is_game_running = true
@@ -51,14 +49,14 @@ func start_game():
     game_started.emit()
 
 func restart_game():
-    game_is_running.emit(true)
+    player_hud  = get_node("/root/GlobalData").player_hud
+    player_menu  =get_node("/root/GlobalData").menu
     player_hud.visible = true
     player_menu.visible  =false
     _is_game_running = true
     player_hud.update_player_life(3)
     player_hud.update_player_score(0)
     _game_score = 0
-    get_node("/root/GlobalData").SET_PLAYER_SCORE(_game_score)
     game_restarted.emit()
 
 func quit_game():
@@ -66,15 +64,14 @@ func quit_game():
 
 func player_scored():
     _game_score +=1000
-    get_node("/root/GlobalData").SET_PLAYER_SCORE(_game_score)
-    # UI UPDATE
     get_node("/root/GlobalData").player_hud.update_player_score(_game_score)
 
 func game_over():
     await get_tree().create_timer(2.0).timeout
     get_node("/root/GlobalData").menu.update_game_over()
-    game_is_running.emit(false)
     player_hud.visible = false
     player_menu.visible   = true
     _is_game_running = false
     _is_game_over = true
+func meta_game_progress():
+    game_meta_broked.emit()

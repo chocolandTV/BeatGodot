@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://ccv8bej7mim7"]
+[gd_scene load_steps=9 format=3 uid="uid://ccv8bej7mim7"]
 
 [ext_resource type="Script" path="res://scenes/components/player_attack_claw.gd" id="1_imka8"]
 [ext_resource type="Texture2D" uid="uid://lkyplsfgqnff" path="res://assets/textures/mouse_cursor.png" id="2_20mga"]
+[ext_resource type="PackedScene" uid="uid://bf2ls3twfo300" path="res://scenes/components/hit_box_component.tscn" id="3_novro"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n1ydg"]
 radius = 96.15
@@ -139,10 +140,14 @@ _data = {
 "attack": SubResource("Animation_jmqmw")
 }
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_apths"]
+radius = 96.0052
+
 [node name="Player_Attack_Claw" type="Area2D"]
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("1_imka8")
+hearth_color = Color(0.6, 0.27451, 0.211765, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-62, 0)
@@ -162,3 +167,13 @@ flip_h = true
 libraries = {
 "": SubResource("AnimationLibrary_ct27s")
 }
+
+[node name="HitBox_Component" parent="." instance=ExtResource("3_novro")]
+visible = false
+collision_layer = 128
+collision_mask = 0
+damage = 10000
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox_Component"]
+position = Vector2(-62, -1)
+shape = SubResource("CircleShape2D_apths")

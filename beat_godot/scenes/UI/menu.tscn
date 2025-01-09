@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://by2tt8nxs4d0k"]
+[gd_scene load_steps=17 format=3 uid="uid://by2tt8nxs4d0k"]
 
 [ext_resource type="Script" path="res://scenes/UI/menu.gd" id="1_fh81q"]
 [ext_resource type="Texture2D" uid="uid://bnhu40f2f2a1m" path="res://assets/textures/background.png" id="1_lnp5v"]
@@ -14,7 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://bx8uui0bkqmn0" path="res://assets/textures/godot_face/redgodot.png" id="8_ogj45"]
 [ext_resource type="StyleBox" uid="uid://dj578j6yjpski" path="res://resources/button_normal.tres" id="9_8up5h"]
 [ext_resource type="Texture2D" uid="uid://did530whq38bh" path="res://assets/textures/godot_face/smile.png" id="14_34v36"]
-[ext_resource type="PackedScene" uid="uid://cgbqcbmqwxdr0" path="res://scenes/components/background/background.tscn" id="16_xsgmr"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r8xff"]
 
@@ -60,6 +59,7 @@ grow_vertical = 2
 script = ExtResource("2_jbbbc")
 
 [node name="Timer" type="Timer" parent="Raven_Spawner"]
+wait_time = 0.4
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -258,10 +258,6 @@ gravity = Vector2(-550, 0)
 initial_velocity_min = 59.7
 initial_velocity_max = 358.21
 color = Color(0.537255, 0.356863, 0.117647, 1)
-
-[node name="Background" parent="." instance=ExtResource("16_xsgmr")]
-offset = Vector2(800, 540)
-transform = Transform2D(0.41, 0, 0, 0.41, 800, 540)
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Button_Credits" to="." method="on_button_pressed_credits"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Button_Exit" to="." method="on_button_pressed_quit"]

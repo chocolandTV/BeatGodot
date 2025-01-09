@@ -9,8 +9,9 @@ var _audio_manager: Audio_Manager
 @onready var button_restart: Button = $MarginContainer/VBoxContainer/Button_Restart
 @onready var button_version: Button = $MarginContainer/VBoxContainer/Button_version
 @onready var menu_spawn_timer : Timer = $Raven_Spawner/Timer
-var is_credits_visible: bool = false
 
+var is_credits_visible: bool = false
+var _secret_raven_counter : int  =0
 func _ready() -> void:
     get_node("/root/GlobalData").SET_MENU(self)
     _audio_manager = get_node("/root/Audio")
@@ -22,6 +23,7 @@ func _ready() -> void:
     
 func game_paused():
     menu_spawn_timer .start()
+
 func on_button_pressed_version():
     _audio_manager.play_random()
 
@@ -30,6 +32,7 @@ func on_button_pressed_start():
     button_restart.visible = true
     button_resume.visible = true
     menu_spawn_timer .stop()
+
     _game_manager.start_game()
 
 
@@ -55,4 +58,11 @@ func on_button_pressed_credits():
     credit_panel.visible = is_credits_visible
 
 func update_game_over():
-    pass
+    button_resume.visible = false
+func increase_menu_raven_counter():
+    _secret_raven_counter +=1
+    if _secret_raven_counter >= 10 :
+        update_raven_counter()
+
+func update_raven_counter():
+    button_version.text = "Ravens: "+ str( _secret_raven_counter)
