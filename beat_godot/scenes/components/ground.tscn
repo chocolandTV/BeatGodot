@@ -1,6 +1,5 @@
-[gd_scene load_steps=4 format=3 uid="uid://dg1poo4ux7p4m"]
+[gd_scene load_steps=3 format=3 uid="uid://dg1poo4ux7p4m"]
 
-[ext_resource type="Texture2D" uid="uid://uqo44scpuqlp" path="res://assets/textures/ground.png" id="1_1dvd8"]
 [ext_resource type="Script" path="res://scenes/components/ground.gd" id="1_6peva"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_scgjr"]
@@ -19,31 +18,3 @@ shape = SubResource("RectangleShape2D_scgjr")
 [node name="CollisionShape2D2_Bot" type="CollisionShape2D" parent="."]
 position = Vector2(-1534, 1645.37)
 shape = SubResource("RectangleShape2D_scgjr")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-1534, 0)
-texture = ExtResource("1_1dvd8")
-
-[node name="CollisionShape2D_Top2" type="CollisionShape2D" parent="."]
-position = Vector2(2562, -1702)
-shape = SubResource("RectangleShape2D_scgjr")
-
-[node name="CollisionShape2D2_Bot2" type="CollisionShape2D" parent="."]
-position = Vector2(2562, 1645.37)
-shape = SubResource("RectangleShape2D_scgjr")
-
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(2562, 0)
-texture = ExtResource("1_1dvd8")
-
-[node name="CollisionShape2D_Top3" type="CollisionShape2D" parent="."]
-position = Vector2(6658, -1702)
-shape = SubResource("RectangleShape2D_scgjr")
-
-[node name="CollisionShape2D2_Bot3" type="CollisionShape2D" parent="."]
-position = Vector2(6658, 1645.37)
-shape = SubResource("RectangleShape2D_scgjr")
-
-[node name="Sprite2D3" type="Sprite2D" parent="."]
-position = Vector2(6658, 0)
-texture = ExtResource("1_1dvd8")

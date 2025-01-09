@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://cgbqcbmqwxdr0"]
+
+[ext_resource type="Script" path="res://scenes/components/background/background.gd" id="1_6nq0i"]
+[ext_resource type="Texture2D" uid="uid://bnhu40f2f2a1m" path="res://assets/textures/background.png" id="1_lhmy4"]
+[ext_resource type="Texture2D" uid="uid://7n75uykn4pwj" path="res://assets/textures/background_layer2_clouds.png" id="2_naf0r"]
+[ext_resource type="Texture2D" uid="uid://uqo44scpuqlp" path="res://assets/textures/ground.png" id="3_1ef6q"]
+[ext_resource type="Texture2D" uid="uid://cbfiro11hqmud" path="res://assets/textures/sun.png" id="3_3fjdm"]
+[ext_resource type="Texture2D" uid="uid://duf32vnesv8fw" path="res://assets/textures/background_layer3_tree.png" id="4_8qke0"]
+
+[node name="Background" type="ParallaxBackground"]
+scale = Vector2(0.41, 0.41)
+transform = Transform2D(0.41, 0, 0, 0.41, 0, 0)
+script = ExtResource("1_6nq0i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(2048, 0)
+texture = ExtResource("1_lhmy4")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(-2048, 0)
+texture = ExtResource("1_lhmy4")
+
+[node name="Sun" type="Sprite2D" parent="."]
+position = Vector2(0, -157.561)
+scale = Vector2(3, 3)
+texture = ExtResource("3_3fjdm")
+
+[node name="Cloud_Para_Layer" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(12000, 0)
+
+[node name="Clouds" type="Sprite2D" parent="Cloud_Para_Layer"]
+scale = Vector2(0.71, 0.71)
+texture = ExtResource("2_naf0r")
+
+[node name="Tree_Para_Layer" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(30000, 0)
+
+[node name="Tree" type="Sprite2D" parent="Tree_Para_Layer"]
+position = Vector2(0, 209.756)
+scale = Vector2(0.535, 0.535)
+texture = ExtResource("4_8qke0")
+region_rect = Rect2(0, 0, 1920, 1080)
+
+[node name="Ground_Para_Layer" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(4096, 0)
+
+[node name="Ground" type="Sprite2D" parent="Ground_Para_Layer"]
+texture = ExtResource("3_1ef6q")
+
+[node name="Ground2" type="Sprite2D" parent="Ground_Para_Layer"]
+position = Vector2(4096, 0)
+texture = ExtResource("3_1ef6q")

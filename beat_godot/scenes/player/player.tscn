@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b06fobwa0bapc"]
+[gd_scene load_steps=9 format=3 uid="uid://b06fobwa0bapc"]
 
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_q0dk7"]
 [ext_resource type="SpriteFrames" uid="uid://d2ci3iqku7tm1" path="res://assets/spriteSheets/player.tres" id="2_ddlpj"]
@@ -8,6 +8,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_suksw"]
 size = Vector2(266, 44)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o5pcf"]
+radius = 69.3542
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iyllr"]
 radius = 203.416
@@ -34,8 +37,9 @@ shape = SubResource("RectangleShape2D_suksw")
 [node name="HitBox_Component" parent="." instance=ExtResource("4_hh5fy")]
 collision_mask = 0
 
-[node name="CollisionShape2D" parent="HitBox_Component" index="0"]
-debug_color = Color(4.66868e-06, 0.647667, 0.204536, 0.42)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox_Component"]
+position = Vector2(189, -3)
+shape = SubResource("CircleShape2D_o5pcf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_iyllr")

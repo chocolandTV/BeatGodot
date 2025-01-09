@@ -29,8 +29,10 @@ func _ready() -> void:
 
     timer.timeout.connect(on_timer_timeout)
     timer.wait_time = spawn_rate_seconds
-    _game_manager.game_is_running.connect(switch_game_state)
+    _game_manager.game_started.connect(game_start)
+    _game_manager.game_paused.connect(game_paused)
     _game_manager.game_restarted.connect(on_restart_game)
+    _game_manager.game_resumed.connect(game_start)
 
 func on_restart_game():
     health_component.set_life(30)
@@ -58,11 +60,10 @@ func player_scored():
         _audio_manager.play_random()
     _game_manager.player_scored()
 
-func switch_game_state(value :bool):
-    if value:
-        timer.start()
-    else:
-        timer.stop()
+func game_start():
+    timer.start()
+func game_paused():
+    timer.stop()
 func on_default_damage_entered(_area : Area2D):
     health_component.damage(1)
     _audio_manager.play_godot_damage()

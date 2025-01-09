@@ -145,6 +145,7 @@ collision_mask = 0
 script = ExtResource("1_imka8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-62, 0)
 shape = SubResource("CircleShape2D_n1ydg")
 disabled = true
 
