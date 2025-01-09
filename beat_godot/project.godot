@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="BeatGodot"
-run/main_scene="res://scenes/_game/game_scene_01.tscn"
+run/main_scene="res://scenes/_game/game.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 GlobalData="*res://scenes/manager/global_data.tscn"
 Audio="*res://scenes/manager/audio.tscn"
+GameManager="*res://scenes/manager/game_manager.tscn"
 
 [display]
 

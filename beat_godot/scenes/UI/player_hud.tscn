@@ -402,10 +402,12 @@ layout_mode = 2
 text = "Godot_Engine:"
 
 [node name="TextEdit" type="TextEdit" parent="MarginContainer/Godot_Engine_talk"]
+clip_contents = false
 custom_minimum_size = Vector2(800, 40)
 layout_mode = 2
-size_flags_vertical = 4
+mouse_filter = 2
 placeholder_text = "player_start_game"
+editable = false
 caret_multiple = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="MarginContainer/Godot_Engine_talk"]

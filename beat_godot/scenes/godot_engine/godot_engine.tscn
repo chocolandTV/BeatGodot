@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cqgdplic31cfi"]
+[gd_scene load_steps=25 format=3 uid="uid://cqgdplic31cfi"]
 
 [ext_resource type="Texture2D" uid="uid://cw4b0bvhjawus" path="res://assets/textures/godot_engine_bg.png" id="1_18goo"]
 [ext_resource type="Script" path="res://scenes/godot_engine/godot_engine.gd" id="1_h0s3w"]
@@ -7,10 +7,94 @@
 [ext_resource type="SpriteFrames" uid="uid://yc0p6p6u4w3i" path="res://assets/spriteSheets/godot_engine.tres" id="2_h1a28"]
 [ext_resource type="Script" path="res://scenes/godot_engine/godot_animation.gd" id="3_7g3is"]
 [ext_resource type="Texture2D" uid="uid://bcvbl6r5jraoi" path="res://assets/textures/particles/point.png" id="4_o8x6w"]
+[ext_resource type="PackedScene" uid="uid://btc2p8us0tk88" path="res://scenes/components/health_component.tscn" id="8_to82k"]
+[ext_resource type="PackedScene" uid="uid://nh0e3oek75sg" path="res://scenes/components/hurtbox_component.tscn" id="9_2qsk7"]
+[ext_resource type="Texture2D" uid="uid://dwehg2ontgncc" path="res://assets/textures/godot_shield/Shield_01.png" id="10_w3yrx"]
+[ext_resource type="Texture2D" uid="uid://bnp8wvsbvyl8e" path="res://assets/textures/godot_shield/Shield_empty.png" id="10_wsdgs"]
+[ext_resource type="Texture2D" uid="uid://ctatn8ls1vbki" path="res://assets/textures/godot_shield/Shield_02.png" id="11_elkhq"]
+[ext_resource type="Texture2D" uid="uid://dxiae65i2ugua" path="res://assets/textures/godot_shield/Shield_03.png" id="12_tn211"]
+[ext_resource type="Texture2D" uid="uid://bmhes1sruum7c" path="res://assets/textures/godot_shield/Shield_04.png" id="13_7tmfi"]
+[ext_resource type="Texture2D" uid="uid://ce4rdj12juhwf" path="res://assets/textures/godot_shield/Shield_05.png" id="14_jlkpj"]
+[ext_resource type="Texture2D" uid="uid://r261541ukcyr" path="res://assets/textures/godot_shield/Shield_06.png" id="15_02q3i"]
 
 [sub_resource type="Curve" id="Curve_anux2"]
 _data = [Vector2(0.00401606, 1), 0.0, 0.0, 0, 0, Vector2(0.987952, 0.024452), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nwla1"]
+size = Vector2(138, 141)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0fl0a"]
+atlas = ExtResource("10_wsdgs")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u28hl"]
+atlas = ExtResource("10_w3yrx")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5g3tu"]
+atlas = ExtResource("11_elkhq")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m12tk"]
+atlas = ExtResource("12_tn211")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_blbfl"]
+atlas = ExtResource("13_7tmfi")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1xp7b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0fl0a")
+}],
+"loop": false,
+"name": &"default",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u28hl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5g3tu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m12tk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_blbfl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_jlkpj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_02q3i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_02q3i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_jlkpj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_7tmfi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_tn211")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_elkhq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_w3yrx")
+}],
+"loop": false,
+"name": &"shield",
+"speed": 20.0
+}]
 
 [node name="Godot_Engine" type="Node2D"]
 script = ExtResource("1_h0s3w")
@@ -71,6 +155,26 @@ initial_velocity_max = 25.0
 
 [node name="Spawn_rate_timer" type="Timer" parent="."]
 wait_time = 4.0
+
+[node name="Health_Component" parent="." instance=ExtResource("8_to82k")]
+max_health = 30
+
+[node name="Health_reg_timer" type="Timer" parent="Health_Component"]
+wait_time = 0.5
+one_shot = true
+
+[node name="Hurtbox_Component" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("9_2qsk7")]
+collision_layer = 0
+collision_mask = 32
+health_component = NodePath("../Health_Component")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox_Component"]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_nwla1")
+
+[node name="Godot_Shield" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_1xp7b")
+autoplay = "default"
 
 [connection signal="mouse_entered" from="Godot_Movement/AnimatedSprite2D/Button" to="." method="on_mouse_entered"]
 [connection signal="mouse_exited" from="Godot_Movement/AnimatedSprite2D/Button" to="." method="on_mouse_exited"]

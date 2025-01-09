@@ -98,8 +98,7 @@ func on_life_container_exited():
     is_life_container_highlighted = false
 
 func on_text_changed(_newstring: String):
-    ##set random animation and text 
-    print("random text")
+    godot_engine_chat.placeholder_text = _newstring
 
 func _input(event: InputEvent) -> void:
         if event.is_action_pressed("left_click") and  is_life_container_highlighted and !meta_is_done:

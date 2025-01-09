@@ -13,6 +13,3 @@ func play_random():
 
 func play_godot_damage():
     play_godot_damaged.emit()
-
-func _ready() -> void:
-     get_node("/root/GlobalData").SET_AUDIO_MANAGER(self)

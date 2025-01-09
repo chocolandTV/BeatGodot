@@ -23,6 +23,9 @@ func damage(damage_amount : int):
     current_health -= damage_amount
     health_changed.emit()
     check_death()
+func heal():
+    current_health = max_health
+    health_changed.emit()
 
 func check_death():
     if current_health <= 0:
