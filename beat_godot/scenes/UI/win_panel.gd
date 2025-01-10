@@ -2,7 +2,7 @@ extends MarginContainer
 @onready var pulsing_object : TextureRect =$VBoxContainer/Panel/Pulsing_win
 
 func start_scaling():
-    var tween_updown = get_tree().create_tween().set_loops()
+    var tween_updown = get_tree().create_tween().set_loops(20)
 
 ############ up and down
     tween_updown.set_ease(Tween.EASE_IN)

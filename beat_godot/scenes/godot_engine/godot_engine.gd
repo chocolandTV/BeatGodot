@@ -28,6 +28,7 @@ var _audio_manager:  Audio_Manager
 var metagame : int = 0
 
 func _ready() -> void:
+    get_node("/root/GlobalData").SET_GODOT_ENEMY(self)
     color_array.append(color_75)
     color_array.append(color_75)
     color_array.append(color_50)
@@ -76,6 +77,10 @@ func game_start():
 func game_paused():
     timer.stop()
 func on_default_damage_entered(_area : Area2D):
+    var _random : int = randi_range(0,50)
+    print("random >19 result =", _random)
+    if _random > 49:
+        get_node("/root/GameManager").meta_godot_part_spawning()
     health_component.damage(1)
     godot_shield.play("shield")
     animation_sprite.play_terrifiered()
@@ -87,6 +92,7 @@ func on_health_reg_timout():
     _player_hud.on_text_changed("player_attack - > Godot.Set_Life = 3 -> You Can`t Beat Me")
     
 func on_real_damage_entered(_area: Area2D):
+    print("real_damage_triggered")
     metagame +=1
     lifebar.modulate = color_array[metagame]
     lifebar.size.x =  size_array[metagame]
@@ -96,3 +102,15 @@ func on_real_damage_entered(_area: Area2D):
     animation_particle.emitting = true
     _player_hud.on_text_changed("hearth_attack - > do you love me =O §$%& ERROR_HANDLE_LOVE **~~")
     _player_hud.update_metagame(metagame)
+
+    ######################################### HEAL WHEN PLAYER HAVE NOT ALL 3 GODOT PARTS
+    if !get_node("/root/GameManager").check_godot_parts():
+        print("real_damage_chanceled, player has not all parts")
+        metagame -=1
+        lifebar.modulate = color_array[metagame]
+        lifebar.size.x =  size_array[metagame]
+        health_component.damage(-_area.damage)
+        animation_sprite.play_terrifiered()
+        godot_shield.play("shield")
+        _player_hud.on_text_changed("SHIELD HEAL - > you love me!  -> but i still have my Godot Parts XD")
+        _player_hud.update_metagame(metagame)

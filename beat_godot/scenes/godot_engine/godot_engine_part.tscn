@@ -1,0 +1,110 @@
+[gd_scene load_steps=13 format=3 uid="uid://dvhjhe8dlml1s"]
+
+[ext_resource type="Script" path="res://scenes/godot_engine/godot_engine_part.gd" id="1_erlmj"]
+[ext_resource type="Texture2D" uid="uid://did530whq38bh" path="res://assets/textures/godot_face/smile.png" id="1_xmqqe"]
+[ext_resource type="PackedScene" uid="uid://nh0e3oek75sg" path="res://scenes/components/hurtbox_component.tscn" id="1_ybt60"]
+[ext_resource type="PackedScene" uid="uid://btc2p8us0tk88" path="res://scenes/components/health_component.tscn" id="2_ovtjp"]
+[ext_resource type="Texture2D" uid="uid://vtr4nl5rjq1g" path="res://assets/textures/particles/engine_part_particle.png" id="3_2s13k"]
+
+[sub_resource type="Curve" id="Curve_42f1u"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 328.352), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_a01yj"]
+_data = [Vector2(0, 0.417582), 0.0, -0.555291, 0, 0, Vector2(0.975904, 0.0682969), -3.33586, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kv6hh"]
+radius = 55.18
+
+[sub_resource type="Animation" id="Animation_anbkh"]
+resource_name = "rotate"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.13333, 2.03333, 2.96667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 2.0944, 4.18879, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_c5y0v"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r1wcw"]
+_data = {
+"RESET": SubResource("Animation_c5y0v"),
+"rotate": SubResource("Animation_anbkh")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rm3pb"]
+radius = 31.4
+
+[node name="Godot_Engine_Part" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_erlmj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_xmqqe")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_index = 8
+scale = Vector2(0.5, 0.5)
+emitting = false
+amount = 10
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+texture = ExtResource("3_2s13k")
+direction = Vector2(-1, -1)
+spread = 180.0
+gravity = Vector2(500, -50)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+damping_max = 12.0
+angle_curve = SubResource("Curve_42f1u")
+scale_amount_curve = SubResource("Curve_a01yj")
+
+[node name="Health_Component" parent="." instance=ExtResource("2_ovtjp")]
+max_health = 1
+
+[node name="Hurtbox_Component" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("1_ybt60")]
+collision_layer = 0
+collision_mask = 161
+health_component = NodePath("../Health_Component")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox_Component"]
+shape = SubResource("CircleShape2D_kv6hh")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_r1wcw")
+}
+speed_scale = 3.0
+
+[node name="Flap_Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rm3pb")

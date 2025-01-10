@@ -60,7 +60,7 @@ func update_player_score(game_score : int):
     player_score_label.text = str(game_score)
 
 ############## ENDGAME
-func update_metagame(value : int):
+func update_godot_parts(value: int):
     if value >=1:
         godot_engine_Part_01.visible = true
         godot_engine_Part_02.visible = false
@@ -73,6 +73,9 @@ func update_metagame(value : int):
         godot_engine_Part_01.visible = true
         godot_engine_Part_02.visible = true
         godot_engine_Part_03.visible = true
+################# WIN PANEL SHOW
+func update_metagame(value : int):
+    if value >=3 :
         get_tree().paused = true
         godot_win.visible  = true
         godot_win.start_scaling()

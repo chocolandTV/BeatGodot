@@ -2,7 +2,7 @@ extends AnimatedSprite2D
 
 func _ready() -> void:
 
-    var tween_updown = get_tree().create_tween().set_loops()
+    var tween_updown = get_tree().create_tween().set_loops(20)
 
 ############ up and down
     tween_updown.set_ease(Tween.EASE_IN)

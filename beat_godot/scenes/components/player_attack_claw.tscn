@@ -1,11 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://ccv8bej7mim7"]
+[gd_scene load_steps=10 format=3 uid="uid://ccv8bej7mim7"]
 
 [ext_resource type="Script" path="res://scenes/components/player_attack_claw.gd" id="1_imka8"]
 [ext_resource type="Texture2D" uid="uid://lkyplsfgqnff" path="res://assets/textures/mouse_cursor.png" id="2_20mga"]
 [ext_resource type="PackedScene" uid="uid://bf2ls3twfo300" path="res://scenes/components/hit_box_component.tscn" id="3_novro"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n1ydg"]
-radius = 96.15
+radius = 151.013
 
 [sub_resource type="Animation" id="Animation_jxys7"]
 length = 0.001
@@ -134,14 +134,42 @@ tracks/4/keys = {
 "values": [true, true, false]
 }
 
+[sub_resource type="Animation" id="Animation_vblyi"]
+resource_name = "default"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(5, 5)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ct27s"]
 _data = {
 "RESET": SubResource("Animation_jxys7"),
-"attack": SubResource("Animation_jmqmw")
+"attack": SubResource("Animation_jmqmw"),
+"default": SubResource("Animation_vblyi")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_apths"]
-radius = 96.0052
+radius = 154.263
 
 [node name="Player_Attack_Claw" type="Area2D"]
 collision_layer = 32
@@ -150,7 +178,7 @@ script = ExtResource("1_imka8")
 hearth_color = Color(0.6, 0.27451, 0.211765, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-62, 0)
+position = Vector2(2, 1)
 shape = SubResource("CircleShape2D_n1ydg")
 disabled = true
 
@@ -167,13 +195,15 @@ flip_h = true
 libraries = {
 "": SubResource("AnimationLibrary_ct27s")
 }
+autoplay = "RESET"
 
 [node name="HitBox_Component" parent="." instance=ExtResource("3_novro")]
 visible = false
 collision_layer = 128
 collision_mask = 0
+input_pickable = false
 damage = 10000
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox_Component"]
-position = Vector2(-62, -1)
+position = Vector2(-1, -1)
 shape = SubResource("CircleShape2D_apths")

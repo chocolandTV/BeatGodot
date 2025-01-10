@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c75lipgihvfjc"]
+[gd_scene load_steps=11 format=3 uid="uid://c75lipgihvfjc"]
 
 [ext_resource type="SpriteFrames" uid="uid://d2ci3iqku7tm1" path="res://assets/spriteSheets/player.tres" id="1_wy6xg"]
 [ext_resource type="Texture2D" uid="uid://c5fnes7sywokx" path="res://assets/textures/particles/feather.png" id="2_mwnux"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://nh0e3oek75sg" path="res://scenes/components/hurtbox_component.tscn" id="5_objsv"]
 [ext_resource type="Script" path="res://scenes/components/hit_box_component.gd" id="5_xvgdw"]
 [ext_resource type="Shape2D" uid="uid://co8v4ckcivdk1" path="res://scenes/enemy/enemy_box.tres" id="6_3ftma"]
+[ext_resource type="PackedScene" uid="uid://c4rm5dey5ccju" path="res://scenes/enemy/texture_button_click.tscn" id="8_2pst1"]
 
 [sub_resource type="Curve" id="Curve_5w0kv"]
 min_value = -360.0
@@ -46,6 +47,7 @@ scale_amount_curve = SubResource("Curve_882b1")
 color = Color(0, 0, 0, 1)
 
 [node name="Health_Component" parent="." instance=ExtResource("4_bflc6")]
+max_health = 1
 
 [node name="HitBox_Component" type="Area2D" parent="."]
 position = Vector2(13, 77)
@@ -59,8 +61,20 @@ shape = ExtResource("6_3ftma")
 [node name="Hurtbox_Component" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_objsv")]
 position = Vector2(-45, 78)
 collision_layer = 0
-collision_mask = 33
 health_component = NodePath("../Health_Component")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Hurtbox_Component"]
 shape = ExtResource("6_3ftma")
+
+[node name="TextureButton" parent="." instance=ExtResource("8_2pst1")]
+anchors_preset = -1
+anchor_left = -0.109
+anchor_top = -0.062
+anchor_right = 1.09
+anchor_bottom = 1.082
+offset_left = -256.192
+offset_top = -256.256
+offset_right = -256.08
+offset_bottom = -255.984
+
+[connection signal="pressed" from="TextureButton" to="." method="on_click_damage"]

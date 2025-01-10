@@ -6,14 +6,16 @@ signal game_started()
 signal game_resumed()
 signal game_paused()
 signal game_meta_broked()
+signal game_godot_part_collected()
 ### VARS
 var _is_game_running : bool = false
 var _is_game_over : bool  = false
 var _game_score : int = 0
+var _game_godot_parts : int  = 0
 var real_game_score : int  = 0
 var player_hud : Player_HUD
 var player_menu : Menu
-
+var godot_part_scene = preload ("res://scenes/godot_engine/godot_engine_part.tscn")
 func new_game():
     _is_game_running = false
     _is_game_over = false
@@ -65,9 +67,10 @@ func quit_game():
 func player_scored():
     _game_score +=1000
     get_node("/root/GlobalData").player_hud.update_player_score(_game_score)
-
 func game_over():
     await get_tree().create_timer(2.0).timeout
+    player_hud  = get_node("/root/GlobalData").player_hud
+    player_menu  =get_node("/root/GlobalData").menu
     get_node("/root/GlobalData").menu.update_game_over()
     player_hud.visible = false
     player_menu.visible   = true
@@ -75,3 +78,16 @@ func game_over():
     _is_game_over = true
 func meta_game_progress():
     game_meta_broked.emit()
+
+func meta_godot_part_collected():
+    _game_godot_parts +=1
+    game_godot_part_collected.emit()
+
+func meta_godot_part_spawning(_pos : Vector2):
+    var new_godot_part =  godot_part_scene.instantiate()
+    new_godot_part.global_position = _pos
+    
+    get_node("/root/GlobalData").enemygodot.add_child(new_godot_part)
+
+func check_godot_parts() -> bool:
+    return _game_godot_parts >= 3

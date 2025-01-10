@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://c4rm5dey5ccju"]
+
+[node name="TextureButton" type="TextureButton"]
+z_index = 10
+y_sort_enabled = true
+offset_left = -105.0
+offset_top = -101.0
+offset_right = 99.0
+offset_bottom = 83.0
+focus_mode = 0
+action_mode = 0
+button_mask = 3

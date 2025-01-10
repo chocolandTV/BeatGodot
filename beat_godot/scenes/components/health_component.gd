@@ -7,10 +7,18 @@ signal health_changed()
 var is_invincible : bool  = false
 var current_health : int = 3
 var player_hearth_damage : int = 0
-
+const MAX_LIFE : int = 10
 func set_life(value : int):
     max_health = value
     current_health = value
+
+func add_life():
+    if current_health > MAX_LIFE:
+        current_health = MAX_LIFE
+        max_health = MAX_LIFE
+    else: 
+        current_health +=1
+        max_health +=1
 
 func cure_wounds():
     current_health +=1

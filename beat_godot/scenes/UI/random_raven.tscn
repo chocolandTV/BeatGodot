@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dfe10m6j3isqy"]
+[gd_scene load_steps=5 format=3 uid="uid://dfe10m6j3isqy"]
 
 [ext_resource type="Script" path="res://scenes/UI/random_raven.gd" id="1_ace62"]
 [ext_resource type="SpriteFrames" uid="uid://d2ci3iqku7tm1" path="res://assets/spriteSheets/player.tres" id="2_44xjx"]
 [ext_resource type="Texture2D" uid="uid://dl5ot6x2up1a6" path="res://assets/textures/enemie_eye.png" id="3_d48jn"]
+[ext_resource type="PackedScene" uid="uid://c4rm5dey5ccju" path="res://scenes/enemy/texture_button_click.tscn" id="4_evbvp"]
 
 [node name="Random_Raven" type="Node2D"]
 script = ExtResource("1_ace62")
@@ -20,15 +21,6 @@ position = Vector2(-124.138, 62.069)
 scale = Vector2(0.241379, 0.241379)
 texture = ExtResource("3_d48jn")
 
-[node name="TextureButton" type="TextureButton" parent="."]
-z_index = 10
-y_sort_enabled = true
-offset_left = -105.0
-offset_top = -101.0
-offset_right = 99.0
-offset_bottom = 83.0
-focus_mode = 0
-action_mode = 0
-button_mask = 3
+[node name="TextureButton" parent="." instance=ExtResource("4_evbvp")]
 
 [connection signal="pressed" from="TextureButton" to="." method="on_died"]
