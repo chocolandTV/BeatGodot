@@ -90,3 +90,6 @@ func flap():
 func on_player_scored():
     _game_manager.player_scored()
     _audio_manager.play_random()
+
+func on_player_get_invincible():
+    health_component.player_invincible_on()

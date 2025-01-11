@@ -1,8 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://ccv8bej7mim7"]
+[gd_scene load_steps=8 format=3 uid="uid://ccv8bej7mim7"]
 
 [ext_resource type="Script" path="res://scenes/components/player_attack_claw.gd" id="1_imka8"]
 [ext_resource type="Texture2D" uid="uid://lkyplsfgqnff" path="res://assets/textures/mouse_cursor.png" id="2_20mga"]
-[ext_resource type="PackedScene" uid="uid://bf2ls3twfo300" path="res://scenes/components/hit_box_component.tscn" id="3_novro"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n1ydg"]
 radius = 151.013
@@ -168,9 +167,6 @@ _data = {
 "default": SubResource("Animation_vblyi")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_apths"]
-radius = 154.263
-
 [node name="Player_Attack_Claw" type="Area2D"]
 collision_layer = 32
 collision_mask = 0
@@ -183,8 +179,8 @@ shape = SubResource("CircleShape2D_n1ydg")
 disabled = true
 
 [node name="Cooldown_timer" type="Timer" parent="."]
-wait_time = 0.5
-one_shot = true
+wait_time = 0.4
+autostart = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
@@ -197,13 +193,4 @@ libraries = {
 }
 autoplay = "RESET"
 
-[node name="HitBox_Component" parent="." instance=ExtResource("3_novro")]
-visible = false
-collision_layer = 128
-collision_mask = 0
-input_pickable = false
-damage = 10000
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox_Component"]
-position = Vector2(-1, -1)
-shape = SubResource("CircleShape2D_apths")
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

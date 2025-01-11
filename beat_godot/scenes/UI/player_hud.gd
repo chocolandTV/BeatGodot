@@ -27,7 +27,8 @@ var _zero_life_icon : Texture2D  = preload("res://assets/textures/health_panel_0
 var _inf_life_icon : Texture2D  = preload("res://assets/textures/health_panel_8_hearths.png")
 var player_metagame_life : int = 9
 var is_life_container_highlighted : bool  = false
-
+#### meta game done 
+var is_meta_game_done : bool = false
 func _ready() -> void:
     get_node("/root/GlobalData").SET_PLAYERHUD(self)
     update_player_life(3)
@@ -38,13 +39,6 @@ func _ready() -> void:
 ### update all thingi
 
 func godot_anim_play_dificult():
-    ### TEXT TWEEN EPIC NEW FUNCTION
-#     func _ready():
-    # 	var tween = create_tween()
-    # 	tween.tween_method(set_label_text, 0, 10, 1).set_delay(1)
-
-    # func set_label_text(value: int):
-    # 	$Label.text = "Counting " + str(value)
     godot_animation_player.play("score10")
     godot_animation_sprite.play("angry")
 
@@ -52,7 +46,7 @@ func godot_anim_play_endgame():
     godot_animation_player.play("metagame")
     godot_animation_sprite.play("terrified")
 
-func godot_anim_play_damaged():
+func godot_anim_play_hard_damaged():
     godot_animation_player.play("metagame")
     godot_animation_sprite.play("redgodot")
 
@@ -105,7 +99,7 @@ func on_text_changed(_newstring: String):
     godot_engine_chat.placeholder_text = _newstring
 ########## META GAME#############
 func _input(event: InputEvent) -> void:
-        if event.is_action_pressed("left_click") and  is_life_container_highlighted:
+        if event.is_action_pressed("left_click") and  is_life_container_highlighted and !is_meta_game_done:
             player_metagame_life -=1
             if player_metagame_life == 6:
                 update_player_life(2)
@@ -119,4 +113,7 @@ func _input(event: InputEvent) -> void:
                 update_player_life(-1)
                 particle_health_01.emitting = true
                 get_node("/root/GameManager").meta_game_progress()
+                ## disable health_component
+                get_node("/root/GlobalData").player.on_player_get_invincible()
+                is_meta_game_done = true
                 godot_animation_player.play("item10")

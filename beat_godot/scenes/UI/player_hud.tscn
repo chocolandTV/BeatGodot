@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c5871jutojwl3"]
+[gd_scene load_steps=21 format=3 uid="uid://c5871jutojwl3"]
 
 [ext_resource type="Texture2D" uid="uid://be8bhtdbvvs8d" path="res://assets/textures/feather.png" id="1_dmp4r"]
 [ext_resource type="Script" path="res://scenes/UI/player_hud.gd" id="1_f1dol"]
@@ -110,9 +110,26 @@ tracks/0/keys = {
 "values": [".", "..", "...", "xD", ".", "..", "...", ".", "..", "...", "event_player_survived -> increase spawnrate	", "event_player_survived -> increase spawnrate	"]
 }
 
+[sub_resource type="Animation" id="Animation_8n554"]
+resource_name = "hard_damage"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextEdit:placeholder_text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.433333, 0.5, 0.566667, 0.766667, 0.8, 0.833333, 1.13333, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [".", "..", "...", "O.o", ".", "..", "...", ".", "..", "...", "godot_life_decreased_much - aaaahhhhhh", "godot_life_decreased_much - aaaahhhhhh"]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7n7sv"]
 _data = {
 "RESET": SubResource("Animation_mrbut"),
+"hard_damage": SubResource("Animation_8n554"),
 "item10": SubResource("Animation_8lw8m"),
 "metagame": SubResource("Animation_ywm6x"),
 "score10": SubResource("Animation_i5cbw")
@@ -370,6 +387,7 @@ offset_right = 244.5
 offset_bottom = 236.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -389,6 +407,7 @@ theme_override_constants/margin_bottom = 80
 [node name="Godot_Engine_talk" type="HBoxContainer" parent="MarginContainer"]
 clip_contents = true
 layout_mode = 2
+mouse_filter = 2
 alignment = 2
 
 [node name="TextureRect" type="TextureRect" parent="MarginContainer/Godot_Engine_talk"]

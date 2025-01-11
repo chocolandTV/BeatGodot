@@ -42,6 +42,6 @@ func check_death():
 func damage_player_hearth():
     if player_hearth_damage < 3:
         player_hearth_damage += 1
-    if player_hearth_damage ==3:
-        ## signal game_mode 2 starts
-        is_invincible = true
+        
+func player_invincible_on():
+    is_invincible = true

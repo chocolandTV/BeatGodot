@@ -14,6 +14,7 @@ var badbirds_scene = preload ("res://scenes/Obstacles/bad_raven.tscn")
 @export var color_50: Color
 @export var color_25: Color
 @onready var lifebar : ColorRect =$Godot_Movement/LifeBar/ColorRect
+var godot_part_scene = preload ("res://scenes/godot_engine/godot_engine_part.tscn")
 ### CONST
 var start_pos : Vector2
 var color_array : Array[Color]
@@ -50,12 +51,14 @@ func on_restart_game():
     health_component.set_life(30)
     global_position = start_pos
     metagame = 0
+    
 
 #### TIMER EVENT  ALL 4 SECONDS
 func on_timer_timeout():
     generate_obstacles()
     _player_hud.godot_anim_play_dificult()
     godot_movement.increase_difficult_speed()
+    animation_sprite.play_redeye()
 
 func generate_obstacles():
     var new_bad_ravens = badbirds_scene.instantiate()
@@ -72,18 +75,25 @@ func player_scored():
         _audio_manager.play_random()
     _game_manager.player_scored()
 
+func meta_godot_part_spawning(_pos : Vector2):
+    if randi_range(0,10) > 8:
+        var new_godot_part =  godot_part_scene.instantiate()
+        new_godot_part.global_position = _pos
+        call_deferred("add_child", new_godot_part)
+        # add_child(new_godot_part)
+
 func game_start():
     timer.start()
 func game_paused():
     timer.stop()
 func on_default_damage_entered(_area : Area2D):
-    var _random : int = randi_range(0,50)
-    print("random >19 result =", _random)
-    if _random > 49:
-        get_node("/root/GameManager").meta_godot_part_spawning()
+    print ("doing default damage")
+
+    meta_godot_part_spawning(global_position)
+    
     health_component.damage(1)
     godot_shield.play("shield")
-    animation_sprite.play_terrifiered()
+    animation_sprite.play_red_godot()
     animation_particle.emitting = true
     health_generation_timer.start()
 
@@ -92,16 +102,17 @@ func on_health_reg_timout():
     _player_hud.on_text_changed("player_attack - > Godot.Set_Life = 3 -> You Can`t Beat Me")
     
 func on_real_damage_entered(_area: Area2D):
-    print("real_damage_triggered")
+    print ("doing meta damage")
     metagame +=1
     lifebar.modulate = color_array[metagame]
     lifebar.size.x =  size_array[metagame]
-    health_component.damage(_area.damage)
+    health_component.damage(10000)
     _audio_manager.play_godot_damage()
     animation_sprite.play_terrifiered()
     animation_particle.emitting = true
     _player_hud.on_text_changed("hearth_attack - > do you love me =O §$%& ERROR_HANDLE_LOVE **~~")
     _player_hud.update_metagame(metagame)
+    _player_hud.godot_anim_play_hard_damaged()
 
     ######################################### HEAL WHEN PLAYER HAVE NOT ALL 3 GODOT PARTS
     if !get_node("/root/GameManager").check_godot_parts():
@@ -114,3 +125,7 @@ func on_real_damage_entered(_area: Area2D):
         godot_shield.play("shield")
         _player_hud.on_text_changed("SHIELD HEAL - > you love me!  -> but i still have my Godot Parts XD")
         _player_hud.update_metagame(metagame)
+
+
+func _on_godot_shield_animation_finished() -> void:
+    godot_shield.play("default")
