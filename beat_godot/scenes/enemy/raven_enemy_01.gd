@@ -36,9 +36,11 @@ func on_enemy_died():
     tween_dead.set_ease(Tween.EASE_IN)
     tween_dead.set_trans(Tween.TRANS_EXPO)
     ### SPAWNING CHANCE OF GODOT PART
-    get_node("/root/GlobalData").enemygodot.meta_godot_part_spawning(global_position).call_deferred()
+    call_deferred("on_enemy_died_spawning_godot_part")
     tween_dead.tween_property(self,"rotation",deg_to_rad(-90),1).as_relative()
     tween_dead.set_parallel()
     tween_dead.tween_property(self,"position",Vector2.DOWN * 2500,1).as_relative()
     tween_dead.tween_callback(queue_free).set_delay(2)
-    
+
+func on_enemy_died_spawning_godot_part():
+        get_node("/root/GlobalData").enemygodot.meta_godot_part_spawning(global_position)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c75lipgihvfjc"]
+[gd_scene load_steps=11 format=3 uid="uid://c75lipgihvfjc"]
 
 [ext_resource type="SpriteFrames" uid="uid://d2ci3iqku7tm1" path="res://assets/spriteSheets/player.tres" id="1_wy6xg"]
 [ext_resource type="Texture2D" uid="uid://c5fnes7sywokx" path="res://assets/textures/particles/feather.png" id="2_mwnux"]
@@ -17,6 +17,9 @@ point_count = 2
 [sub_resource type="Curve" id="Curve_882b1"]
 _data = [Vector2(0.00401606, 1), 0.0, 0.0, 0, 0, Vector2(0.991968, 0.0463744), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3av84"]
+radius = 431.64
 
 [node name="Raven_obstacle_01" type="AnimatedSprite2D"]
 modulate = Color(0, 0, 0, 1)
@@ -53,7 +56,7 @@ collision_layer = 16
 collision_mask = 0
 script = ExtResource("5_xvgdw")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="HitBox_Component"]
+[node name="Hit_box_collision" type="CollisionShape2D" parent="HitBox_Component"]
 shape = ExtResource("6_3ftma")
 
 [node name="Hurtbox_Component" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("5_objsv")]
@@ -62,5 +65,6 @@ collision_layer = 0
 collision_mask = 160
 health_component = NodePath("../Health_Component")
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hurtbox_Component"]
-shape = ExtResource("6_3ftma")
+[node name="Hurt_box_collision" type="CollisionShape2D" parent="Hurtbox_Component"]
+position = Vector2(47, -18)
+shape = SubResource("CircleShape2D_3av84")

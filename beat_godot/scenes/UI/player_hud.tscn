@@ -50,6 +50,22 @@ tracks/1/keys = {
 "values": [Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_8n554"]
+resource_name = "hard_damage"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextEdit:placeholder_text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.433333, 0.5, 0.566667, 0.766667, 0.8, 0.833333, 1.13333, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [".", "..", "...", "O.o", ".", "..", "...", ".", "..", "...", "godot_life_decreased_much - aaaahhhhhh", "godot_life_decreased_much - aaaahhhhhh"]
+}
+
 [sub_resource type="Animation" id="Animation_8lw8m"]
 resource_name = "item10"
 length = 2.0
@@ -108,22 +124,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [".", "..", "...", "xD", ".", "..", "...", ".", "..", "...", "event_player_survived -> increase spawnrate	", "event_player_survived -> increase spawnrate	"]
-}
-
-[sub_resource type="Animation" id="Animation_8n554"]
-resource_name = "hard_damage"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextEdit:placeholder_text")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.433333, 0.5, 0.566667, 0.766667, 0.8, 0.833333, 1.13333, 2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [".", "..", "...", "O.o", ".", "..", "...", ".", "..", "...", "godot_life_decreased_much - aaaahhhhhh", "godot_life_decreased_much - aaaahhhhhh"]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7n7sv"]
