@@ -15,7 +15,7 @@ func cure_enemy():
     health_component.add_life()
 
 func hit_effect():
-    print("hit effect")
+    get_node("/root/GameManager").player_scored(100)
     _audio_manager.play_random()
     particles.emitting = true
     var tween = get_tree().create_tween()
@@ -28,7 +28,6 @@ func hit_effect():
     tween.set_trans(Tween.TRANS_SPRING)
 
 func on_enemy_died():
-    print("raven is dead")
     get_node("/root/GlobalData").menu.increase_menu_raven_counter()
     $HitBox_Component.visible = false
     $Hurtbox_Component.visible = false
@@ -36,6 +35,7 @@ func on_enemy_died():
     tween_dead.set_ease(Tween.EASE_IN)
     tween_dead.set_trans(Tween.TRANS_EXPO)
     ### SPAWNING CHANCE OF GODOT PART
+    get_node("/root/GameManager").player_scored(1000)
     call_deferred("on_enemy_died_spawning_godot_part")
     tween_dead.tween_property(self,"rotation",deg_to_rad(-90),1).as_relative()
     tween_dead.set_parallel()
@@ -43,4 +43,4 @@ func on_enemy_died():
     tween_dead.tween_callback(queue_free).set_delay(2)
 
 func on_enemy_died_spawning_godot_part():
-        get_node("/root/GlobalData").enemygodot.meta_godot_part_spawning(global_position)
+    get_node("/root/GlobalData").enemygodot.meta_godot_part_spawning()

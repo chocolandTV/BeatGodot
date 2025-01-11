@@ -69,28 +69,19 @@ func generate_obstacles():
 func godot_loose_parts():
     _player_hud.godot_anim_play_endgame()
 
-
-func player_scored():
-    if randi_range(0,100) < 10:  #sound fix
-        _audio_manager.play_random()
-    _game_manager.player_scored()
-
-func meta_godot_part_spawning(_pos : Vector2):
-    if randi_range(0,10) > 8:
+func meta_godot_part_spawning():
+    if randi_range(0,100) > 95:
         var new_godot_part =  godot_part_scene.instantiate()
-        new_godot_part.global_position = _pos
+        new_godot_part.global_position = Vector2(global_position.x, randi_range(0,10) * 100)
         call_deferred("add_child", new_godot_part)
-        # add_child(new_godot_part)
+
 
 func game_start():
     timer.start()
 func game_paused():
     timer.stop()
 func on_default_damage_entered(_area : Area2D):
-    print ("doing default damage")
-
-    meta_godot_part_spawning(global_position)
-    
+    get_node("/root/GameManager").player_scored(1)
     health_component.damage(1)
     godot_shield.play("shield")
     animation_sprite.play_red_godot()
@@ -102,7 +93,8 @@ func on_health_reg_timout():
     _player_hud.on_text_changed("player_attack - > Godot.Set_Life = 3 -> You Can`t Beat Me")
     
 func on_real_damage_entered(_area: Area2D):
-    print ("doing meta damage")
+    meta_godot_part_spawning()
+    get_node("/root/GameManager").player_scored(10000)
     metagame +=1
     lifebar.modulate = color_array[metagame]
     lifebar.size.x =  size_array[metagame]

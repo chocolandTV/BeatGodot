@@ -6,16 +6,18 @@ signal game_started()
 signal game_resumed()
 signal game_paused()
 signal game_meta_broked()
-signal game_godot_part_collected()
+signal game_godot_part_collected(value : int)
 ### VARS
 var _is_game_running : bool = false
 var _is_game_over : bool  = false
 var _game_score : int = 0
 var _game_godot_parts : int  = 0
-var real_game_score : int  = 0
+
 var player_hud : Player_HUD
 var player_menu : Menu
-
+var _audio_manager : Audio_Manager
+func _ready() -> void:
+    _audio_manager = get_node("/root/Audio")
 func new_game():
     _is_game_running = false
     _is_game_over = false
@@ -64,9 +66,11 @@ func restart_game():
 func quit_game():
     get_tree().quit()
 
-func player_scored():
-    _game_score +=1000
+func player_scored(value : int):
+    _audio_manager.play_random()
+    _game_score +=value
     get_node("/root/GlobalData").player_hud.update_player_score(_game_score)
+
 func game_over():
     await get_tree().create_timer(2.0).timeout
     player_hud  = get_node("/root/GlobalData").player_hud
@@ -81,7 +85,7 @@ func meta_game_progress():
 
 func meta_godot_part_collected():
     _game_godot_parts +=1
-    game_godot_part_collected.emit()
+    game_godot_part_collected.emit(_game_godot_parts)
 
 func check_godot_parts() -> bool:
     return _game_godot_parts >= 3

@@ -9,7 +9,7 @@ var _is_done : bool = false
 const  GRAVITY : int = 980
 const MAX_VEL : int = 1200
 const FLAP_SPEED : int = -700
-const SPEED  : int  =250
+const SPEED  : int  =350
 ### var  animation
 ### on death - > collect -> queue_free
 ### func _process movement like player  but -
@@ -26,8 +26,8 @@ func _physics_process(delta: float) -> void:
             set_rotation(deg_to_rad(velocity.y *0.05   ))
         move_and_collide(velocity * delta)
 
-### if pos.x < -500  . queue_free
 func _on_died_collect_part():
+    print("godot_part_collected")
     if !_is_done:
         _is_done =true
         set_rotation(PI/2)
@@ -39,3 +39,5 @@ func flap():
     velocity.y = FLAP_SPEED
     particles.emitting = true
     anim_player.play("rotate")
+func on_respawner_entered(_area : Area2D):
+    queue_free()

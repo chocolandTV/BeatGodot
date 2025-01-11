@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dvhjhe8dlml1s"]
+[gd_scene load_steps=14 format=3 uid="uid://dvhjhe8dlml1s"]
 
 [ext_resource type="Script" path="res://scenes/godot_engine/godot_engine_part.gd" id="1_erlmj"]
 [ext_resource type="Texture2D" uid="uid://did530whq38bh" path="res://assets/textures/godot_face/smile.png" id="1_xmqqe"]
@@ -37,6 +37,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_anbkh"]
 resource_name = "rotate"
 length = 3.0
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -44,7 +45,7 @@ tracks/0/path = NodePath("Sprite2D:rotation")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.13333, 2.03333, 2.96667),
+"times": PackedFloat32Array(0, 1.2, 2.1, 2.96667),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [0.0, 2.0944, 4.18879, 6.28319]
@@ -58,6 +59,9 @@ _data = {
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_rm3pb"]
 radius = 31.4
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ajp6j"]
+radius = 56.0803
 
 [node name="Godot_Engine_Part" type="CharacterBody2D"]
 motion_mode = 1
@@ -91,7 +95,7 @@ max_health = 1
 
 [node name="Hurtbox_Component" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("1_ybt60")]
 collision_layer = 0
-collision_mask = 129
+collision_mask = 161
 health_component = NodePath("../Health_Component")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox_Component"]
@@ -101,10 +105,17 @@ shape = SubResource("CircleShape2D_kv6hh")
 libraries = {
 "": SubResource("AnimationLibrary_r1wcw")
 }
-speed_scale = 3.0
+autoplay = "rotate"
 
 [node name="Flap_Timer" type="Timer" parent="."]
 autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_rm3pb")
+
+[node name="End_cycle" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 64
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="End_cycle"]
+shape = SubResource("CircleShape2D_ajp6j")

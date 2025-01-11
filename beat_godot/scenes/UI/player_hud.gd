@@ -35,6 +35,7 @@ func _ready() -> void:
     update_player_score(0)
     life_texture.mouse_entered.connect(on_life_container_entered)
     life_texture.mouse_exited.connect(on_life_container_exited)
+    get_node("/root/GameManager").game_godot_part_collected.connect(on_new_engine_part_collected)
 
 ### update all thingi
 
@@ -54,6 +55,8 @@ func update_player_score(game_score : int):
     player_score_label.text = str(game_score)
 
 ############## ENDGAME
+func on_new_engine_part_collected(value : int):
+    update_godot_parts(value)
 func update_godot_parts(value: int):
     if value >=1:
         godot_engine_Part_01.visible = true
