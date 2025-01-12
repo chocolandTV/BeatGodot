@@ -70,9 +70,9 @@ func godot_loose_parts():
     _player_hud.godot_anim_play_endgame()
 
 func meta_godot_part_spawning():
-    if randi_range(0,100) > 95:
+    if randi_range(0,100) > 90:
         var new_godot_part =  godot_part_scene.instantiate()
-        new_godot_part.global_position = Vector2(global_position.x, randi_range(0,10) * 100)
+        new_godot_part.global_position = Vector2(global_position.x, 500+ randi_range(-200,200))
         call_deferred("add_child", new_godot_part)
 
 

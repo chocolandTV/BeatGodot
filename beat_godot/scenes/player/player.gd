@@ -10,6 +10,8 @@ var is_falling: bool = false
 var is_player_active : bool = false
 @onready var animation_sprite : AnimatedSprite2D = $Beatrii
 @onready var health_component : Health_Component = $Health_Component
+@onready var particles : CPUParticles2D = $Beatrii/flap_particles
+@onready var animation_player : AnimationPlayer =$AnimationPlayer
 var _game_manager : Game_Manager
 var _audio_manager:  Audio_Manager
 var _player_hud : Player_HUD
@@ -84,8 +86,11 @@ func on_player_death():
 func on_player_damage():
         _player_hud.update_player_life(health_component.current_health)
         _audio_manager.play_hit()
+        animation_player.play("damaged")
+
 func flap():
     velocity.y = FLAP_SPEED
+    particles.emitting  = true
 
 func on_player_get_invincible():
     health_component.player_invincible_on()

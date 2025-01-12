@@ -1,10 +1,14 @@
-[gd_scene load_steps=22 format=3 uid="uid://nv6kev6dqsnh"]
+[gd_scene load_steps=26 format=3 uid="uid://nv6kev6dqsnh"]
 
 [ext_resource type="PackedScene" uid="uid://b06fobwa0bapc" path="res://scenes/player/player.tscn" id="1_bhwtw"]
 [ext_resource type="Script" path="res://scenes/_game/game_show_hider.gd" id="1_e4jx6"]
 [ext_resource type="PackedScene" uid="uid://dut1yf7bi2vl5" path="res://scenes/components/camera_2d.tscn" id="2_4si25"]
+[ext_resource type="Script" path="res://scenes/components/background/background.gd" id="4_bmi0d"]
 [ext_resource type="Texture2D" uid="uid://up4h56pf72e4" path="res://assets/textures/particles/dust.png" id="4_nj5ex"]
+[ext_resource type="Texture2D" uid="uid://bnhu40f2f2a1m" path="res://assets/textures/background.png" id="5_cqbq8"]
 [ext_resource type="PackedScene" uid="uid://cqgdplic31cfi" path="res://scenes/godot_engine/godot_engine.tscn" id="6_1ucc8"]
+[ext_resource type="Texture2D" uid="uid://cbfiro11hqmud" path="res://assets/textures/sun.png" id="6_8fqd1"]
+[ext_resource type="Texture2D" uid="uid://oylo7iacsul0" path="res://assets/textures/background_mountain.png" id="7_ynvia"]
 [ext_resource type="PackedScene" uid="uid://by2tt8nxs4d0k" path="res://scenes/UI/menu.tscn" id="8_a4dou"]
 [ext_resource type="PackedScene" uid="uid://c5871jutojwl3" path="res://scenes/UI/player_hud.tscn" id="8_xvm8s"]
 [ext_resource type="AudioStream" uid="uid://c8ordyl0ho8af" path="res://resources/sounds/kuchibue no kimochi.mp3" id="10_f6jh7"]
@@ -46,9 +50,45 @@ y_sort_enabled = true
 offset_right = 1920.0
 offset_bottom = 1080.0
 
+[node name="Mountain_sun_BG_Paralax" type="ParallaxBackground" parent="."]
+offset = Vector2(787.4, 540)
+transform = Transform2D(1, 0, 0, 1, 787.4, 540)
+scroll_ignore_camera_zoom = true
+script = ExtResource("4_bmi0d")
+speed = 5.0
+
+[node name="bg_left" type="Sprite2D" parent="Mountain_sun_BG_Paralax"]
+position = Vector2(-2048, 2.439)
+texture = ExtResource("5_cqbq8")
+
+[node name="bg_left2" type="Sprite2D" parent="Mountain_sun_BG_Paralax"]
+position = Vector2(2048, 0)
+texture = ExtResource("5_cqbq8")
+
+[node name="bg_sun" type="Sprite2D" parent="Mountain_sun_BG_Paralax"]
+position = Vector2(183.88, 21)
+scale = Vector2(2.29062, 2.29062)
+texture = ExtResource("6_8fqd1")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Mountain_sun_BG_Paralax"]
+position = Vector2(1139.6, 0)
+motion_mirroring = Vector2(2861.19, 0)
+
+[node name="Mountain" type="Sprite2D" parent="Mountain_sun_BG_Paralax/ParallaxLayer"]
+position = Vector2(0, 380.488)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("7_ynvia")
+
+[node name="Mountain2" type="Sprite2D" parent="Mountain_sun_BG_Paralax/ParallaxLayer"]
+position = Vector2(1433.66, 380.488)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("7_ynvia")
+
 [node name="Background" parent="." instance=ExtResource("20_gcoaq")]
+layer = -99
 offset = Vector2(787.4, 540)
 transform = Transform2D(0.41, 0, 0, 0.41, 787.4, 540)
+speed = 600.0
 
 [node name="Game_Content" type="Node2D" parent="."]
 visible = false
@@ -80,6 +120,7 @@ volume_db = -21.543
 
 [node name="Godot_damage" type="AudioStreamPlayer" parent="Game_Content/Audio_Manager"]
 stream = ExtResource("17_uvr0p")
+volume_db = -10.0
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Game_Content"]
 position = Vector2(2161, 519)

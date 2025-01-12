@@ -113,7 +113,6 @@ autoplay = "redeyes"
 script = ExtResource("3_7g3is")
 
 [node name="Timer" type="Timer" parent="Godot_Movement/AnimatedSprite2D"]
-wait_time = 4.0
 autostart = true
 
 [node name="Particle_damaged" type="CPUParticles2D" parent="Godot_Movement/AnimatedSprite2D"]

@@ -34,7 +34,7 @@ func on_timer_timeout():
 
 func on_metagame_update():
     sprite.texture = new_attack_sprite
-    sprite.modulate = hearth_color
+    # sprite.modulate = hearth_color
     set_collision_layer_value(6,false)
     set_collision_layer_value(8, true)
 
