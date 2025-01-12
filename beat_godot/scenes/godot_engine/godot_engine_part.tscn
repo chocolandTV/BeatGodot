@@ -17,7 +17,7 @@ _data = [Vector2(0, 0.417582), 0.0, -0.555291, 0, 0, Vector2(0.975904, 0.0682969
 point_count = 2
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kv6hh"]
-radius = 55.18
+radius = 84.0238
 
 [sub_resource type="Animation" id="Animation_c5y0v"]
 length = 0.001
@@ -64,6 +64,8 @@ radius = 31.4
 radius = 56.0803
 
 [node name="Godot_Engine_Part" type="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_erlmj")
 
@@ -100,6 +102,7 @@ health_component = NodePath("../Health_Component")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox_Component"]
 shape = SubResource("CircleShape2D_kv6hh")
+debug_color = Color(1, 0.6, 0.701961, 0.419608)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -119,3 +122,6 @@ collision_mask = 64
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="End_cycle"]
 shape = SubResource("CircleShape2D_ajp6j")
+debug_color = Color(0.31866, 0.491378, 1, 0.42)
+
+[connection signal="area_entered" from="End_cycle" to="." method="on_respawner_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://by2tt8nxs4d0k"]
+[gd_scene load_steps=21 format=3 uid="uid://by2tt8nxs4d0k"]
 
 [ext_resource type="Script" path="res://scenes/UI/menu.gd" id="1_fh81q"]
 [ext_resource type="Script" path="res://scenes/UI/Menu_Raven_Spawner.gd" id="2_jbbbc"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://d554bmbvhgcr" path="res://assets/textures/ui/perfect_button_pressed.png" id="8_58sp1"]
 [ext_resource type="Texture2D" uid="uid://bx8uui0bkqmn0" path="res://assets/textures/godot_face/redgodot.png" id="8_ogj45"]
 [ext_resource type="StyleBox" uid="uid://dj578j6yjpski" path="res://resources/button_normal.tres" id="9_8up5h"]
+[ext_resource type="Texture2D" uid="uid://bwwyryxh8ca88" path="res://assets/textures/particles/feather_big.png" id="13_8liq7"]
 [ext_resource type="Texture2D" uid="uid://did530whq38bh" path="res://assets/textures/godot_face/smile.png" id="14_34v36"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r8xff"]
@@ -19,6 +20,25 @@
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f47g7"]
 texture = ExtResource("8_58sp1")
 modulate_color = Color(0.917647, 0.956863, 0.827451, 1)
+
+[sub_resource type="Curve" id="Curve_4bcpb"]
+min_value = -360.0
+max_value = 360.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.88755, 139.022), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Curve" id="Curve_kjmlh"]
+_data = [Vector2(0, 0.967033), 0.0, 0.0, 0, 0, Vector2(0.975904, 0.024452), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_u1784"]
+offsets = PackedFloat32Array(0, 0.208145, 0.751131, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="Curve" id="Curve_bxpwg"]
+min_value = -1.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.995984, -0.912088), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [node name="Menu" type="Control"]
 custom_minimum_size = Vector2(1920, 1080)
@@ -94,6 +114,7 @@ theme_override_constants/separation = 25
 theme_override_styles/separator = SubResource("StyleBoxEmpty_r8xff")
 
 [node name="Button_Start" type="Button" parent="MarginContainer/VBoxContainer"]
+process_mode = 3
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -111,6 +132,7 @@ text = "Start"
 script = ExtResource("7_m0e1q")
 
 [node name="Button_Resume" type="Button" parent="MarginContainer/VBoxContainer"]
+process_mode = 3
 visible = false
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
@@ -129,6 +151,7 @@ text = "Resume"
 script = ExtResource("7_m0e1q")
 
 [node name="Button_Restart" type="Button" parent="MarginContainer/VBoxContainer"]
+process_mode = 3
 visible = false
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
@@ -147,6 +170,7 @@ text = "Restart"
 script = ExtResource("7_m0e1q")
 
 [node name="Button_Credits" type="Button" parent="MarginContainer/VBoxContainer"]
+process_mode = 3
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -158,6 +182,7 @@ text = "Credits"
 script = ExtResource("7_m0e1q")
 
 [node name="Button_Exit" type="Button" parent="MarginContainer/VBoxContainer"]
+process_mode = 3
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -170,6 +195,7 @@ text = "Exit
 script = ExtResource("7_m0e1q")
 
 [node name="Button_version" type="Button" parent="MarginContainer/VBoxContainer"]
+process_mode = 3
 custom_minimum_size = Vector2(350, 100)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -179,6 +205,26 @@ theme_override_font_sizes/font_size = 25
 theme_override_icons/icon = ExtResource("14_34v36")
 text = "version: 1.01"
 script = ExtResource("7_m0e1q")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="MarginContainer/VBoxContainer/Button_version"]
+position = Vector2(750, 250)
+emitting = false
+amount = 250
+lifetime = 2.0
+randomness = 1.0
+texture = ExtResource("13_8liq7")
+emission_shape = 3
+emission_rect_extents = Vector2(1000, 50)
+spread = 180.0
+gravity = Vector2(0, -980)
+linear_accel_max = 100.0
+angle_max = 10.0
+angle_curve = SubResource("Curve_4bcpb")
+scale_amount_min = 0.5
+scale_amount_curve = SubResource("Curve_kjmlh")
+color_ramp = SubResource("Gradient_u1784")
+hue_variation_max = 1.0
+hue_variation_curve = SubResource("Curve_bxpwg")
 
 [node name="Credits" type="MarginContainer" parent="."]
 visible = false

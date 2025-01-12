@@ -1,7 +1,6 @@
 extends Node
 class_name Game_Manager
 
-signal game_restarted()
 signal game_started()
 signal game_resumed()
 signal game_paused()
@@ -16,12 +15,15 @@ var _game_godot_parts : int  = 0
 var player_hud : Player_HUD
 var player_menu : Menu
 var _audio_manager : Audio_Manager
+
 func _ready() -> void:
     _audio_manager = get_node("/root/Audio")
+    
 func new_game():
-    _is_game_running = false
+    _is_game_running = true
     _is_game_over = false
     _game_score = 0
+    _game_godot_parts =0 
     game_started.emit()
 ######## PUBLICS
 func is_game_running() ->bool :
@@ -34,34 +36,18 @@ func resume_game():
     paused_game(false)
 
 func paused_game(value :bool):
-    player_hud.visible = !value
-    player_menu.visible  =value
     if value:
         player_menu.game_paused()
+        _is_game_running = !value
         game_paused.emit()
     else:
         game_resumed.emit()
     _is_game_running = !value
 
 func start_game():
-    player_hud  = get_node("/root/GlobalData").player_hud
-    player_menu  =get_node("/root/GlobalData").menu
-    player_hud.visible = true
-    player_menu.visible  =false
     _is_game_running = true
     
     game_started.emit()
-
-func restart_game():
-    player_hud  = get_node("/root/GlobalData").player_hud
-    player_menu  =get_node("/root/GlobalData").menu
-    player_hud.visible = true
-    player_menu.visible  =false
-    _is_game_running = true
-    player_hud.update_player_life(3)
-    player_hud.update_player_score(0)
-    _game_score = 0
-    game_restarted.emit()
 
 func quit_game():
     get_tree().quit()
@@ -69,13 +55,12 @@ func quit_game():
 func player_scored(value : int):
     _audio_manager.play_random()
     _game_score +=value
-    get_node("/root/GlobalData").player_hud.update_player_score(_game_score)
+    player_hud.update_player_score(_game_score)
 
 func game_over():
     await get_tree().create_timer(2.0).timeout
-    player_hud  = get_node("/root/GlobalData").player_hud
-    player_menu  =get_node("/root/GlobalData").menu
-    get_node("/root/GlobalData").menu.update_game_over()
+    
+    player_menu.update_game_over()
     player_hud.visible = false
     player_menu.visible   = true
     _is_game_running = false

@@ -209,9 +209,9 @@ stretch_mode = 2
 script = ExtResource("3_otkrc")
 
 [node name="particle_01" type="CPUParticles2D" parent="VBoxContainer/Player_Progress_Panel/Life_container"]
-position = Vector2(65, 64.45)
+position = Vector2(190, 63)
 emitting = false
-amount = 3
+amount = 50
 lifetime = 10.0
 explosiveness = 1.0
 randomness = 1.0
@@ -226,17 +226,17 @@ initial_velocity_max = 55.0
 orbit_velocity_max = 1.0
 radial_accel_min = 5.0
 radial_accel_max = 55.0
-scale_amount_min = 0.1
-scale_amount_max = 0.4
+scale_amount_min = 0.3
+scale_amount_max = 0.7
 scale_amount_curve = SubResource("Curve_gj7g0")
 hue_variation_max = 1.0
 hue_variation_curve = SubResource("Curve_6i41h")
 
 [node name="particle_02" type="CPUParticles2D" parent="VBoxContainer/Player_Progress_Panel/Life_container"]
-position = Vector2(194, 66.45)
+position = Vector2(322, 63)
 scale = Vector2(0.29, 0.29)
 emitting = false
-amount = 3
+amount = 50
 lifetime = 10.0
 explosiveness = 1.0
 randomness = 1.0
@@ -251,17 +251,17 @@ initial_velocity_max = 55.0
 orbit_velocity_max = 1.0
 radial_accel_min = 5.0
 radial_accel_max = 55.0
-scale_amount_min = 0.1
-scale_amount_max = 0.4
+scale_amount_min = 0.3
+scale_amount_max = 0.7
 scale_amount_curve = SubResource("Curve_gj7g0")
 hue_variation_max = 1.0
 hue_variation_curve = SubResource("Curve_6i41h")
 
 [node name="particle_03" type="CPUParticles2D" parent="VBoxContainer/Player_Progress_Panel/Life_container"]
-position = Vector2(323, 66.45)
+position = Vector2(443, 65)
 scale = Vector2(0.29, 0.29)
 emitting = false
-amount = 3
+amount = 50
 lifetime = 10.0
 explosiveness = 1.0
 randomness = 1.0
@@ -276,8 +276,8 @@ initial_velocity_max = 55.0
 orbit_velocity_max = 1.0
 radial_accel_min = 5.0
 radial_accel_max = 55.0
-scale_amount_min = 0.1
-scale_amount_max = 0.4
+scale_amount_min = 0.3
+scale_amount_max = 0.7
 scale_amount_curve = SubResource("Curve_gj7g0")
 hue_variation_max = 1.0
 hue_variation_curve = SubResource("Curve_6i41h")
@@ -294,8 +294,8 @@ layout_mode = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="VBoxContainer/Player_Progress_Panel/Score_Holder/HBoxContainer"]
 modulate = Color(0.858824, 0.847059, 0.682353, 1)
-position = Vector2(178, 30)
-scale = Vector2(0.23, 0.23)
+position = Vector2(219.49, 30)
+scale = Vector2(0.17, 0.17)
 texture = ExtResource("1_dmp4r")
 
 [node name="player_score" type="Label" parent="VBoxContainer/Player_Progress_Panel/Score_Holder/HBoxContainer"]

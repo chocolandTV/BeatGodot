@@ -20,7 +20,6 @@ func _ready() -> void:
     start_pos = global_position
     _player_hud = get_node("/root/GlobalData").player_hud
     _game_manager = get_node("/root/GameManager")
-    _game_manager.game_restarted.connect(on_game_restart)
     _game_manager.game_started.connect(on_game_started)
     _game_manager.game_paused.connect(on_game_paused)
     _game_manager.game_resumed.connect(on_game_resumed)
@@ -32,6 +31,7 @@ func _ready() -> void:
 
     get_node("/root/GlobalData").SET_PLAYER(self)
     reset()
+    on_game_started()
 ############# GAME MANAGER RESTART
 func on_game_paused():
     is_player_active = false
@@ -41,8 +41,7 @@ func on_game_started():
 func on_game_resumed():
     is_player_active = true
     is_flying = true
-func on_game_restart():
-    reset()
+
     
 func reset():
     is_falling = false
@@ -53,18 +52,13 @@ func reset():
     
 func _input(event: InputEvent) -> void:
         if event.is_action_pressed("fly") and is_flying:
-            if _game_manager.is_game_running():
                 flap()
-        if event.is_action_pressed("escape") and _game_manager.is_game_running():
-            ### GAME PAUSED
-            _game_manager.paused_game(true)
-        elif event.is_action_pressed("escape") and _game_manager.is_game_paused():
-            #game resumed
-            _game_manager.paused_game(false)
 
 func _physics_process(delta: float) -> void:
     if is_flying or is_falling:
         velocity.y += GRAVITY * delta
+        if global_position.y > 1080:
+            flap()
         if velocity.y > MAX_VEL:
             velocity.y = MAX_VEL
         if is_flying:

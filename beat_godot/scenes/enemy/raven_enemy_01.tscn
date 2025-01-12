@@ -49,6 +49,7 @@ scale_amount_curve = SubResource("Curve_882b1")
 color = Color(0, 0, 0, 1)
 
 [node name="Health_Component" parent="." instance=ExtResource("4_bflc6")]
+max_health = 1
 
 [node name="HitBox_Component" type="Area2D" parent="."]
 position = Vector2(13, 77)

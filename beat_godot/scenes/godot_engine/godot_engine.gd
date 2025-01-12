@@ -44,14 +44,7 @@ func _ready() -> void:
     timer.wait_time = spawn_rate_seconds
     _game_manager.game_started.connect(game_start)
     _game_manager.game_paused.connect(game_paused)
-    _game_manager.game_restarted.connect(on_restart_game)
     _game_manager.game_resumed.connect(game_start)
-
-func on_restart_game():
-    health_component.set_life(30)
-    global_position = start_pos
-    metagame = 0
-    
 
 #### TIMER EVENT  ALL 4 SECONDS
 func on_timer_timeout():
@@ -72,7 +65,7 @@ func godot_loose_parts():
 func meta_godot_part_spawning():
     if randi_range(0,100) > 90:
         var new_godot_part =  godot_part_scene.instantiate()
-        new_godot_part.global_position = Vector2(global_position.x, 500+ randi_range(-200,200))
+        new_godot_part.global_position = Vector2(global_position.x,randi_range(200,800))
         call_deferred("add_child", new_godot_part)
 
 

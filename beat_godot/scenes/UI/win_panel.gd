@@ -12,4 +12,6 @@ func start_scaling():
     tween_updown.tween_property(pulsing_object,"scale",Vector2.ONE,10).as_relative()
 
 func on_button_pressed_restart():
-    get_node("/root/GlobalData").menu.on_button_pressed_restart()
+    get_tree().paused = false
+    visible  = false
+    get_tree().change_scene_to_file("res://scenes/_game/game_menu.tscn")

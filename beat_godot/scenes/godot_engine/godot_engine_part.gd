@@ -16,7 +16,7 @@ const SPEED  : int  =350
 ### on timer timeout flap +anim rotate + particle
 func _ready() -> void:
     timer.timeout.connect(flap)
-    health_comp.died.connect(_on_died_collect_part)
+    health_comp.health_changed.connect(_on_died_collect_part)
 
 func _physics_process(delta: float) -> void:
         velocity.y += GRAVITY * delta

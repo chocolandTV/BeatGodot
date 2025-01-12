@@ -36,7 +36,13 @@ func _ready() -> void:
     life_texture.mouse_entered.connect(on_life_container_entered)
     life_texture.mouse_exited.connect(on_life_container_exited)
     get_node("/root/GameManager").game_godot_part_collected.connect(on_new_engine_part_collected)
+    get_node("/root/GameManager").game_resumed.connect(on_game_resumed)
+    get_node("/root/GameManager").player_hud = self
 
+### update hud _on resume
+func on_game_resumed():
+    visible = true
+    
 ### update all thingi
 
 func godot_anim_play_dificult():
@@ -53,7 +59,6 @@ func godot_anim_play_hard_damaged():
 
 func update_player_score(game_score : int):
     player_score_label.text = str(game_score)
-
 ############## ENDGAME
 func on_new_engine_part_collected(value : int):
     update_godot_parts(value)
@@ -92,10 +97,10 @@ func update_player_life(value : int):
         life_texture. texture = _inf_life_icon
 
 func on_life_container_entered():
-    print("Mouse entered")
+
     is_life_container_highlighted = true
 func on_life_container_exited():
-    print("mouse exited")
+
     is_life_container_highlighted = false
 
 func on_text_changed(_newstring: String):
@@ -105,11 +110,9 @@ func _input(event: InputEvent) -> void:
         if event.is_action_pressed("left_click") and  is_life_container_highlighted and !is_meta_game_done:
             player_metagame_life -=1
             if player_metagame_life == 6:
-                update_player_life(2)
                 particle_health_03.emitting = true
                 godot_animation_player.play("item10")
             if player_metagame_life ==3:
-                update_player_life(1)
                 particle_health_02.emitting = true
                 godot_animation_player.play("item10")
             if player_metagame_life <= 0:

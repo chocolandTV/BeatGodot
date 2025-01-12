@@ -1,0 +1,91 @@
+[gd_scene load_steps=16 format=3 uid="uid://xulkdoocd17y"]
+
+[ext_resource type="PackedScene" uid="uid://by2tt8nxs4d0k" path="res://scenes/UI/menu.tscn" id="2_ih6bi"]
+[ext_resource type="Script" path="res://scenes/components/background/background.gd" id="4_eafi7"]
+[ext_resource type="Texture2D" uid="uid://bnhu40f2f2a1m" path="res://assets/textures/background.png" id="5_ac4af"]
+[ext_resource type="Texture2D" uid="uid://cbfiro11hqmud" path="res://assets/textures/sun.png" id="6_j38oa"]
+[ext_resource type="Texture2D" uid="uid://oylo7iacsul0" path="res://assets/textures/background_mountain.png" id="7_lfsis"]
+[ext_resource type="PackedScene" uid="uid://cgbqcbmqwxdr0" path="res://scenes/components/background/background.tscn" id="8_gm21s"]
+[ext_resource type="AudioStream" uid="uid://c8ordyl0ho8af" path="res://resources/sounds/kuchibue no kimochi.mp3" id="11_s2nuf"]
+[ext_resource type="Script" path="res://scenes/_game/audio_executer.gd" id="12_jp2nh"]
+[ext_resource type="AudioStream" uid="uid://km1xfdtpnlxu" path="res://resources/sounds/raven_01.mp3" id="13_2rkbx"]
+[ext_resource type="AudioStream" uid="uid://cpa66jq6vets6" path="res://resources/sounds/raven_02.mp3" id="14_74byu"]
+[ext_resource type="AudioStream" uid="uid://bspox2avo3h5g" path="res://resources/sounds/raven_03.mp3" id="15_7rfgy"]
+[ext_resource type="AudioStream" uid="uid://bug8kbgx6r280" path="res://resources/sounds/raven_thinking.mp3" id="16_i4srq"]
+[ext_resource type="AudioStream" uid="uid://cii62g4hxqxik" path="res://resources/sounds/raven_hit.mp3" id="17_1iofo"]
+[ext_resource type="AudioStream" uid="uid://b5v3jpsf5ax70" path="res://resources/sounds/godot_damaged.mp3" id="18_nybs4"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_wv8yx"]
+streams_count = 4
+stream_0/stream = ExtResource("13_2rkbx")
+stream_1/stream = ExtResource("14_74byu")
+stream_2/stream = ExtResource("15_7rfgy")
+stream_3/stream = ExtResource("16_i4srq")
+
+[node name="game_menu" type="Node2D"]
+
+[node name="Menu" parent="." instance=ExtResource("2_ih6bi")]
+z_index = 10
+y_sort_enabled = true
+offset_right = 1920.0
+offset_bottom = 1080.0
+is_game_menu = true
+
+[node name="Mountain_sun_BG_Paralax" type="ParallaxBackground" parent="."]
+offset = Vector2(787.4, 540)
+transform = Transform2D(1, 0, 0, 1, 787.4, 540)
+scroll_ignore_camera_zoom = true
+script = ExtResource("4_eafi7")
+speed = 20.0
+
+[node name="bg_left" type="Sprite2D" parent="Mountain_sun_BG_Paralax"]
+position = Vector2(-2048, 2.439)
+texture = ExtResource("5_ac4af")
+
+[node name="bg_left2" type="Sprite2D" parent="Mountain_sun_BG_Paralax"]
+position = Vector2(2048, 0)
+texture = ExtResource("5_ac4af")
+
+[node name="bg_sun" type="Sprite2D" parent="Mountain_sun_BG_Paralax"]
+position = Vector2(183.88, 21)
+scale = Vector2(2.29062, 2.29062)
+texture = ExtResource("6_j38oa")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="Mountain_sun_BG_Paralax"]
+position = Vector2(1139.6, 0)
+motion_mirroring = Vector2(2861.19, 0)
+
+[node name="Mountain" type="Sprite2D" parent="Mountain_sun_BG_Paralax/ParallaxLayer"]
+position = Vector2(0, 380.488)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("7_lfsis")
+
+[node name="Mountain2" type="Sprite2D" parent="Mountain_sun_BG_Paralax/ParallaxLayer"]
+position = Vector2(1433.66, 380.488)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("7_lfsis")
+
+[node name="Background" parent="." instance=ExtResource("8_gm21s")]
+layer = -99
+offset = Vector2(787.4, 540)
+transform = Transform2D(0.41, 0, 0, 0.41, 787.4, 540)
+speed = 600.0
+
+[node name="Audio_Manager" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_s2nuf")
+volume_db = -20.0
+autoplay = true
+parameters/looping = true
+script = ExtResource("12_jp2nh")
+
+[node name="Raven_Random_Sound" type="AudioStreamPlayer" parent="Audio_Manager"]
+stream = SubResource("AudioStreamRandomizer_wv8yx")
+volume_db = -15.0
+
+[node name="Raven_Hit_Sound" type="AudioStreamPlayer" parent="Audio_Manager"]
+stream = ExtResource("17_1iofo")
+volume_db = -21.543
+
+[node name="Godot_damage" type="AudioStreamPlayer" parent="Audio_Manager"]
+stream = ExtResource("18_nybs4")
+volume_db = -10.0
